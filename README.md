@@ -6,6 +6,36 @@ A three-stage Python pipeline that turns a Word document of MCTC news highlights
 input/*.docx  →  extract  →  normalize  →  export  →  output/feed.json
 ```
 
+### Results on MCTC Highlights 2026
+
+| Metric | Count |
+|--------|------:|
+| Posts extracted | 76 |
+| Posts with date | 75 / 76 |
+| Posts with featured image | 44 / 76 |
+| Posts with tags | 75 / 76 |
+| Images extracted & renamed | 94 |
+| Feed size (feed.json) | 146 KB |
+| Feed size (posts.json) | 225 KB |
+
+**By category**
+
+| Category | Posts |
+|----------|------:|
+| Trainee Programs | 12 |
+| Safety Campaigns & Drills | 10 |
+| Competitions & Awards | 9 |
+| Events & Ceremonies | 8 |
+| Staff Development | 8 |
+| Partnerships & Agreements | 7 |
+| Media & Publications | 5 |
+| Accreditation & Compliance | 5 |
+| Industry Visits & Site Tours | 3 |
+| On-the-Job Training | 3 |
+| Campus & Facilities | 2 |
+| Academic & Examinations | 1 |
+| General | 3 |
+
 ---
 
 ## Pipeline stages
