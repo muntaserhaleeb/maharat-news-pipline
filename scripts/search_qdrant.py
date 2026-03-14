@@ -17,7 +17,6 @@ import json
 import sys
 from pathlib import Path
 
-from qdrant_client import QdrantClient
 from qdrant_client.models import (
     FieldCondition,
     Filter,
@@ -31,7 +30,7 @@ from qdrant_client.models import (
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config import load_qdrant_config
+from config import load_qdrant_config, make_client
 from embed_chunks import Embedder
 
 
@@ -127,7 +126,7 @@ def main():
     score_threshold  = args.score_threshold or retrieval.get("score_threshold", 0.0)
     dense_model      = col_cfg["vectors"]["dense"].get("model", "BAAI/bge-small-en-v1.5")
 
-    client   = QdrantClient(url=qcfg["url"], api_key=qcfg.get("api_key"))
+    client   = make_client(qdrant_cfg)
     embedder = Embedder(dense_model=dense_model)
 
     query_filter = build_filter(

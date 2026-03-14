@@ -59,3 +59,29 @@ def get_taxonomy_rules(taxonomy=None):
     if taxonomy is None:
         taxonomy = load_taxonomy()
     return taxonomy.get("rules", {})
+
+
+def make_client(qdrant_cfg=None):
+    """
+    Return a QdrantClient using either HTTP (url) or embedded local (path) mode.
+    url takes precedence when both are set.
+    """
+    from qdrant_client import QdrantClient
+
+    if qdrant_cfg is None:
+        qdrant_cfg = load_qdrant_config()
+
+    qcfg = qdrant_cfg["qdrant"]
+    url  = qcfg.get("url")
+    path = qcfg.get("path")
+
+    if url:
+        return QdrantClient(url=url, api_key=qcfg.get("api_key"))
+
+    if path:
+        # Resolve relative paths from the project root
+        resolved = ROOT / path if not Path(path).is_absolute() else Path(path)
+        resolved.mkdir(parents=True, exist_ok=True)
+        return QdrantClient(path=str(resolved))
+
+    raise ValueError("qdrant config must have either 'url' or 'path' set")

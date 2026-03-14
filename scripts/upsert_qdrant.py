@@ -43,7 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from chunk_markdown import make_chunks
-from config import load_chunking_config, load_qdrant_config, load_taxonomy, get_taxonomy_rules
+from config import load_chunking_config, load_qdrant_config, load_taxonomy, get_taxonomy_rules, make_client
 from embed_chunks import Embedder
 from ingest_markdown import load_posts, validate_all
 
@@ -270,8 +270,7 @@ def main():
     overlap_tokens = chunk_cfg.get("chunking", {}).get("overlap_tokens", 100)
 
     # ── connect ──────────────────────────────────────────────────────────
-    qcfg   = qdrant_cfg["qdrant"]
-    client = QdrantClient(url=qcfg["url"], api_key=qcfg.get("api_key"))
+    client = make_client(qdrant_cfg)
 
     if not args.dry_run:
         setup_collection(client, col_cfg, recreate=args.recreate)

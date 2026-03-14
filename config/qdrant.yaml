@@ -1,5 +1,9 @@
 qdrant:
-  url: "http://localhost:6333"
+  # Use 'url' for a running Qdrant server (Docker / remote).
+  # Use 'path' for embedded local mode (no server needed).
+  # If both are set, 'url' takes precedence.
+  url: null
+  path: "qdrant_storage"   # relative to project root
   api_key: null
   prefer_grpc: false
 

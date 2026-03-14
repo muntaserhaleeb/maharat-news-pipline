@@ -24,7 +24,7 @@ from qdrant_client.models import SparseVector
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from config import load_qdrant_config
+from config import load_qdrant_config, make_client
 from embed_chunks import Embedder
 from search_qdrant import search
 
@@ -169,7 +169,7 @@ def main():
     alias_name      = col_cfg["live_alias"]
     dense_model     = col_cfg["vectors"]["dense"].get("model", "BAAI/bge-small-en-v1.5")
 
-    client = QdrantClient(url=qcfg["url"], api_key=qcfg.get("api_key"))
+    client = make_client(qdrant_cfg)
 
     print(f"\nValidating Qdrant collection: {collection_name}")
     print("─" * 60)

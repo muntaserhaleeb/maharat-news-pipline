@@ -35,7 +35,7 @@ from qdrant_client import QdrantClient
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config import load_qdrant_config
+from config import load_qdrant_config, make_client
 from embed_chunks import Embedder
 from search_qdrant import build_filter, search
 
@@ -126,7 +126,7 @@ def main():
     print(f'\nSearching for: "{args.topic}"', file=sys.stderr)
     print(f"Collection   : {collection_name}", file=sys.stderr)
 
-    client   = QdrantClient(url=qcfg["url"], api_key=qcfg.get("api_key"))
+    client   = make_client(qdrant_cfg)
     embedder = Embedder(dense_model=dense_model)
 
     query_filter = build_filter(
