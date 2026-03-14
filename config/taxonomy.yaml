@@ -1,0 +1,318 @@
+taxonomy:
+  version: "1.0"
+  locale: "en"
+  source: "Maharat editorial taxonomy"
+
+categories:
+  - "Partnerships"
+  - "Events"
+  - "Training Programs"
+  - "Graduations"
+  - "Industry Engagement"
+  - "Community Outreach"
+  - "Leadership & Governance"
+  - "Accreditations & Certifications"
+  - "Women in Construction"
+  - "International Collaboration"
+  - "Corporate Announcements"
+  - "Awards & Recognition"
+
+tags:
+  founding partners:
+    - "Saudi Aramco"
+    - "Technical and Vocational Training Corporation"
+    - "Human Resources Development Fund"
+    - "Saudi Contractors Authority"
+  strategic partners:
+    - "Nesma & Partners Contracting Company"
+    - "ESAB Middle East"
+    - "Sinopec Nanjing Engineering Middle East Co., LTD."
+    - "NEFT Energies"
+    - "NOCN"
+    - "Halumm"
+  partners:
+    - "Colleges of Excellence"  
+    - "Samsung E&A"
+    - "Hyundai Engineering"
+    - "LNA"
+    - "Sinopec Engineering Group"
+    - "Vermaat Technics B.V."
+    - "Nanjing University of Post and Telecommunication"
+    - "Saudi Electrical Services Polytechnic"
+    - "Ministry of Environment, Water and Agriculture"
+    - "Ministry of Human Resources and Social Development"
+    - "Ministry of Health"
+    - "Ministry of Municipal, Rural Affairs and Housing"
+    - "National Development Association"
+    - "Alber Association"
+    - "Binaa Foundation / Charitable Society for Orphan Care in the Eastern Province"
+    - "TARMEEM charity"
+    - "TaAlum (Education Support Association)"
+    - "Social Development Association in Qaryat Al Ulya"
+    - "Nairiyah Local Council"
+    - "Nairiyah Municipality"
+    - "Nairiyah Governorate"
+  
+  accreditation:
+    - "ACCET"
+    - "Masar"
+    - "NOCN"
+    - "Gatehouse Awards"
+    - "City & Guilds"
+    - "AWS"
+    - "NEBOSH"
+    - "IOSH"
+    - "ISO"
+    - "Great Place to Work"
+  topics:
+    - "Safety"
+    - "HSE"
+    - "Welding"
+    - "Heavy Equipment"
+    - "Scaffolding"
+    - "Workforce Development"
+    - "OJT"
+    - "Certifications"
+    - "Women in Construction"
+    - "Construction Technology"
+    - "Prefabrication"
+    - "Digital Transformation"
+    - "Automated Welding"
+    - "Practical Training"
+    - "Employer Engagement"
+    - "Career Readiness"
+    - "Skills Development"
+    - "Industry Standards"
+    - "Accreditation"
+    - "Apprenticeship"
+    - "Site Safety"
+    - "Trainer Development"
+    - "Saudi Vision 2030"
+    - "Innovation"
+
+  locations:
+    - "Riyadh"
+    - "Dhahran"
+    - "Al Khobar"
+    - "Nairyah"
+    - "Qiddiya"
+    - "Neom"
+    - "Dammam"
+    - "Jazan"
+    - "Nanjing"
+    - "China"
+
+  audiences:
+    - "Trainees"
+    - "Employers"
+    - "Industry Partners"
+    - "Female Trainees"
+    - "Trainers"
+    - "Stakeholders"
+    - "Board Members"
+    - "Sponsors"
+    - "Alumni"
+    - "Community"
+
+  content_types:
+    - "news_post"
+    - "event_story"
+    - "partnership_update"
+    - "graduation_story"
+    - "program_announcement"
+    - "recognition_story"
+    - "leadership_news"
+
+rules:
+  single_primary_category: true
+  min_tags_per_article: 3
+  max_tags_per_article: 7
+  max_partner_tags_per_article: 3
+  max_location_tags_per_article: 2
+  require_category: true
+  require_summary: true
+  require_slug: true
+  require_title: true
+  require_language: true
+  default_language: "en"
+  allowed_statuses:
+    - "draft"
+    - "approved"
+    - "archived"
+  default_status: "approved"
+  default_visibility: "public"
+  allowed_visibilities:
+    - "public"
+    - "internal"
+    - "restricted"
+  enforce_controlled_vocabulary: true
+  normalize_case: true
+  trim_whitespace: true
+  deduplicate_tags: true
+
+mapping_hints:
+  category_keywords:
+    "Partnerships":
+      - "agreement"
+      - "mou"
+      - "memorandum"
+      - "collaboration"
+      - "partnership"
+      - "sla"
+      - "signed"
+    "Events":
+      - "event"
+      - "forum"
+      - "conference"
+      - "workshop"
+      - "ceremony"
+      - "exhibition"
+      - "visit"
+    "Training Programs":
+      - "program"
+      - "diploma"
+      - "course"
+      - "training"
+      - "bootcamp"
+      - "academy"
+      - "curriculum"
+    "Graduations":
+      - "graduation"
+      - "graduates"
+      - "cohort"
+      - "commencement"
+    "Industry Engagement":
+      - "industry"
+      - "employer"
+      - "sector"
+      - "engagement"
+      - "stakeholder"
+    "Community Outreach":
+      - "community"
+      - "volunteer"
+      - "outreach"
+      - "awareness"
+    "Leadership & Governance":
+      - "chairman"
+      - "board"
+      - "trustees"
+      - "leadership"
+      - "governance"
+    "Accreditations & Certifications":
+      - "certification"
+      - "certified"
+      - "accreditation"
+      - "iosh"
+      - "nebosh"
+      - "aws"
+      - "nocn"
+    "Women in Construction":
+      - "female"
+      - "women"
+      - "women in construction"
+    "International Collaboration":
+      - "international"
+      - "china"
+      - "global"
+      - "overseas"
+    "Corporate Announcements":
+      - "announcement"
+      - "launch"
+      - "opening"
+      - "initiative"
+    "Awards & Recognition":
+      - "recognition"
+      - "award"
+      - "honored"
+      - "celebrated"
+
+normalization:
+  aliases:
+    - "Aramco": "Saudi Aramco"
+    - "TVTC": "Technical and Vocational Training Corporation"
+    - "HRDF": "Human Resources Development Fund"
+    - "SCA": "Saudi Contractors Authority"
+    - "LWDD": "Aramco Local Force Development Department"
+    - "PMT": "Aramco Project Management Team"
+    - "LP": "Aramco Loss Prevention Department"
+    - "BoT": "Board of Trustees"
+    - "MCTC": "Maharat Construction Training Center"
+    - "Sinopec": "Sinopec Nanjing Engineering Middle East Co., LTD."
+    - "Nesma & Partners": "Nesma & Partners Contracting Company"
+    - "Hyundai": "Hyundai Engineering & Construction"
+    - "ITP": "ITP Media Group"
+    - "NOCN": "National Open College Network"
+    - "ACCET": " Accrediting Council for Continuing Education & Training"
+    - "AWS": "American Welding Society"
+    - "ESAB": "ESAB Middle East"
+    - "Vermaat": "Vermaat Technics B.V."
+    - "LNA": "Leading National Academy"
+    - "Tarmeem": "TARMEEM charity"
+    - "Gatehouse": "Gatehouse Awards"
+    - "IOSH": "Institution of Occupational Safety and Health"
+    - "CoE": "Colleges of Excellence"
+    - "NCSP": "National Center of Strategic Partnerships"
+    - "MEWA": "Ministry of Environment, Water and Agriculture"
+    - "MOH": "Ministry of Health"
+    - "SESP": "Saudi Electrical Services Polytechnic"
+    - "NEFT": "NEFT Energies"
+    - "Samsung": "Samsung E&A Arabia Co. Ltd."
+    - "SASO": "Saudi Standards, Metrology and Quality Organization"
+    - "Nanjing University": "Nanjing University of Posts and Telecommunications"
+    - "Halumm": "Halumm Constrcution Innovation Company"
+    - "Masar": "Education and Training Evaluation Commission (ETEC) / MASAR"
+
+
+  disallowed_free_tags:
+    - "news"
+    - "update"
+    - "maharat"
+    - "article"
+    - "website"
+    - "post"
+
+  preferred_partner_order:
+    - "Saudi Aramco"
+    - "HRDF"
+    - "Saudi Contractors Authority"
+    - "Samsung E&A"
+    - "TÜV SÜD"
+    - "NOCN"
+    - "NEFT Energies"
+    - "Sinopec"
+    - "Hyundai"
+    - "Halumm"
+
+quality_checks:
+  title_min_length: 12
+  title_max_length: 140
+  summary_min_length: 40
+  summary_max_length: 320
+  chunk_min_words: 40
+  chunk_max_words: 450
+  require_featured_image_for:
+    - "Events"
+    - "Graduations"
+    - "Partnerships"
+  recommended_tags_by_category:
+    "Partnerships":
+      - "Workforce Development"
+      - "Employer Engagement"
+    "Training Programs":
+      - "Skills Development"
+      - "Practical Training"
+    "Graduations":
+      - "Career Readiness"
+      - "Trainees"
+    "Accreditations & Certifications":
+      - "Certification"
+      - "Industry Standards"
+
+liferay_mapping:
+  blog_title_field: "title"
+  blog_summary_field: "summary"
+  blog_slug_field: "slug"
+  blog_body_field: "chunk_text"
+  category_field: "category"
+  tags_field: "tags"
+  featured_image_field: "featured_image"

@@ -32,9 +32,9 @@ from docx.oxml.ns import qn
 # ── Paths ──────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).resolve().parent.parent
 INPUT_DIR = ROOT / "input"
-POSTS_DIR = ROOT / "output" / "posts"
-IMAGES_DIR = ROOT / "output" / "images"
-MANIFESTS_DIR = ROOT / "output" / "manifests"
+POSTS_DIR = ROOT / "data" / "posts"
+IMAGES_DIR = ROOT / "data" / "images"
+MANIFESTS_DIR = ROOT / "data" / "manifests"
 REVIEW_DIR = ROOT / "review"
 
 

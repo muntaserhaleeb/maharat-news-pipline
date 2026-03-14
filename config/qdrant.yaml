@@ -1,0 +1,305 @@
+qdrant:
+  url: "http://localhost:6333"
+  api_key: null
+  prefer_grpc: false
+
+collections:
+  primary:
+    name: "maharat_content_chunks_v1"
+    live_alias: "maharat_content_live"
+
+    vectors:
+      dense:
+        model: "BAAI/bge-small-en-v1.5"
+        size: 384
+        distance: "Cosine"
+        on_disk: false
+
+    sparse_vectors:
+      sparse:
+        modifier: null
+
+    storage:
+      on_disk_payload: true
+
+    optimization:
+      indexing_threshold: 20000
+
+    hnsw:
+      m: 16
+      ef_construct: 100
+      full_scan_threshold: 10000
+
+    wal:
+      wal_capacity_mb: 32
+      wal_segments_ahead: 0
+
+    quantization:
+      enabled: false
+      type: "scalar"
+      quantile: 0.99
+      always_ram: false
+
+payload_schema:
+  article_id:
+    type: "keyword"
+    description: "Stable article-level identifier, usually equal to slug"
+
+  chunk_id:
+    type: "keyword"
+    description: "Stable chunk identifier, e.g. slug__003"
+
+  title:
+    type: "text"
+    description: "Article headline"
+
+  slug:
+    type: "keyword"
+    description: "Unique article slug"
+
+  url:
+    type: "keyword"
+    description: "Relative or absolute content URL"
+
+  source_type:
+    type: "keyword"
+    description: "Archive source type, e.g. news_archive"
+
+  content_type:
+    type: "keyword"
+    description: "Content type, e.g. news_post"
+
+  chunk_index:
+    type: "integer"
+    description: "Chunk order within article"
+
+  chunk_type:
+    type: "keyword"
+    description: "title, summary, body, quote, caption, metadata_note"
+
+  heading_path:
+    type: "keyword"
+    description: "Flattened heading path for the chunk"
+
+  chunk_text:
+    type: "text"
+    description: "Chunk body text used for retrieval grounding"
+
+  summary:
+    type: "text"
+    description: "Article summary"
+
+  date:
+    type: "datetime"
+    description: "Primary publish or event date in ISO 8601"
+
+  year:
+    type: "integer"
+    description: "Derived year for fast filtering"
+
+  quarter:
+    type: "keyword"
+    description: "Q1, Q2, Q3, Q4"
+
+  month:
+    type: "integer"
+    description: "Derived month number"
+
+  category:
+    type: "keyword"
+    description: "Primary category"
+
+  tags:
+    type: "keyword"
+    description: "Controlled tag values"
+
+  partner:
+    type: "keyword"
+    description: "Primary or related partner names"
+
+  location:
+    type: "keyword"
+    description: "Related city, region, site, or country"
+
+  audience:
+    type: "keyword"
+    description: "Target audience labels"
+
+  featured_image:
+    type: "keyword"
+    description: "Main image filename"
+
+  image_names:
+    type: "keyword"
+    description: "All related image filenames"
+
+  language:
+    type: "keyword"
+    description: "Language code, e.g. en"
+
+  status:
+    type: "keyword"
+    description: "draft, approved, archived"
+
+  source_document:
+    type: "keyword"
+    description: "Original source document name"
+
+  source_section:
+    type: "keyword"
+    description: "Original section or heading from source"
+
+  source_page_start:
+    type: "integer"
+    description: "Start page in source document"
+
+  source_page_end:
+    type: "integer"
+    description: "End page in source document"
+
+  word_count:
+    type: "integer"
+    description: "Chunk word count"
+
+  published:
+    type: "bool"
+    description: "Whether content is approved for retrieval in live drafting"
+
+  visibility:
+    type: "keyword"
+    description: "public, internal, restricted"
+
+  version:
+    type: "keyword"
+    description: "Ingestion/schema version"
+
+  ingested_at:
+    type: "datetime"
+    description: "Timestamp when point was indexed"
+
+payload_indexes:
+  - field_name: "article_id"
+    field_schema: "keyword"
+
+  - field_name: "chunk_id"
+    field_schema: "keyword"
+
+  - field_name: "slug"
+    field_schema: "keyword"
+
+  - field_name: "url"
+    field_schema: "keyword"
+
+  - field_name: "source_type"
+    field_schema: "keyword"
+
+  - field_name: "content_type"
+    field_schema: "keyword"
+
+  - field_name: "chunk_index"
+    field_schema: "integer"
+
+  - field_name: "chunk_type"
+    field_schema: "keyword"
+
+  - field_name: "date"
+    field_schema: "datetime"
+
+  - field_name: "year"
+    field_schema: "integer"
+
+  - field_name: "quarter"
+    field_schema: "keyword"
+
+  - field_name: "month"
+    field_schema: "integer"
+
+  - field_name: "category"
+    field_schema: "keyword"
+
+  - field_name: "tags"
+    field_schema: "keyword"
+
+  - field_name: "partner"
+    field_schema: "keyword"
+
+  - field_name: "location"
+    field_schema: "keyword"
+
+  - field_name: "audience"
+    field_schema: "keyword"
+
+  - field_name: "featured_image"
+    field_schema: "keyword"
+
+  - field_name: "image_names"
+    field_schema: "keyword"
+
+  - field_name: "language"
+    field_schema: "keyword"
+
+  - field_name: "status"
+    field_schema: "keyword"
+
+  - field_name: "source_document"
+    field_schema: "keyword"
+
+  - field_name: "source_section"
+    field_schema: "keyword"
+
+  - field_name: "source_page_start"
+    field_schema: "integer"
+
+  - field_name: "source_page_end"
+    field_schema: "integer"
+
+  - field_name: "word_count"
+    field_schema: "integer"
+
+  - field_name: "published"
+    field_schema: "bool"
+
+  - field_name: "visibility"
+    field_schema: "keyword"
+
+  - field_name: "version"
+    field_schema: "keyword"
+
+  - field_name: "ingested_at"
+    field_schema: "datetime"
+
+retrieval:
+  default_limit: 8
+  candidate_limit: 24
+  score_threshold: 0.15
+
+  prefilters:
+    published: true
+    status: "approved"
+    language: "en"
+    visibility: "public"
+
+  hybrid:
+    enabled: true
+    dense_vector_name: "dense"
+    sparse_vector_name: "sparse"
+    fusion: "rrf"
+
+  reranking:
+    enabled: false
+    top_k: 12
+
+ingestion:
+  point_id_pattern: "{slug}__{chunk_index:03d}"
+  upsert_batch_size: 64
+  skip_unpublished: false
+  require_front_matter: true
+  fail_on_missing_slug: true
+  fail_on_missing_date: false
+  fail_on_unknown_category: true
+  fail_on_unknown_tags: false
+
+logging:
+  level: "INFO"
+  save_failed_records: true
+  failed_records_path: "logs/failed_records.jsonl"

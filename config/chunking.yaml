@@ -1,0 +1,10 @@
+chunking:
+  strategy: markdown_headings
+  max_tokens: 500
+  overlap_tokens: 80
+  preserve_sections: true
+  allowed_chunk_types:
+    - title
+    - summary
+    - body
+    - caption

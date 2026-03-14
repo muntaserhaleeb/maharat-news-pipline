@@ -24,8 +24,8 @@ import yaml
 
 # ── Paths ──────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).resolve().parent.parent
-POSTS_DIR = ROOT / "output" / "posts"
-OUTPUT_DIR = ROOT / "output"
+POSTS_DIR = ROOT / "data" / "posts"
+OUTPUT_DIR = ROOT / "data"
 
 # ── Defaults ───────────────────────────────────────────────────────────────
 FEED_TITLE = "MCTC News"
