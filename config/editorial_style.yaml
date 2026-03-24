@@ -1,0 +1,335 @@
+editorial_style:
+  version: "1.0"
+  organization:
+    full_name: "Maharat Construction Training Center"
+    short_name: "Maharat"
+    descriptor: "a not-for-profit national training institution advancing construction workforce development in alignment with Saudi Vision 2030"
+
+  brand_positioning:
+    core_identity:
+      - "industry-driven"
+      - "workforce-focused"
+      - "quality-oriented"
+      - "safety-conscious"
+      - "partnership-led"
+      - "future-ready"
+    strategic_themes:
+      - "workforce readiness"
+      - "industry partnership"
+      - "skills development"
+      - "training excellence"
+      - "safety and quality"
+      - "sector advancement"
+      - "innovation in training"
+      - "inclusive participation"
+      - "employability"
+      - "Saudi Vision 2030 alignment"
+
+  voice:
+    tone:
+      - "professional"
+      - "institutional"
+      - "credible"
+      - "factual"
+      - "forward-looking"
+      - "measured"
+    style_characteristics:
+      - "clear"
+      - "structured"
+      - "precise"
+      - "confident but not promotional"
+      - "grounded in evidence"
+    avoid:
+      - "hype-heavy language"
+      - "generic AI phrasing"
+      - "casual or conversational expressions"
+      - "unsupported superlatives"
+      - "sweeping claims"
+      - "sales language"
+      - "clickbait phrasing"
+
+  writing_principles:
+    - "Lead with the most newsworthy fact."
+    - "Ground all claims in retrieved source material."
+    - "Use clear institutional language suitable for a website news audience."
+    - "Emphasize practical significance to workforce development, training quality, safety, and industry relevance when supported by the source."
+    - "Use full official organization names on first mention."
+    - "Avoid overstating partnerships, outcomes, or program scope."
+    - "Prefer specificity over abstraction."
+    - "Keep momentum in the narrative by moving from event to context to significance."
+
+  article_types:
+    partnership_announcement:
+      purpose: "Announce and explain a collaboration, agreement, MoU, SLA, or joint initiative."
+      emphasis:
+        - "scope of collaboration"
+        - "partner identity and relevance"
+        - "expected value to workforce development or sector capability"
+        - "strategic significance to Maharat"
+      preferred_structure:
+        - "headline"
+        - "summary"
+        - "announcement paragraph"
+        - "context paragraph"
+        - "strategic significance paragraph"
+        - "optional program or implementation detail paragraph"
+
+    graduation_story:
+      purpose: "Highlight learner achievement, graduation milestones, and partner recognition."
+      emphasis:
+        - "milestone achieved"
+        - "program identity"
+        - "cohort significance"
+        - "recognition of partners and sponsors where supported"
+      preferred_structure:
+        - "headline"
+        - "summary"
+        - "opening achievement paragraph"
+        - "program details paragraph"
+        - "recognition/significance paragraph"
+
+    training_program_update:
+      purpose: "Present a new or ongoing training program, curriculum development, or delivery milestone."
+      emphasis:
+        - "program content"
+        - "practical value"
+        - "industry alignment"
+        - "learner or employer relevance"
+      preferred_structure:
+        - "headline"
+        - "summary"
+        - "program overview paragraph"
+        - "training features paragraph"
+        - "impact paragraph"
+
+    event_story:
+      purpose: "Report participation in or hosting of events, forums, workshops, visits, exhibitions, or ceremonies."
+      emphasis:
+        - "what happened"
+        - "who participated"
+        - "why it mattered"
+        - "how it supported Maharat’s mission"
+      preferred_structure:
+        - "headline"
+        - "summary"
+        - "event paragraph"
+        - "participation/context paragraph"
+        - "sector relevance paragraph"
+
+    recognition_story:
+      purpose: "Highlight awards, recognitions, sponsor acknowledgements, or achievements."
+      emphasis:
+        - "recognized entity or milestone"
+        - "why the recognition matters"
+        - "institutional significance"
+      preferred_structure:
+        - "headline"
+        - "summary"
+        - "recognition paragraph"
+        - "context paragraph"
+        - "significance paragraph"
+
+    leadership_news:
+      purpose: "Communicate leadership activities, governance developments, board-level engagements, or strategic direction."
+      emphasis:
+        - "leadership role"
+        - "decision or engagement"
+        - "institutional importance"
+      preferred_structure:
+        - "headline"
+        - "summary"
+        - "leadership development paragraph"
+        - "context paragraph"
+        - "institutional significance paragraph"
+
+  structure:
+    required_outputs:
+      - "headline"
+      - "summary"
+      - "body"
+      - "suggested_slug"
+      - "seo_summary"
+      - "sources_used"
+    body_model:
+      opening_paragraph: "State the main development, involved party or event, and its purpose."
+      second_paragraph: "Provide context, supporting details, and relevant program or event information."
+      third_paragraph: "Explain significance to Maharat, workforce development, training quality, safety, or sector advancement."
+      optional_additional_paragraphs:
+        - "partner recognition details"
+        - "program features"
+        - "location and participation details"
+        - "credentials or accreditation relevance"
+
+  headline_rules:
+    principles:
+      - "Make the headline clear and specific."
+      - "Name the main action, event, or partnership."
+      - "Use Maharat as the institutional subject when appropriate."
+      - "Avoid vague or generic constructions."
+    avoid:
+      - "question headlines"
+      - "clickbait"
+      - "overly long headlines"
+      - "hype words such as groundbreaking, revolutionary, unmatched"
+    preferred_patterns:
+      - "Maharat Signs [Agreement Type] with [Partner]"
+      - "Maharat Celebrates [Graduation/Event Name]"
+      - "Maharat Launches [Program/Initiative]"
+      - "Maharat Highlights [Achievement/Participation]"
+      - "Maharat Strengthens [Theme] Through [Initiative/Partnership]"
+    length:
+      min_words: 5
+      max_words: 14
+
+  summary_rules:
+    purpose: "Provide a concise news standfirst for website readers and feed cards."
+    max_words: 45
+    min_words: 18
+    should_include:
+      - "main action"
+      - "partner, event, or program if relevant"
+      - "practical or strategic significance"
+    avoid:
+      - "repeating the headline verbatim"
+      - "marketing language"
+      - "details not supported by sources"
+
+  body_rules:
+    paragraph_style: "medium-length paragraphs"
+    preferred_sentence_style: "clear, direct, information-rich"
+    opening_must_include_when_available:
+      - "main action or event"
+      - "organization or partner"
+      - "purpose or relevance"
+    include_when_supported:
+      - "date"
+      - "location"
+      - "program name"
+      - "recognized credentials or certifications"
+      - "partner role"
+      - "sector significance"
+    avoid:
+      - "stacking too many facts in one sentence"
+      - "long promotional openings"
+      - "unverifiable impact claims"
+
+  partner_language:
+    first_mention_rule: "Use full official partner name on first mention."
+    follow_up_rule: "Use shortened form only after first mention if it remains clear."
+    recognition_rule: "Acknowledge partners, sponsors, and accrediting bodies accurately and proportionately."
+    avoid:
+      - "inflating the scope of a relationship"
+      - "implying signed agreements where the source only indicates discussions or visits"
+      - "assigning roles not stated in the source"
+
+  program_language:
+    principles:
+      - "Refer to program names consistently."
+      - "Highlight industry relevance, practical training, and learner outcomes where supported."
+      - "Do not infer curriculum details not present in the source."
+
+  factual_controls:
+    must_have_sources: true
+    no_invention:
+      - "dates"
+      - "quotes"
+      - "attendance figures"
+      - "partner names"
+      - "program names"
+      - "credentials or certifications"
+      - "locations"
+      - "implementation details"
+      - "outcomes not explicitly supported"
+    quote_policy: "Only include a direct quote if it appears in retrieved source material."
+    uncertainty_rule: "If a detail is not explicit in the retrieved material, omit it rather than infer it."
+    conflict_rule: "If sources conflict, prefer the more specific and recent approved source, or present cautiously."
+
+  style_guards:
+    banned_phrases:
+      - "world-class leader"
+      - "revolutionary initiative"
+      - "unparalleled excellence"
+      - "game-changing"
+      - "state-of-the-art training ecosystem"
+    discouraged_phrases:
+      - "proudly announced"
+      - "exciting milestone"
+      - "transformative journey"
+      - "in today’s rapidly evolving world"
+    preferred_replacements:
+      "proudly announced": "announced"
+      "exciting milestone": "important milestone"
+      "transformative journey": "training journey"
+
+  audience_profiles:
+    website_news:
+      description: "General website audience including partners, trainees, employers, and stakeholders."
+      tone_adjustment: "clear and accessible but still institutional"
+    executive_readers:
+      description: "Board members, senior leaders, strategic partners."
+      tone_adjustment: "more strategic and concise"
+    marketing_reuse:
+      description: "Source text to be repurposed for LinkedIn, newsletters, and magazine content."
+      tone_adjustment: "still factual, slightly more engaging"
+
+  seo_rules:
+    slug:
+      use_title_basis: true
+      lowercase: true
+      replace_ampersand_with: "and"
+      separator: "-"
+      max_length: 80
+    seo_summary:
+      max_words: 30
+      should_include:
+        - "Maharat"
+        - "primary action or event"
+        - "partner or program if relevant"
+
+  source_packaging:
+    include_sources_used: true
+    include_retrieval_debug: true
+    source_fields:
+      - "title"
+      - "slug"
+      - "source_document"
+      - "date"
+      - "chunk_id"
+
+  generation_rules:
+    max_context_chunks: 8
+    prioritize_chunk_types:
+      - "summary"
+      - "body"
+      - "title"
+      - "quote"
+      - "caption"
+    require_grounding_statement: true
+    preferred_article_length_words:
+      short_news: 180
+      standard_news: 300
+      extended_news: 500
+
+  quality_checks:
+    headline:
+      must_be_specific: true
+      must_reference_main_action: true
+    summary:
+      must_be_distinct_from_headline: true
+      must_include_significance: true
+    body:
+      must_open_with_main_fact: true
+      must_not_include_unsupported_claims: true
+      should_include_context: true
+    sources:
+      minimum_sources: 1
+      require_source_list: true
+
+  output_template:
+    order:
+      - "headline"
+      - "summary"
+      - "body"
+      - "suggested_slug"
+      - "seo_summary"
+      - "sources_used"

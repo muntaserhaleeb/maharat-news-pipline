@@ -1,0 +1,294 @@
+generation:
+  version: "2.0"
+
+  system_identity:
+    organization: "Maharat Construction Training Center"
+    short_name: "Maharat"
+    mission_context: "advancing construction workforce development in alignment with Saudi Vision 2030"
+
+  model: "claude-sonnet-4-6"
+  max_tokens: 4096
+
+  thinking:
+    type: "disabled"
+
+  style: "Maharat website news"
+  tone: "professional, factual, institutionally credible"
+
+  default_settings:
+    max_context_chunks: 8
+    min_sources_required: 1
+    enforce_grounding: true
+    allow_inferred_context: false
+    temperature: 0.2
+
+  candidate_multiplier: 3
+  score_threshold: 0.15
+  require_grounding: true
+
+  draft_sections:
+    - title
+    - summary
+    - body
+
+  word_range:
+    min: 250
+    max: 450
+
+  include_source_list: true
+  system_prompt_template: "maharat_news_v1"
+
+  retrieval_rules:
+    use_hybrid_search: true
+    entity_boosting: true
+    candidate_multiplier: 3
+    score_threshold: 0.15
+    entity_fields:
+      - entities_organizations
+      - entities_programs
+      - entities_locations
+      - entities_credentials
+      - entities_people
+    prioritize_chunk_types:
+      - summary
+      - body
+      - title
+      - quote
+      - caption
+
+  generation_modes:
+    website_news:
+      description: "Standard Maharat website news article"
+      article_type: "standard_news"
+
+      length:
+        min_words: 220
+        target_words: 300
+        max_words: 420
+
+      structure:
+        include_headline: true
+        include_summary: true
+        include_body: true
+        include_slug: true
+        include_seo_summary: true
+        include_sources: true
+        include_hashtags: false
+        include_subheadings: false
+
+      tone_adjustment:
+        - "professional"
+        - "institutional"
+        - "clear"
+
+      formatting:
+        paragraphs: "medium"
+        subheadings: false
+
+    linkedin_post:
+      description: "LinkedIn announcement derived from Maharat news"
+      article_type: "social_announcement"
+
+      length:
+        min_words: 80
+        target_words: 120
+        max_words: 160
+
+      structure:
+        include_headline: false
+        include_summary: false
+        include_body: true
+        include_slug: false
+        include_seo_summary: false
+        include_sources: false
+        include_hashtags: true
+        include_subheadings: false
+
+      tone_adjustment:
+        - "engaging"
+        - "professional"
+        - "concise"
+
+      formatting:
+        paragraphs: "short"
+        subheadings: false
+
+      hashtags:
+        auto_generate: true
+        base_tags:
+          - "Maharat"
+          - "WorkforceDevelopment"
+          - "ConstructionTraining"
+          - "SaudiVision2030"
+
+    magazine_article:
+      description: "Expanded narrative article for Skilling Innovatively magazine"
+      article_type: "feature_article"
+
+      length:
+        min_words: 600
+        target_words: 800
+        max_words: 1200
+
+      structure:
+        include_headline: true
+        include_summary: true
+        include_body: true
+        include_slug: true
+        include_seo_summary: false
+        include_sources: true
+        include_hashtags: false
+        include_subheadings: true
+
+      tone_adjustment:
+        - "narrative"
+        - "informative"
+        - "analytical"
+
+      formatting:
+        paragraphs: "medium"
+        subheadings: true
+
+      additional_sections:
+        - "background"
+        - "sector context"
+        - "future outlook"
+
+    event_announcement:
+      description: "Short event participation or event hosting announcement"
+      article_type: "event_story"
+
+      length:
+        min_words: 150
+        target_words: 200
+        max_words: 260
+
+      structure:
+        include_headline: true
+        include_summary: true
+        include_body: true
+        include_slug: true
+        include_seo_summary: true
+        include_sources: true
+        include_hashtags: false
+        include_subheadings: false
+
+      tone_adjustment:
+        - "clear"
+        - "informative"
+
+      formatting:
+        paragraphs: "short"
+        subheadings: false
+
+      include_event_details: true
+
+    partner_highlight:
+      description: "Recognition-focused partner spotlight article"
+      article_type: "recognition_story"
+
+      length:
+        min_words: 220
+        target_words: 260
+        max_words: 350
+
+      structure:
+        include_headline: true
+        include_summary: true
+        include_body: true
+        include_slug: true
+        include_seo_summary: true
+        include_sources: true
+        include_hashtags: false
+        include_subheadings: false
+
+      tone_adjustment:
+        - "recognition-focused"
+        - "professional"
+
+      formatting:
+        paragraphs: "medium"
+        subheadings: false
+
+      highlight_partner_role: true
+
+  timeline_rules:
+    prioritize_recent_content: true
+    recency_boost_years: 2
+    fallback_years: 5
+    weighting:
+      current_year: 1.0
+      previous_year: 0.85
+      older_content: 0.65
+
+  entity_usage:
+    detect_entities_from_query: true
+    include_entity_context_in_prompt: true
+    entity_priority_order:
+      - organizations
+      - programs
+      - credentials
+      - locations
+      - people
+
+  seo_rules:
+    slug_generation:
+      lowercase: true
+      replace_ampersand_with: "and"
+      separator: "-"
+      max_length: 80
+
+    seo_summary:
+      max_words: 30
+      include_keywords: true
+
+  grounding_rules:
+    require_source_reference: true
+    prohibit_invention:
+      - partner_names
+      - dates
+      - certifications
+      - quotes
+      - attendance_numbers
+      - locations
+      - implementation_details
+    citation_format: "source_list"
+
+  quality_controls:
+    minimum_sources: 1
+    check_partner_consistency: true
+    check_entity_consistency: true
+    check_duplicate_sentences: true
+    check_overly_promotional_language: true
+    check_summary_length: true
+    check_unsupported_claims: true
+
+  output:
+    save_drafts: true
+    drafts_dir: "outputs/drafts"
+    debug_dir: "outputs/debug"
+    include_sources_used: true
+    include_token_usage: true
+    format: "json"
+
+  output_packaging:
+    save_outputs: true
+    output_directory: "outputs/drafts"
+    include_metadata:
+      - topic
+      - generation_mode
+      - timestamp
+      - entities_detected
+      - retrieved_chunks
+    files_generated:
+      - draft.md
+      - sources.json
+      - retrieval_debug.json
+
+  generation_rules:
+    max_context_chunks: 8
+    require_grounding_statement: true
+    preferred_article_length_words:
+      short_news: 180
+      standard_news: 300
+      extended_news: 500

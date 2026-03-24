@@ -272,6 +272,21 @@ payload_indexes:
   - field_name: "ingested_at"
     field_schema: "datetime"
 
+  - field_name: "entities_organizations"
+    field_schema: "keyword"
+
+  - field_name: "entities_programs"
+    field_schema: "keyword"
+
+  - field_name: "entities_locations"
+    field_schema: "keyword"
+
+  - field_name: "entities_credentials"
+    field_schema: "keyword"
+
+  - field_name: "entities_people"
+    field_schema: "keyword"
+
 retrieval:
   default_limit: 8
   candidate_limit: 24

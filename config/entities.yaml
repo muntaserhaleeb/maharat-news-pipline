@@ -1,0 +1,221 @@
+##############################################################################
+# Maharat Entity Dictionary
+# Used by services/entity_service.py for deterministic entity extraction.
+# Each entry: canonical (authoritative name) + aliases (all variant spellings).
+# Extraction is case-insensitive; aliases with special chars use substring
+# matching; pure-word aliases use word-boundary matching.
+##############################################################################
+
+entities:
+
+  # ── organizations ─────────────────────────────────────────────────────────
+  organizations:
+
+    # Core institution
+    - canonical: "Maharat Construction Training Center"
+      aliases: ["MCTC", "Maharat"]
+
+    # Founding partners
+    - canonical: "Saudi Aramco"
+      aliases: ["Aramco", "Saudi Aramco Company"]
+    - canonical: "Technical and Vocational Training Corporation"
+      aliases: ["TVTC"]
+    - canonical: "Human Resources Development Fund"
+      aliases: ["HRDF", "Hadaf"]
+
+
+    # Strategic partners
+    - canonical: "Nesma & Partners Contracting Company"
+      aliases: ["Nesma", "NESMA", "Nesma & Partners", "Nesma and Partners"]
+    - canonical: "Saudi Contractors Authority"
+      aliases: ["SCA", "Saudi Contractors Authority Academy"]
+    - canonical: "Samsung E&A"
+      aliases: ["Samsung", "Samsung E&A"]
+    - canonical: "ESAB Middle East"
+      aliases: ["ESAB"]
+    - canonical: "Sinopec Nanjing Engineering Middle East Co., LTD."
+      aliases: ["Sinopec", "Sinopec Nanjing"]
+    - canonical: "NEFT Energies"
+      aliases: ["NEFT"]
+    - canonical: "Halumm"
+      aliases: ["Halumm Innovation"]
+    - canonical: "Vermaat Technics B.V."
+      aliases: ["Vermaat", "Vermaat Technics"]
+    - canonical: "Leading National Academy"
+      aliases: ["LNA"]
+    - canonical: "Saudi Electrical Services Polytechnic"
+      aliases: ["SESP"]
+
+    # Government ministries & bodies
+    - canonical: "Ministry of Environment, Water and Agriculture"
+      aliases: ["MEWA"]
+    - canonical: "Ministry of Human Resources and Social Development"
+      aliases: ["MHRSD", "Ministry of Human Resources"]
+    - canonical: "Ministry of Health"
+      aliases: ["MOH"]
+    - canonical: "Ministry of Municipal, Rural Affairs and Housing"
+      aliases: ["Ministry of Municipal"]
+    - canonical: "National Center of Strategic Partnerships"
+      aliases: ["NCSP"]
+    - canonical: "Saudi Standards, Metrology and Quality Organization"
+      aliases: ["SASO"]
+    - canonical: "National Development Association"
+      aliases: []
+
+    # Community & social organizations
+    - canonical: "Nairiyah Local Council"
+      aliases: []
+    - canonical: "Nairiyah Municipality"
+      aliases: []
+    - canonical: "Nairiyah Governorate"
+      aliases: []
+    - canonical: "Alber Association"
+      aliases: ["Alber"]
+    - canonical: "Binaa Foundation"
+      aliases: ["Binaa"]
+    - canonical: "Social Development Association in Qaryat Al Ulya"
+      aliases: ["Qaryat Al Ulya Association"]
+
+  # ── programs ──────────────────────────────────────────────────────────────
+  programs:
+
+    - canonical: "Construction Safety Diploma"
+      aliases: ["CSD"]
+    - canonical: "Civil Construction Diploma"
+      aliases: []
+    - canonical: "Welding Associate Diploma"
+      aliases: ["Welding Diploma"]
+    - canonical: "Automated Welding Diploma"
+      aliases: ["Automated Welding"]
+    - canonical: "Pipefitting Diploma"
+      aliases: ["Pipefitting"]
+    - canonical: "Instrumentation Diploma"
+      aliases: ["Instrumentation Program"]
+    - canonical: "Electrical Diploma"
+      aliases: ["Electrical Program"]
+    - canonical: "Scaffolding Diploma"
+      aliases: ["Scaffolding Program"]
+    - canonical: "HSE Training & Certifications"
+      aliases: ["HSE Training", "HSE Certification"]
+    - canonical: "Construction Safety Manual"
+      aliases: ["CSM", "CSM Course", "Construction Safety Manual Training"]
+    - canonical: "Work Permit Receiver"
+      aliases: ["WPR", "Work Permit Reciever"]
+    - canonical: "On-the-Job Training"
+      aliases: ["OJT"]
+
+  # ── locations ─────────────────────────────────────────────────────────────
+  locations:
+
+    - canonical: "Dhahran"
+      aliases: ["Dahran"]
+    - canonical: "Nairiyah"
+      aliases: ["Nairyah", "Al Nairiyah"]
+    - canonical: "Al Khobar"
+      aliases: ["Khobar"]
+    - canonical: "Riyadh"
+      aliases: []
+    - canonical: "Dammam"
+      aliases: []
+    - canonical: "Jazan"
+      aliases: ["Jizan"]
+    - canonical: "Qiddiya"
+      aliases: []
+    - canonical: "Neom"
+      aliases: ["NEOM"]
+    - canonical: "Nanjing"
+      aliases: []
+    - canonical: "China"
+      aliases: []
+    - canonical: "Saudi Arabia"
+      aliases: ["Kingdom of Saudi Arabia", "KSA"]
+    - canonical: "Eastern Province"
+      aliases: ["Eastern Region"]
+    - canonical: "Juaimah Training Center"
+      aliases: ["JTC", "Juaimah"]
+    - canonical: "Rahima Training Center"
+      aliases: ["RTC", "Rahima"]
+    - canonical: "North Housing Training Institute"
+      aliases: ["NHTI Training Center"]
+
+  # ── credentials ───────────────────────────────────────────────────────────
+  credentials:
+
+    - canonical: "ACCET"
+      aliases: ["Accrediting Council for Continuing Education and Training"]
+    - canonical: "Masar"
+      aliases: []
+    - canonical: "NOCN"
+      aliases: ["National Open College Network"]
+    - canonical: "Gatehouse Awards"
+      aliases: ["Gatehouse"]
+    - canonical: "City & Guilds"
+      aliases: ["City and Guilds"]
+    - canonical: "American Welding Society"
+      aliases: ["AWS"]
+    - canonical: "NEBOSH"
+      aliases: ["Nebosh"]
+    - canonical: "IOSH"
+      aliases: ["Institution of Occupational Safety and Health"]
+    - canonical: "ISO"
+      aliases: []
+    - canonical: "Great Place to Work"
+      aliases: ["GPTW"]
+    - canonical: "Work Permit Receiver Certificate"
+      aliases: ["WPR Certificate"]
+    - canonical: "Construction Safety Manual Certificate"
+      aliases: ["CSM Certificate"]
+
+  # ── people ────────────────────────────────────────────────────────────────
+  # Role-based designations and named individuals.
+  people:
+
+    - canonical: "Chairman of the Board of Trustees"
+      aliases: ["BoT Chairman", "Board Chairman"]
+    - canonical: "Managing Director"
+      aliases: ["MD"]
+    - canonical: "Board of Trustees"
+      aliases: ["BoT"]
+
+    # Board members & named individuals
+    # Extra fields (title, affiliation) are metadata only — not used in pattern matching.
+
+    - canonical: "Mansour Shehri"
+      aliases: ["Shehri", "Mansour Shehri"]
+      title: "Chairman of the Board"
+      affiliation: "Saudi Aramco — VP, Liquids to Chemicals Project Management"
+
+    - canonical: "Mishari Bin Abdullah Al-Qahtani"
+      aliases: ["Al-Qahtani", "Mishari Al-Qahtani", "Mishari Al Qahtani"]
+      title: "Vice Chairman"
+      affiliation: "TVTC — GM, TVTC Eastern Province"
+
+    - canonical: "Abdullah M. Subaii"
+      aliases: ["Subaii", "Abdullah Subaii"]
+      title: "Board Member"
+      affiliation: "Saudi Aramco — Director, Amiral Project Dept."
+
+    - canonical: "Saad Al Shahrani"
+      aliases: ["Al Shahrani", "Saad Shahrani"]
+      title: "Board Member"
+      affiliation: "Saudi Aramco — Director, Local Workforce Development Dept."
+
+    - canonical: "Nader Y. Shinnawi"
+      aliases: ["Shinnawi", "Nader Shinnawi"]
+      title: "Board Member"
+      affiliation: "HRDF — Chief of Training Subsidy Program"
+
+    - canonical: "Saud W. Alaqeedi"
+      aliases: ["Alaqeedi", "Saud Alaqeedi"]
+      title: "Board Member"
+      affiliation: "Saudi Contractors Authority — Board Member"
+
+    - canonical: "Sami Mussali"
+      aliases: ["Mussali"]
+      title: "Managing Director"
+      affiliation: "Maharat Construction Training Center"
+
+    - canonical: "Muntaser Haleeb"
+      aliases: ["Haleeb", "Muntaser"]
+      title: "Business Development Director"
+      affiliation: "Maharat Construction Training Center"

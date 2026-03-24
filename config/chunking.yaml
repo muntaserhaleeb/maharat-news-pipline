@@ -1,10 +1,22 @@
 chunking:
-  strategy: markdown_headings
-  max_tokens: 500
-  overlap_tokens: 80
-  preserve_sections: true
-  allowed_chunk_types:
+
+  strategy: markdown_structure
+
+  target_words: 350
+  max_words: 600
+  overlap_words: 80
+
+  preserve_headings: true
+  preserve_paragraphs: true
+
+  chunk_types:
     - title
     - summary
     - body
     - caption
+
+  importance_weights:
+    title: 1.0
+    summary: 0.9
+    body: 0.7
+    caption: 0.3

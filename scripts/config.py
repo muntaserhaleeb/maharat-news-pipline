@@ -1,87 +1,24 @@
 #!/usr/bin/env python3
 """
-Load and expose qdrant.yaml, chunking.yaml, and taxonomy.yaml configs.
+Config loader — thin re-export wrapper.
+All logic lives in services/config_service.py.
+This file exists for backwards compatibility with one-off scripts in scripts/.
 """
 
-import yaml
+import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-CONFIG_DIR = ROOT / "config"
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-
-def _load(name):
-    path = CONFIG_DIR / name
-    with open(path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
-
-
-def load_qdrant_config():
-    return _load("qdrant.yaml")
-
-
-def load_chunking_config():
-    return _load("chunking.yaml")
-
-
-def load_taxonomy():
-    return _load("taxonomy.yaml")
-
-
-def get_collection_cfg(qdrant_cfg=None):
-    """Return the primary collection config block."""
-    if qdrant_cfg is None:
-        qdrant_cfg = load_qdrant_config()
-    return qdrant_cfg["collections"]["primary"]
-
-
-def get_all_valid_tags(taxonomy=None):
-    """Return a flat set of all allowed tag values from taxonomy.yaml."""
-    if taxonomy is None:
-        taxonomy = load_taxonomy()
-    tags_section = taxonomy.get("tags", {})
-    valid = set()
-    for group_values in tags_section.values():
-        if isinstance(group_values, list):
-            for v in group_values:
-                valid.add(v)
-    return valid
-
-
-def get_valid_categories(taxonomy=None):
-    """Return list of allowed category names."""
-    if taxonomy is None:
-        taxonomy = load_taxonomy()
-    return taxonomy.get("categories", [])
-
-
-def get_taxonomy_rules(taxonomy=None):
-    if taxonomy is None:
-        taxonomy = load_taxonomy()
-    return taxonomy.get("rules", {})
-
-
-def make_client(qdrant_cfg=None):
-    """
-    Return a QdrantClient using either HTTP (url) or embedded local (path) mode.
-    url takes precedence when both are set.
-    """
-    from qdrant_client import QdrantClient
-
-    if qdrant_cfg is None:
-        qdrant_cfg = load_qdrant_config()
-
-    qcfg = qdrant_cfg["qdrant"]
-    url  = qcfg.get("url")
-    path = qcfg.get("path")
-
-    if url:
-        return QdrantClient(url=url, api_key=qcfg.get("api_key"))
-
-    if path:
-        # Resolve relative paths from the project root
-        resolved = ROOT / path if not Path(path).is_absolute() else Path(path)
-        resolved.mkdir(parents=True, exist_ok=True)
-        return QdrantClient(path=str(resolved))
-
-    raise ValueError("qdrant config must have either 'url' or 'path' set")
+from services.config_service import (  # noqa: F401  (re-export)
+    _load,
+    get_all_valid_tags,
+    get_collection_cfg,
+    get_taxonomy_rules,
+    get_valid_categories,
+    load_chunking_config,
+    load_generation_config,
+    load_qdrant_config,
+    load_taxonomy,
+    make_client,
+)

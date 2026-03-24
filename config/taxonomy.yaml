@@ -22,22 +22,21 @@ tags:
     - "Saudi Aramco"
     - "Technical and Vocational Training Corporation"
     - "Human Resources Development Fund"
-    - "Saudi Contractors Authority"
+    - "Colleges of Excellence"  
   strategic partners:
+    - "Saudi Contractors Authority"
     - "Nesma & Partners Contracting Company"
     - "ESAB Middle East"
     - "Sinopec Nanjing Engineering Middle East Co., LTD."
     - "NEFT Energies"
     - "NOCN"
+    - "Nanjing University of Post and Telecommunication"
     - "Halumm"
   partners:
-    - "Colleges of Excellence"  
     - "Samsung E&A"
     - "Hyundai Engineering"
     - "LNA"
-    - "Sinopec Engineering Group"
     - "Vermaat Technics B.V."
-    - "Nanjing University of Post and Telecommunication"
     - "Saudi Electrical Services Polytechnic"
     - "Ministry of Environment, Water and Agriculture"
     - "Ministry of Human Resources and Social Development"
@@ -53,7 +52,7 @@ tags:
     - "Nairiyah Municipality"
     - "Nairiyah Governorate"
   
-  accreditation:
+  acreditations_and_certifications:
     - "ACCET"
     - "Masar"
     - "NOCN"
@@ -64,6 +63,21 @@ tags:
     - "IOSH"
     - "ISO"
     - "Great Place to Work"
+
+  programs:
+  - "Construction Safety Diploma"
+  - "Civil Construction Diploma"
+  - "Welding Associate Diploma"
+  - "Automated Welding Diploma"
+  - "Pipefitting Diploma"
+  - "Instrumentation Diploma"
+  - "Electrical Diploma"
+  - "Scaffolding Diploma"
+  - "HSE Training & Certifications"
+  - "Technichal Short Courses"
+  - "Construction Safety Manual Training and Certification"
+  - "Work Permit Reciever (WPR)"
+
   topics:
     - "Safety"
     - "HSE"
@@ -122,6 +136,16 @@ tags:
     - "program_announcement"
     - "recognition_story"
     - "leadership_news"
+
+  event_types:
+    - "Graduation Ceremony"
+    - "MoU Signing"
+    - "Workshop"
+    - "Conference"
+    - "Exhibition"
+    - "Site Visit"
+    - "Recognition Ceremony"
+    - "Launch Event"
 
 rules:
   single_primary_category: true

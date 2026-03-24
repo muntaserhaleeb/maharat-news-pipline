@@ -1,0 +1,11 @@
+query,expected_slug_contains,category,min_results
+"fire safety training drill",fire|safety,,1
+"welding competition award",welding|competition,,1
+"graduation ceremony intake",graduation|graduat,,1
+"OJT on-the-job training monitoring",ojt|on-the-job,,1
+"partnership agreement with Samsung",samsung,,1
+"female trainees women in construction",female|women,,1
+"NEBOSH IOSH safety certification training",osh|safety,,1
+"Nesma training agreement trainees",nesma,,1
+"English conversation competition",english|conversation,,1
+"orientation session new trainees",orientation,,1

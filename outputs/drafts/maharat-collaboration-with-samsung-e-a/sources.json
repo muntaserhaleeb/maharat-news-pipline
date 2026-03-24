@@ -1,0 +1,129 @@
+{
+  "draft_id": "2cccd440-fed4-40b7-8aec-ed0b39582236",
+  "draft_slug": "maharat-collaboration-with-samsung-e-a",
+  "topic": "Maharat collaboration with Samsung E&A",
+  "article_type": null,
+  "generation_mode": "website_news",
+  "headline": "Maharat and Samsung E&A Sign Training Agreement for 300 Saudi Trainees",
+  "summary": "Maharat Construction Training Center signed a training sponsorship agreement with Samsung E&A on February 16, 2026, enrolling 300 Saudi trainees in one-year diploma programs set to begin in April 2026.",
+  "suggested_slug": "maharat-samsung-ea-training-agreement-300-saudi-trainees-2026",
+  "seo_summary": "Maharat Construction Training Center signs a training agreement with Samsung E&A to enroll 300 Saudi trainees in one-year diploma programs starting April 2026.",
+  "qa_warnings": [],
+  "entities_detected": {
+    "organizations": [
+      "Halumm",
+      "Human Resources Development Fund",
+      "Maharat Construction Training Center",
+      "NEFT Energies",
+      "Samsung E&A",
+      "Saudi Aramco",
+      "Saudi Contractors Authority",
+      "Technical and Vocational Training Corporation"
+    ],
+    "programs": [],
+    "credentials": [],
+    "locations": [
+      "Eastern Province",
+      "Jazan",
+      "Saudi Arabia"
+    ],
+    "people": [
+      "Board of Trustees",
+      "Chairman of the Board of Trustees",
+      "Mansour Shehri"
+    ]
+  },
+  "generated_at": "2026-03-14T22:31:13.518938+00:00",
+  "generation_config": {
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 4096,
+    "require_grounding": true,
+    "article_type": null,
+    "generation_mode": "website_news"
+  },
+  "model": "claude-sonnet-4-6",
+  "input_tokens": 3259,
+  "output_tokens": 518,
+  "sources_used": [
+    {
+      "slug": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac",
+      "chunk_id": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac__003",
+      "chunk_index": 3,
+      "title": "MCTC Signs Multiple Strategic Partnerships and Training Agreements (Saudi Contractors Authority Academy, Halumm, TÜV SÜD, Samsung E&A, and NEFT Energies",
+      "date": "2026-02-01",
+      "category": "Partnerships & Agreements",
+      "score": 1.0,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-signs-a-training-agreement-with-samsung-ea",
+      "chunk_id": "mctc-signs-a-training-agreement-with-samsung-ea__000",
+      "chunk_index": 0,
+      "title": "MCTC Signs a Training Agreement with Samsung E&A",
+      "date": "2026-02-16",
+      "category": "Partnerships & Agreements",
+      "score": 0.5833,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-signs-a-training-agreement-with-samsung-ea",
+      "chunk_id": "mctc-signs-a-training-agreement-with-samsung-ea__001",
+      "chunk_index": 1,
+      "title": "MCTC Signs a Training Agreement with Samsung E&A",
+      "date": "2026-02-16",
+      "category": "Partnerships & Agreements",
+      "score": 0.5833,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac",
+      "chunk_id": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac__005",
+      "chunk_index": 5,
+      "title": "MCTC Signs Multiple Strategic Partnerships and Training Agreements (Saudi Contractors Authority Academy, Halumm, TÜV SÜD, Samsung E&A, and NEFT Energies",
+      "date": "2026-02-01",
+      "category": "Partnerships & Agreements",
+      "score": 0.2909,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac",
+      "chunk_id": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac__002",
+      "chunk_index": 2,
+      "title": "MCTC Signs Multiple Strategic Partnerships and Training Agreements (Saudi Contractors Authority Academy, Halumm, TÜV SÜD, Samsung E&A, and NEFT Energies",
+      "date": "2026-02-01",
+      "category": "Partnerships & Agreements",
+      "score": 0.2714,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac",
+      "chunk_id": "mctc-signs-multiple-strategic-partnerships-and-training-agreements-saudi-contrac__001",
+      "chunk_index": 1,
+      "title": "MCTC Signs Multiple Strategic Partnerships and Training Agreements (Saudi Contractors Authority Academy, Halumm, TÜV SÜD, Samsung E&A, and NEFT Energies",
+      "date": "2026-02-01",
+      "category": "Partnerships & Agreements",
+      "score": 0.25,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-hosts-visit-from-anmar-training-center",
+      "chunk_id": "mctc-hosts-visit-from-anmar-training-center__001",
+      "chunk_index": 1,
+      "title": "MCTC Hosts Visit from Anmar Training Center",
+      "date": "2026-01-12",
+      "category": "Media & Publications",
+      "score": 0.2111,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    },
+    {
+      "slug": "mctc-signs-multiple-strategic-mous",
+      "chunk_id": "mctc-signs-multiple-strategic-mous__001",
+      "chunk_index": 1,
+      "title": "MCTC Signs Multiple Strategic MoUs",
+      "date": "2026-02-16",
+      "category": "Partnerships & Agreements",
+      "score": 0.175,
+      "source_document": "MCTC Highlights 2026 (1).docx"
+    }
+  ]
+}
