@@ -38,82 +38,14 @@ IMAGES_DIR = ROOT / "data" / "images"
 MANIFESTS_DIR = ROOT / "data" / "manifests"
 REVIEW_DIR = ROOT / "review"
 
-# ── Controlled category list ───────────────────────────────────────────────
-# Evaluated in order; first match wins. Be specific — broad terms like
-# "safety" or "training" appear in almost every post body, so use phrases.
+# ── Load category rules from config/taxonomy.yaml ─────────────────────────
+_taxonomy = yaml.safe_load((ROOT / "config" / "taxonomy.yaml").read_text(encoding="utf-8"))
+_cat_cfg = _taxonomy["category_rules"]
+DEFAULT_CATEGORY: str = _cat_cfg["default"]
 CATEGORY_RULES: list[tuple[str, list[str]]] = [
-    ("Media & Publications", [
-        "published in construction week", "media coverage", "press",
-    ]),
-    ("Partnerships & Agreements", [
-        " mou", "strategic mou", "training agreement", "partnership agreement",
-        "signs a training", "signs multiple", "strategic partnership",
-        "city & guilds", "gatehouse awards", "city guilds accreditation",
-        "samsung e&a agreement", "nesma training agreement",
-    ]),
-    ("Accreditation & Compliance", [
-        "accreditation from", "earns accreditation", "secures accreditation",
-        "etec", "tvtc facility visit", "hrdf follow-up", "hrdf visit",
-        "sesp riyadh", "assessment practices survey",
-        "follow-up visit report", "arabian accreditation",
-    ]),
-    ("Industry Visits & Site Tours", [
-        "site visit to", "pre-ojt site visit", "visit to amiral",
-        "visit from anmar", "hosts a tvtc", "hosts a 2-day visit",
-        "railway polytechnic", "sfec company", "visit from the etec",
-        "trainees visit", "organizes a site visit",
-    ]),
-    ("Safety Campaigns & Drills", [
-        "fire drill", "safety campaign", "safety awareness campaign",
-        "safety slogan", "safety contest", "drug awareness",
-        "drug & alcohol", "alcohol-free", "pedestrian safety",
-        "wrong-way driving", "camping safety",
-        "drive safety initiative", "istisqa", "prayer for rain",
-    ]),
-    ("Competitions & Awards", [
-        "competition", "tournament", "contest", "award", "winner",
-        "steelfab", "football tournament", "welding competition",
-        "english conversation competition", "technical excellence contest",
-        "academic excellence", "recognition initiative",
-    ]),
-    ("Events & Ceremonies", [
-        "graduation ceremony", "graduation of its first",
-        "celebrates intake", "celebrates the graduation",
-        "nariyah spring festival", "iftar", "ramadan gathering",
-        "fun day", "umrah", "speak up club", "spring festival",
-        "career guidance forum",
-    ]),
-    ("Staff Development", [
-        "cpd sessions", "continuing professional development",
-        "orientation session for", "classera training session",
-        "leadxera training", "staff motivation", "recess week",
-        "staff fun day", "centralized exams training",
-    ]),
-    ("Academic & Examinations", [
-        "midterm examination", "end-of-semester", "speaking test",
-        "evp", "hvp", "headway program", "english conversation",
-        "final examination", "semester 1 exam",
-    ]),
-    ("On-the-Job Training", [
-        "ojt deployment", "ojt assessment", "ojt monitoring",
-        "pre-ojt", "on-the-job training", "pre-graduation program",
-        "graduate affairs",
-    ]),
-    ("Trainee Programs", [
-        "wpr pre-requisite", "work permit receiver",
-        "csm course", "construction safety manual",
-        "graduation project", "scaffolding program",
-        "5g welding training", "osh training programs",
-        "counseling session", "collects ipads",
-        "increases its capacity", "enrolls", "intake 1",
-    ]),
-    ("Campus & Facilities", [
-        "facility renovation", "facility visit", "initiates facility",
-        "classroom renovation", "resource management", "digital transformation",
-    ]),
+    (rule["name"], rule["keywords"])
+    for rule in _cat_cfg["ordered_rules"]
 ]
-
-DEFAULT_CATEGORY = "General"
 
 # ── Controlled tag vocabulary ──────────────────────────────────────────────
 # Each tag maps to keywords that trigger it.
