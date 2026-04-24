@@ -88,6 +88,8 @@ def extract_all_images(doc, images_dir: Path) -> dict:
     for rId, rel in doc.part.rels.items():
         if "image" not in rel.reltype:
             continue
+        if rel.is_external:
+            continue
         part = rel.target_part
         ext = part.content_type.split("/")[-1].replace("jpeg", "jpg")
         digest = hashlib.md5(part.blob).hexdigest()[:12]
