@@ -196,6 +196,19 @@ def _build_retrieval_debug(
     retrieval_context: dict,
     chunks: list,
 ) -> dict:
+    base = {
+        "draft_id":        draft_id,
+        "query":           retrieval_context.get("query", ""),
+        "generation_mode": retrieval_context.get("generation_mode"),
+        "article_type":    retrieval_context.get("article_type"),
+        "filters":         retrieval_context.get("filters", {}),
+    }
+    # Use pre-built structured payload from RetrievalResult.to_debug_dict() if available
+    payload = retrieval_context.get("retrieval_debug_payload")
+    if payload:
+        base.update(payload)
+        return base
+    # Legacy flat format — single chunks list
     chunk_records = []
     for i, point in enumerate(chunks):
         p = point.payload or {}
@@ -213,15 +226,11 @@ def _build_retrieval_debug(
             "word_count":  p.get("word_count", 0),
             "chunk_text":  p.get("chunk_text", ""),
         })
-    return {
-        "draft_id":         draft_id,
-        "query":            retrieval_context.get("query", ""),
-        "generation_mode":  retrieval_context.get("generation_mode"),
-        "article_type":     retrieval_context.get("article_type"),
-        "filters":          retrieval_context.get("filters", {}),
+    base.update({
         "chunks_retrieved": len(chunks),
         "chunks":           chunk_records,
-    }
+    })
+    return base
 
 
 # ── DraftResult ───────────────────────────────────────────────────────────

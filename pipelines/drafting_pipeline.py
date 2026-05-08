@@ -9,14 +9,9 @@ from typing import Dict, List, Optional
 
 import services.citation_service as citation_service
 import services.prompt_service as prompt_service
-from services.config_service import (
-    load_editorial_style_config,
-    load_generation_config,
-    load_qdrant_config,
-)
+from services.config_service import load_generation_config, load_qdrant_config
 from services.generation_service import DraftResult, GenerationService
 from services.memory_router import MemoryRouter
-from services.retrieval_service import RetrievalService
 from services.style_service import StyleService, VALID_ARTICLE_TYPES
 from pipelines.retrieval_pipeline import RetrievalPipeline
 
@@ -64,18 +59,20 @@ class DraftingPipeline:
 
     def __init__(
         self,
-        retrieval_pipeline: RetrievalPipeline,
         generation_service: GenerationService,
         gen_cfg: dict,
         style_service: Optional[StyleService] = None,
+        router: Optional[MemoryRouter] = None,
+        # legacy — kept for backward compat when constructed directly
+        retrieval_pipeline: Optional[RetrievalPipeline] = None,
         knowledge_retrieval_pipeline: Optional[RetrievalPipeline] = None,
     ):
-        self.retrieval_pipeline           = retrieval_pipeline
         self.generation_service           = generation_service
         self.gen_cfg                      = gen_cfg
         self.style_service                = style_service
+        self._router                      = router or MemoryRouter()
+        self.retrieval_pipeline           = retrieval_pipeline
         self.knowledge_retrieval_pipeline = knowledge_retrieval_pipeline
-        self._router                      = MemoryRouter()
 
     @classmethod
     def from_config(
@@ -95,27 +92,10 @@ class DraftingPipeline:
 
         style_service = StyleService.from_config()
 
-        # Build optional knowledge retrieval pipeline if collection is configured
-        knowledge_pipeline = None
-        if qdrant_cfg.get("collections", {}).get("knowledge"):
-            try:
-                knowledge_pipeline = RetrievalPipeline(
-                    retrieval_service=RetrievalService.from_config(
-                        qdrant_cfg, collection_key="knowledge"
-                    ),
-                    retrieval_cfg=qdrant_cfg.get("retrieval", {}),
-                    gen_cfg=gen_cfg,
-                )
-            except Exception as exc:
-                print(
-                    f"[warn] Could not init knowledge retrieval pipeline: {exc}",
-                    file=sys.stderr,
-                )
+        # Build fully-loaded router with shared Qdrant client (avoids storage lock)
+        router = MemoryRouter.from_config(qdrant_cfg=qdrant_cfg, gen_cfg=gen_cfg)
 
         return cls(
-            retrieval_pipeline=RetrievalPipeline.from_config(
-                qdrant_cfg=qdrant_cfg, gen_cfg=gen_cfg
-            ),
             generation_service=GenerationService.from_config(
                 gen_cfg=gen_cfg,
                 api_key=api_key,
@@ -123,7 +103,7 @@ class DraftingPipeline:
             ),
             gen_cfg=gen_cfg,
             style_service=style_service,
-            knowledge_retrieval_pipeline=knowledge_pipeline,
+            router=router,
         )
 
     def _resolve_mode(self, generation_mode: Optional[str]):
@@ -160,10 +140,11 @@ class DraftingPipeline:
         Full RAG drafting pipeline.
 
         1. Resolve generation mode from generation.yaml generation_modes.
-        2. Retrieve news chunks; optionally also retrieve knowledge chunks.
-        3. Aggregate entities from all retrieved chunks.
-        4. Build single or dual prompt depending on use_knowledge.
-        5. If dry_run: print chunks and return None.
+        2. Retrieve via MemoryRouter: news + knowledge + editorial + graph context.
+        3. If dry_run: print chunks and return None.
+        4. Aggregate entities from all retrieved chunks.
+        5. Build multi-lane prompt (news evidence / institutional knowledge /
+           editorial guidance / graph context).
         6. Generate via GenerationService (JSON -> structured fields + QA).
         7. Print QA warnings, headline/slug, citations, save path to stderr.
         8. Return DraftResult.
@@ -177,43 +158,77 @@ class DraftingPipeline:
                 f"Valid types: {', '.join(VALID_ARTICLE_TYPES)}"
             )
 
-        # step 2 — retrieve news chunks
         retrieval_rules     = self.gen_cfg.get("retrieval_rules", {})
         effective_threshold = (
             score_threshold
             if score_threshold is not None
             else retrieval_rules.get("score_threshold")
         )
-        chunks = self.retrieval_pipeline.retrieve(
-            query=topic,
-            limit=limit,
-            category=category,
-            year=year,
-            score_threshold=effective_threshold,
-        )
-        print(f"Retrieved {len(chunks)} news chunk(s) for: \"{topic}\"", file=sys.stderr)
 
-        # step 2b — optionally retrieve knowledge chunks
-        knowledge_chunks: list = []
-        if use_knowledge:
-            if self.knowledge_retrieval_pipeline is None:
-                print(
-                    "[warn] --use-knowledge requested but knowledge pipeline is "
-                    "unavailable. Run: python app/cli.py ingest-knowledge",
-                    file=sys.stderr,
+        # step 2 — retrieve
+        knowledge_chunks:        list = []
+        editorial_chunks:        list = []
+        graph_context_blocks:    List[str] = []
+        retrieval_debug_payload: Optional[dict] = None
+
+        if self._router._news_svc is not None:
+            # Full router path — 3-lane retrieval + graph entity detection
+            rr = self._router.retrieve(
+                query=topic,
+                filters={"category": category, "year": year},
+                use_knowledge=use_knowledge,
+                limit=limit,
+                score_threshold=effective_threshold,
+            )
+            chunks               = rr.news_chunks
+            knowledge_chunks     = rr.knowledge_chunks
+            editorial_chunks     = rr.editorial_chunks
+            graph_context_blocks = rr.graph_context_blocks
+            retrieval_debug_payload = rr.to_debug_dict()
+            print(
+                f"Retrieved {len(chunks)} news, "
+                f"{len(knowledge_chunks)} knowledge, "
+                f"{len(editorial_chunks)} editorial chunk(s) for: \"{topic}\"",
+                file=sys.stderr,
+            )
+            if rr.graph_entities:
+                enames = [e.get("name", e.get("id", "?")) for e in rr.graph_entities]
+                print(f"Graph entities: {', '.join(enames)}", file=sys.stderr)
+        else:
+            # Legacy path — used when pipeline constructed directly without router
+            if self.retrieval_pipeline is None:
+                raise RuntimeError(
+                    "DraftingPipeline has no retrieval service. "
+                    "Use DraftingPipeline.from_config()."
                 )
-            else:
-                k_limit = max(4, (limit or 8) // 2)
-                knowledge_chunks = self.knowledge_retrieval_pipeline.retrieve(
-                    query=topic,
-                    limit=k_limit,
-                    score_threshold=effective_threshold,
-                    apply_prefilters=False,
-                )
-                print(
-                    f"Retrieved {len(knowledge_chunks)} knowledge chunk(s)",
-                    file=sys.stderr,
-                )
+            chunks = self.retrieval_pipeline.retrieve(
+                query=topic,
+                limit=limit,
+                category=category,
+                year=year,
+                score_threshold=effective_threshold,
+            )
+            print(f"Retrieved {len(chunks)} news chunk(s) for: \"{topic}\"", file=sys.stderr)
+
+            if use_knowledge:
+                if self.knowledge_retrieval_pipeline is None:
+                    print(
+                        "[warn] --use-knowledge requested but knowledge pipeline is "
+                        "unavailable. Run: python app/cli.py ingest-knowledge",
+                        file=sys.stderr,
+                    )
+                else:
+                    k_limit = max(4, (limit or 8) // 2)
+                    knowledge_chunks = self.knowledge_retrieval_pipeline.retrieve(
+                        query=topic,
+                        limit=k_limit,
+                        score_threshold=effective_threshold,
+                        apply_prefilters=False,
+                    )
+                    print(
+                        f"Retrieved {len(knowledge_chunks)} knowledge chunk(s)",
+                        file=sys.stderr,
+                    )
 
         # step 3 — dry run
         if dry_run:
@@ -226,9 +241,15 @@ class DraftingPipeline:
                 print("KNOWLEDGE CHUNKS")
                 print("─" * 72)
                 print(prompt_service.format_knowledge_chunks_as_context(knowledge_chunks))
+            if editorial_chunks:
+                print("\n" + "─" * 72)
+                print("EDITORIAL GUIDANCE CHUNKS")
+                print("─" * 72)
+                print(prompt_service.format_editorial_chunks_as_context(editorial_chunks))
             return None
 
-        if not chunks and not knowledge_chunks:
+        all_chunks = chunks + knowledge_chunks + editorial_chunks
+        if not all_chunks:
             print(
                 "\nNo relevant chunks found. "
                 "Try a broader topic or lower score_threshold.",
@@ -241,16 +262,16 @@ class DraftingPipeline:
         entities_detected: Dict[str, List[str]] = {}
         if entity_usage.get("detect_entities_from_query") or \
                 entity_usage.get("include_entity_context_in_prompt"):
-            entities_detected = _aggregate_entities_from_chunks(
-                chunks + knowledge_chunks
-            )
+            entities_detected = _aggregate_entities_from_chunks(all_chunks)
 
-        # step 5 — build prompt (single or dual)
-        if use_knowledge and knowledge_chunks:
+        # step 5 — build prompt (multi-lane when knowledge/editorial/graph available)
+        if knowledge_chunks or editorial_chunks or graph_context_blocks:
             prompt_package = prompt_service.build_prompt_package_dual(
                 topic=topic,
                 news_chunks=chunks,
                 knowledge_chunks=knowledge_chunks,
+                editorial_chunks=editorial_chunks,
+                graph_context_blocks=graph_context_blocks,
                 gen_cfg=self.gen_cfg,
                 style_service=self.style_service,
                 article_type=article_type,
@@ -271,7 +292,6 @@ class DraftingPipeline:
             )
 
         # step 6 — generate
-        all_chunks = chunks + knowledge_chunks
         retrieval_context = {
             "query":            topic,
             "generation_mode":  generation_mode,
@@ -279,11 +299,15 @@ class DraftingPipeline:
             "use_knowledge":    use_knowledge,
             "news_chunks":      len(chunks),
             "knowledge_chunks": len(knowledge_chunks),
+            "editorial_chunks": len(editorial_chunks),
             "filters": {
                 "category": category,
                 "year":     year,
             },
         }
+        if retrieval_debug_payload:
+            retrieval_context["retrieval_debug_payload"] = retrieval_debug_payload
+
         draft_slug = _topic_to_slug(topic, year=year)
 
         mode_label = f" [{generation_mode}]" if generation_mode else ""

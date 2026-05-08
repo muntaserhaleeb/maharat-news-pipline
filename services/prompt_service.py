@@ -361,12 +361,29 @@ def format_knowledge_chunks_as_context(chunks: list) -> str:
     return "\n".join(lines)
 
 
+def format_editorial_chunks_as_context(chunks: list) -> str:
+    """Format editorial guideline ScoredPoint objects into an EDITORIAL GUIDANCE block."""
+    lines = []
+    for i, point in enumerate(chunks, 1):
+        p = point.payload or {}
+        lines.append(f"--- Editorial {i} (score={point.score:.4f}) ---")
+        if p.get("title"):
+            lines.append(f"Title   : {p['title']}")
+        if p.get("section"):
+            lines.append(f"Section : {p['section']}")
+        lines.append(f"Text    :\n{p.get('chunk_text', '').strip()}")
+        lines.append("")
+    return "\n".join(lines)
+
+
 # ── dual-retrieval user message ───────────────────────────────────────────
 
 def build_user_message_dual(
     topic: str,
     news_context: str,
     knowledge_context: str,
+    editorial_context: str = "",
+    graph_context_blocks: Optional[List[str]] = None,
     article_type: Optional[str] = None,
     mode_spec: Optional[dict] = None,
     mode_name: Optional[str] = None,
@@ -374,8 +391,11 @@ def build_user_message_dual(
     include_entity_context: bool = False,
 ) -> str:
     """
-    Build a user message with clearly separated news evidence and
-    institutional knowledge sections.  Used when use_knowledge=True.
+    Build a user message with clearly separated retrieval lanes:
+      - NEWS / EVENT EVIDENCE      (primary factual basis)
+      - INSTITUTIONAL KNOWLEDGE    (Maharat identity, programs, accreditations)
+      - EDITORIAL GUIDANCE         (style and tone rules)
+      - KNOWLEDGE GRAPH CONTEXT    (entity profiles when detected)
     """
     type_hint = (
         f" (article type: {article_type.replace('_', ' ')})"
@@ -424,6 +444,24 @@ def build_user_message_dual(
             knowledge_context,
         ]
 
+    if editorial_context.strip():
+        parts += [
+            "═══ EDITORIAL GUIDANCE ═══════════════════════════════════════════",
+            "Apply the following style and tone guidelines when writing the article.",
+            "",
+            editorial_context,
+        ]
+
+    if graph_context_blocks:
+        parts += [
+            "═══ KNOWLEDGE GRAPH CONTEXT ══════════════════════════════════════",
+            "The entity profiles below are provided for factual grounding. "
+            "Use official names and relationships as shown.",
+            "",
+            "\n\n".join(graph_context_blocks),
+            "",
+        ]
+
     return "\n".join(parts)
 
 
@@ -437,9 +475,12 @@ def build_prompt_package_dual(
     mode_name: Optional[str] = None,
     mode_spec: Optional[dict] = None,
     entities_detected: Optional[dict] = None,
+    editorial_chunks: Optional[list] = None,
+    graph_context_blocks: Optional[List[str]] = None,
 ) -> Dict[str, str]:
     """
-    Return {"system": str, "user": str} for dual-retrieval (news + knowledge) drafting.
+    Return {"system": str, "user": str} for full multi-lane drafting:
+      news evidence + institutional knowledge + editorial guidance + graph context.
     """
     grounding_rules = gen_cfg.get("grounding_rules")
     entity_usage    = gen_cfg.get("entity_usage", {})
@@ -457,13 +498,16 @@ def build_prompt_package_dual(
     else:
         system = _DEFAULT_SYSTEM_PROMPT
 
-    news_ctx  = format_chunks_as_context(news_chunks)         if news_chunks      else ""
+    news_ctx  = format_chunks_as_context(news_chunks)               if news_chunks      else ""
     know_ctx  = format_knowledge_chunks_as_context(knowledge_chunks) if knowledge_chunks else ""
+    edit_ctx  = format_editorial_chunks_as_context(editorial_chunks) if editorial_chunks else ""
 
     user = build_user_message_dual(
         topic=topic,
         news_context=news_ctx,
         knowledge_context=know_ctx,
+        editorial_context=edit_ctx,
+        graph_context_blocks=graph_context_blocks or [],
         article_type=article_type,
         mode_spec=mode_spec,
         mode_name=mode_name,

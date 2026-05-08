@@ -155,12 +155,24 @@ def cmd_evaluate(args):
 
 def cmd_route_query(args):
     from services.memory_router import MemoryRouter
-    router = MemoryRouter()
+    _ROUTE_COLLECTIONS = {
+        "news":      ["maharat_content_live"],
+        "knowledge": ["maharat_knowledge_live"],
+        "both":      ["maharat_content_live", "maharat_knowledge_live"],
+    }
+    router = MemoryRouter.from_config()
     result = router.route_query(args.query, intent=args.intent or None)
-    print(f"\nQuery  : {args.query}")
-    print(f"Route  : {result.route}")
-    print(f"Intent : {result.intent}")
-    print(f"Reason : {result.reasoning}")
+    entities = router._detect_graph_entities(args.query)
+
+    print(f"\nQuery       : {args.query}")
+    print(f"Route       : {result.route}")
+    print(f"Reason      : {result.reasoning}")
+    collections = _ROUTE_COLLECTIONS.get(result.route, [])
+    if collections:
+        print(f"Collections : {', '.join(collections)}")
+    if entities:
+        enames = [e.get("name", e.get("id", "?")) for e in entities]
+        print(f"Graph entities: {', '.join(enames)}")
 
 
 def cmd_evaluate_knowledge(args):
