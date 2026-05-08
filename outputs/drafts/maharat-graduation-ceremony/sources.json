@@ -1,0 +1,130 @@
+{
+  "draft_id": "b434653d-9454-4a8c-962a-073daf218075",
+  "draft_slug": "maharat-graduation-ceremony",
+  "topic": "Maharat graduation ceremony",
+  "article_type": "graduation_story",
+  "generation_mode": "website_news",
+  "headline": "Maharat Holds Graduation Ceremony for March 2022 Intake",
+  "summary": "Maharat Construction Training Center marked the completion of its twelfth trainee cohort in a graduation ceremony held at the Technical and Vocational Training Corporation campus in Dammam on March 9, 2023.",
+  "suggested_slug": "maharat-graduation-ceremony-march-2022-intake-dammam",
+  "seo_summary": "Maharat Construction Training Center held a graduation ceremony for its twelfth trainee cohort at the Technical and Vocational Training Corporation campus in Dammam.",
+  "qa_warnings": [
+    "QA [mode/length]: body too short (188 words, min 220).",
+    "QA [entity]: retrieved sources reference programs (Pipefitting Diploma) but none appear in the draft body."
+  ],
+  "entities_detected": {
+    "organizations": [
+      "Maharat Construction Training Center",
+      "Nesma & Partners Contracting Company",
+      "SICIM",
+      "Sinopec Nanjing Engineering Middle East Co., LTD.",
+      "Technical and Vocational Training Corporation"
+    ],
+    "programs": [
+      "Pipefitting Diploma"
+    ],
+    "credentials": [],
+    "locations": [
+      "Dammam"
+    ],
+    "people": [
+      "Board of Trustees",
+      "Managing Director",
+      "Saad Al Shahrani"
+    ]
+  },
+  "generated_at": "2026-05-08T12:59:15.318976+00:00",
+  "generation_config": {
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 4096,
+    "temperature": 0.2,
+    "require_grounding": true,
+    "article_type": "graduation_story",
+    "generation_mode": "website_news"
+  },
+  "model": "claude-sonnet-4-6",
+  "input_tokens": 2306,
+  "output_tokens": 424,
+  "sources_used": [
+    {
+      "slug": "maharat-celebrates-the-graduation-of-its-october-2022-intake",
+      "chunk_id": "maharat-celebrates-the-graduation-of-its-october-2022-intake__000",
+      "chunk_index": 0,
+      "title": "Maharat Celebrates the Graduation of Its October 2022 intake",
+      "date": "2023-10-05",
+      "category": "Events & Ceremonies",
+      "score": 0.6111,
+      "source_document": "Weekly Highlights 2023.docx"
+    },
+    {
+      "slug": "maharat-conducts-a-graduation-ceremony-for-intake-3",
+      "chunk_id": "maharat-conducts-a-graduation-ceremony-for-intake-3__000",
+      "chunk_index": 0,
+      "title": "Maharat Conducts a Graduation Ceremony for Intake 3",
+      "date": "2024-05-23",
+      "category": "Events & Ceremonies",
+      "score": 0.5909,
+      "source_document": "Weekly Highlights 2024.docx"
+    },
+    {
+      "slug": "maharat-conducts-a-graduation-ceremony-for-129-trainees-of-october-2022-intake",
+      "chunk_id": "maharat-conducts-a-graduation-ceremony-for-129-trainees-of-october-2022-intake__000",
+      "chunk_index": 0,
+      "title": "Maharat Conducts a Graduation Ceremony for 129 Trainees of October 2022 Intake",
+      "date": "2022-10-06",
+      "category": "Events & Ceremonies",
+      "score": 0.5333,
+      "source_document": "Weekly Highlights 2022.docx"
+    },
+    {
+      "slug": "maharat-holds-graduation-ceremony-for-the-march-2023-intake",
+      "chunk_id": "maharat-holds-graduation-ceremony-for-the-march-2023-intake__000",
+      "chunk_index": 0,
+      "title": "Maharat Holds Graduation Ceremony for the March 2023 Intake",
+      "date": "2024-03-07",
+      "category": "Events & Ceremonies",
+      "score": 0.5,
+      "source_document": "Weekly Highlights 2024.docx"
+    },
+    {
+      "slug": "maharat-holds-graduation-ceremony-for-april-2023-intake",
+      "chunk_id": "maharat-holds-graduation-ceremony-for-april-2023-intake__000",
+      "chunk_index": 0,
+      "title": "Maharat Holds Graduation Ceremony for April 2023 Intake",
+      "date": "2024-03-28",
+      "category": "Events & Ceremonies",
+      "score": 0.4762,
+      "source_document": "Weekly Highlights 2024.docx"
+    },
+    {
+      "slug": "maharat-holds-graduation-ceremony-for-the-february-2023-intake",
+      "chunk_id": "maharat-holds-graduation-ceremony-for-the-february-2023-intake__000",
+      "chunk_index": 0,
+      "title": "Maharat Holds Graduation Ceremony for the February 2023 Intake",
+      "date": "2024-02-08",
+      "category": "Events & Ceremonies",
+      "score": 0.3333,
+      "source_document": "Weekly Highlights 2024.docx"
+    },
+    {
+      "slug": "maharat-celebrates-the-graduation-of-its-october-2022-intake",
+      "chunk_id": "maharat-celebrates-the-graduation-of-its-october-2022-intake__001",
+      "chunk_index": 1,
+      "title": "Maharat Celebrates the Graduation of Its October 2022 intake",
+      "date": "2023-10-05",
+      "category": "Events & Ceremonies",
+      "score": 0.2909,
+      "source_document": "Weekly Highlights 2023.docx"
+    },
+    {
+      "slug": "maharat-hold-its-graduation-ceremony-for-march-2022-intake",
+      "chunk_id": "maharat-hold-its-graduation-ceremony-for-march-2022-intake__000",
+      "chunk_index": 0,
+      "title": "Maharat Hold its Graduation Ceremony for March 2022 Intake",
+      "date": "2023-03-09",
+      "category": "Events & Ceremonies",
+      "score": 0.2679,
+      "source_document": "Weekly Highlights 2023.docx"
+    }
+  ]
+}

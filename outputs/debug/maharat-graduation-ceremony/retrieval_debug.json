@@ -1,0 +1,177 @@
+{
+  "draft_id": "b434653d-9454-4a8c-962a-073daf218075",
+  "query": "Maharat graduation ceremony",
+  "generation_mode": "website_news",
+  "article_type": "graduation_story",
+  "filters": {
+    "category": null,
+    "year": null
+  },
+  "chunks_retrieved": 8,
+  "chunks": [
+    {
+      "rank": 1,
+      "score": 0.6111,
+      "slug": "maharat-celebrates-the-graduation-of-its-october-2022-intake",
+      "chunk_id": "maharat-celebrates-the-graduation-of-its-october-2022-intake__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Celebrates the Graduation of Its October 2022 intake",
+      "date": "2023-10-05",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "graduation",
+        "maharat-construction-training-center"
+      ],
+      "word_count": 26,
+      "chunk_text": "Maharat Celebrates the Graduation of Its October 2022 intake\n\nOn October 5, 2023, Maharat Construction Training Center held a graduation ceremony for its October 2022 intake."
+    },
+    {
+      "rank": 2,
+      "score": 0.5909,
+      "slug": "maharat-conducts-a-graduation-ceremony-for-intake-3",
+      "chunk_id": "maharat-conducts-a-graduation-ceremony-for-intake-3__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Conducts a Graduation Ceremony for Intake 3",
+      "date": "2024-05-23",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "construction-safety-program",
+        "graduation",
+        "maharat-construction-training-center"
+      ],
+      "word_count": 31,
+      "chunk_text": "Maharat Conducts a Graduation Ceremony for Intake 3\n\nOn May 23, 2024, Maharat Construction Training Center held a graduation ceremony for the trainees of May 2023 intake sponsored by L&T company."
+    },
+    {
+      "rank": 3,
+      "score": 0.5333,
+      "slug": "maharat-conducts-a-graduation-ceremony-for-129-trainees-of-october-2022-intake",
+      "chunk_id": "maharat-conducts-a-graduation-ceremony-for-129-trainees-of-october-2022-intake__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Conducts a Graduation Ceremony for 129 Trainees of October 2022 Intake",
+      "date": "2022-10-06",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "graduation",
+        "maharat-construction-training-center"
+      ],
+      "word_count": 33,
+      "chunk_text": "Maharat Conducts a Graduation Ceremony for 129 Trainees of October 2022 Intake\n\nOn October 6, 2022, Maharat Construction Training Center conducted a graduation ceremony for the center’s eleventh intake joined in October 2021."
+    },
+    {
+      "rank": 4,
+      "score": 0.5,
+      "slug": "maharat-holds-graduation-ceremony-for-the-march-2023-intake",
+      "chunk_id": "maharat-holds-graduation-ceremony-for-the-march-2023-intake__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Holds Graduation Ceremony for the March 2023 Intake",
+      "date": "2024-03-07",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "construction-safety-program",
+        "graduation",
+        "maharat-construction-training-center",
+        "nesma-and-partners-contracting-company"
+      ],
+      "word_count": 33,
+      "chunk_text": "Maharat Holds Graduation Ceremony for the March 2023 Intake\n\nOn March 7, 2024, Maharat Construction Training Center held a graduation ceremony for the trainees of March 2023 intake sponsored by three (3) companies."
+    },
+    {
+      "rank": 5,
+      "score": 0.4762,
+      "slug": "maharat-holds-graduation-ceremony-for-april-2023-intake",
+      "chunk_id": "maharat-holds-graduation-ceremony-for-april-2023-intake__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Holds Graduation Ceremony for April 2023 Intake",
+      "date": "2024-03-28",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "construction-safety-program",
+        "graduation",
+        "maharat-construction-training-center"
+      ],
+      "word_count": 31,
+      "chunk_text": "Maharat Holds Graduation Ceremony for April 2023 Intake\n\nOn March 28, 2024, Maharat Construction Training Center held a graduation ceremony for the trainees of April 2023 intake sponsored by GAS Company."
+    },
+    {
+      "rank": 6,
+      "score": 0.3333,
+      "slug": "maharat-holds-graduation-ceremony-for-the-february-2023-intake",
+      "chunk_id": "maharat-holds-graduation-ceremony-for-the-february-2023-intake__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Holds Graduation Ceremony for the February 2023 Intake",
+      "date": "2024-02-08",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "construction-safety-program",
+        "graduation",
+        "maharat-construction-training-center"
+      ],
+      "word_count": 34,
+      "chunk_text": "Maharat Holds Graduation Ceremony for the February 2023 Intake\n\nOn February 8, 2024, Maharat Construction Training Center held a graduation ceremony for the trainees of February 2023 intake sponsored by Rawabi Specialized Contracting Company."
+    },
+    {
+      "rank": 7,
+      "score": 0.2909,
+      "slug": "maharat-celebrates-the-graduation-of-its-october-2022-intake",
+      "chunk_id": "maharat-celebrates-the-graduation-of-its-october-2022-intake__001",
+      "chunk_index": 1,
+      "chunk_type": "body",
+      "title": "Maharat Celebrates the Graduation of Its October 2022 intake",
+      "date": "2023-10-05",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "welding",
+        "pipefitting",
+        "instrumentation",
+        "graduation",
+        "maharat-construction-training-center"
+      ],
+      "word_count": 83,
+      "chunk_text": "On October 5, 2023, Maharat Construction Training Center held a graduation ceremony for its October 2022 intake. A total of 136 graduates celebrated the completion of their 12-month Associate Diploma Programs; Welding, Pipefitting, Electrical, Instrumentation and Safety. Trainees’ parents and representatives from the sponsoring companies attended the ceremony. During the event, trainees with outstanding performance and distinguished staff members were recognized by Maharat’s management. This cohort will hopefully contribute to supporting Saudization and enhancing the level of national growth in the construction sector."
+    },
+    {
+      "rank": 8,
+      "score": 0.2679,
+      "slug": "maharat-hold-its-graduation-ceremony-for-march-2022-intake",
+      "chunk_id": "maharat-hold-its-graduation-ceremony-for-march-2022-intake__000",
+      "chunk_index": 0,
+      "chunk_type": "summary",
+      "title": "Maharat Hold its Graduation Ceremony for March 2022 Intake",
+      "date": "2023-03-09",
+      "category": "Events & Ceremonies",
+      "tags": [
+        "graduation",
+        "maharat-construction-training-center",
+        "technical-and-vocational-training-corporation",
+        "dammam"
+      ],
+      "word_count": 41,
+      "chunk_text": "Maharat Hold its Graduation Ceremony for March 2022 Intake\n\nOn March 9, 2023, Maharat Construction Training Center held a graduation ceremony for trainee cohort 12 in Ghazi Al Gosaibi Hall at the campus of the Technical and Vocational Training Corporation in…"
+    }
+  ]
+}
