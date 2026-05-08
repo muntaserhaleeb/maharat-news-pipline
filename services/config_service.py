@@ -4,6 +4,7 @@ Single source of truth for configuration across services and pipelines.
 scripts/config.py re-exports from here for backwards compatibility with one-off scripts.
 """
 
+import functools
 import yaml
 from pathlib import Path
 
@@ -11,6 +12,7 @@ ROOT       = Path(__file__).resolve().parent.parent
 CONFIG_DIR = ROOT / "config"
 
 
+@functools.lru_cache(maxsize=None)
 def _load(name: str) -> dict:
     path = CONFIG_DIR / name
     with open(path, "r", encoding="utf-8") as f:

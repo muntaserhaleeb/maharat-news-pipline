@@ -28,6 +28,11 @@ import anthropic
 ROOT = Path(__file__).resolve().parent.parent
 
 
+# Rough token budget: warn when estimated prompt + output exceeds this.
+# claude-sonnet/opus/haiku all have 200k context windows.
+_CONTEXT_WINDOW = 200_000
+
+
 # ── config helpers ────────────────────────────────────────────────────────
 
 def _get(cfg: dict, *keys, default=None):
@@ -486,6 +491,19 @@ class GenerationService:
                 "Broaden the query or lower score_threshold."
             )
 
+        # ── token overflow guard ──────────────────────────────────────────
+        _prompt_chars = len(prompt_package.get("system", "")) + len(prompt_package.get("user", ""))
+        _est_input    = _prompt_chars // 4
+        _est_total    = _est_input + self.max_tokens
+        if _est_total > _CONTEXT_WINDOW:
+            import sys as _sys
+            print(
+                f"[generation] Warning: estimated prompt tokens (~{_est_input:,}) + "
+                f"max_tokens ({self.max_tokens:,}) = ~{_est_total:,} exceeds context window "
+                f"({_CONTEXT_WINDOW:,}). Reduce --limit or max_context_chunks in generation.yaml.",
+                file=_sys.stderr,
+            )
+
         draft_id      = str(uuid.uuid4())
         article_parts = []
 
@@ -582,9 +600,24 @@ class GenerationService:
 
     # ── output persistence ─────────────────────────────────────────────────
 
+    @staticmethod
+    def _atomic_write_text(path: Path, text: str) -> None:
+        """Write text to a temp file then rename atomically."""
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_text(text, encoding="utf-8")
+        tmp.replace(path)
+
+    @staticmethod
+    def _atomic_write_json(path: Path, data: dict) -> None:
+        """Write JSON to a temp file then rename atomically."""
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(data, fh, indent=2, ensure_ascii=False)
+        tmp.replace(path)
+
     def _save_draft(self, result: DraftResult) -> Path:
         """
-        Save draft files:
+        Save draft files atomically (temp → rename):
           <drafts_dir>/<draft_slug>/draft.md     — clean formatted article
           <drafts_dir>/<draft_slug>/sources.json — metadata + QA + conditional fields
           <debug_dir>/<draft_slug>/retrieval_debug.json — raw chunk scores
@@ -592,19 +625,11 @@ class GenerationService:
         draft_dir = self.drafts_dir / result.folder_name
         draft_dir.mkdir(parents=True, exist_ok=True)
 
-        # draft.md — clean formatted output (mode-aware)
-        (draft_dir / "draft.md").write_text(
-            result.formatted_article(), encoding="utf-8"
-        )
+        self._atomic_write_text(draft_dir / "draft.md", result.formatted_article())
+        self._atomic_write_json(draft_dir / "sources.json", result.to_sources_dict())
 
-        # sources.json — respects include_sources_used / include_token_usage
-        with open(draft_dir / "sources.json", "w", encoding="utf-8") as fh:
-            json.dump(result.to_sources_dict(), fh, indent=2, ensure_ascii=False)
-
-        # retrieval_debug.json — goes to debug_dir
         debug_dir = self.debug_dir / result.folder_name
         debug_dir.mkdir(parents=True, exist_ok=True)
-        with open(debug_dir / "retrieval_debug.json", "w", encoding="utf-8") as fh:
-            json.dump(result.to_debug_dict(), fh, indent=2, ensure_ascii=False)
+        self._atomic_write_json(debug_dir / "retrieval_debug.json", result.to_debug_dict())
 
         return draft_dir

@@ -452,6 +452,13 @@ class MemoryRouter:
                     query_filter=edit_filter,
                 )
                 # editorial already inside knowledge collection — don't re-add to list
+                if not editorial_chunks:
+                    print(
+                        "[memory_router] No editorial_guidelines chunks found in "
+                        "maharat_knowledge_live. Drafts will proceed without style guidance. "
+                        "Run: python app/cli.py ingest-knowledge",
+                        file=sys.stderr,
+                    )
 
         # ── graph entity detection ────────────────────────────────────────
         # Collect explicit entity names from chunk payloads
