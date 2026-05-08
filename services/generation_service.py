@@ -91,6 +91,7 @@ def _run_mode_qa(
     mode_spec: Optional[dict],
     sources_used: List[dict],
     quality_controls: dict,
+    entities_detected: Optional[dict] = None,
 ) -> List[str]:
     """
     Mode-specific and quality_controls QA checks.
@@ -142,6 +143,31 @@ def _run_mode_qa(
             "QA [grounding]: body text present but no sources retrieved — "
             "claims cannot be verified."
         )
+
+    # ── minimum sources (from quality_controls in generation.yaml) ─────────
+    min_src = quality_controls.get("minimum_sources")
+    if min_src is not None and len(sources_used) < int(min_src):
+        warnings.append(
+            f"QA [sources]: fewer than {min_src} source(s) "
+            f"(got {len(sources_used)})."
+        )
+
+    # ── entity / partner consistency ──────────────────────────────────────
+    if quality_controls.get("check_partner_consistency") and entities_detected and body:
+        orgs = entities_detected.get("organizations", [])
+        if orgs and not any(org.lower() in body.lower() for org in orgs):
+            warnings.append(
+                "QA [partner]: retrieved sources reference organizations "
+                f"({', '.join(orgs[:3])}) but none appear in the draft body."
+            )
+
+    if quality_controls.get("check_entity_consistency") and entities_detected and body:
+        programs = entities_detected.get("programs", [])
+        if programs and not any(prog.lower() in body.lower() for prog in programs):
+            warnings.append(
+                "QA [entity]: retrieved sources reference programs "
+                f"({', '.join(programs[:3])}) but none appear in the draft body."
+            )
 
     return warnings
 
@@ -372,6 +398,11 @@ class GenerationService:
         self.gen_cfg            = gen_cfg
         self.model      = gen_cfg.get("model", "claude-sonnet-4-6")
         self.max_tokens = gen_cfg.get("max_tokens", 4096)
+        self.temperature = (
+            gen_cfg.get("default_settings", {}).get("temperature")
+            if gen_cfg.get("default_settings", {}).get("temperature") is not None
+            else gen_cfg.get("temperature", 0.2)
+        )
         # thinking: pass to API only when explicitly enabled (type != "disabled" and not null)
         _thinking = gen_cfg.get("thinking") or {}
         self.thinking = (
@@ -450,13 +481,16 @@ class GenerationService:
         article_parts = []
 
         api_kwargs: dict = {
-            "model":    self.model,
-            "max_tokens": self.max_tokens,
-            "system":   prompt_package["system"],
-            "messages": [{"role": "user", "content": prompt_package["user"]}],
+            "model":       self.model,
+            "max_tokens":  self.max_tokens,
+            "temperature": self.temperature,
+            "system":      prompt_package["system"],
+            "messages":    [{"role": "user", "content": prompt_package["user"]}],
         }
         if self.thinking is not None:
             api_kwargs["thinking"] = self.thinking
+            # thinking requires temperature=1 — remove the explicit override
+            api_kwargs.pop("temperature", None)
 
         if stream:
             with self._client.messages.stream(**api_kwargs) as stream_ctx:
@@ -479,12 +513,20 @@ class GenerationService:
         sources_used = _extract_sources_used(chunks)
 
         # ── QA ────────────────────────────────────────────────────────────
-        qa_warnings: List[str] = []
+        _qa_raw: List[str] = []
         if self.style_service is not None:
-            qa_warnings = self.style_service.run_qa(parsed, sources_used)
-        qa_warnings += _run_mode_qa(
-            parsed, mode_spec, sources_used, self.quality_controls
+            _qa_raw += self.style_service.run_qa(parsed, sources_used)
+        _qa_raw += _run_mode_qa(
+            parsed, mode_spec, sources_used, self.quality_controls,
+            entities_detected=entities_detected,
         )
+        # deduplicate (both qa paths may emit the same warning for sources)
+        _seen: set = set()
+        qa_warnings: List[str] = []
+        for w in _qa_raw:
+            if w not in _seen:
+                _seen.add(w)
+                qa_warnings.append(w)
 
         result = DraftResult(
             draft_id=draft_id,
@@ -513,11 +555,12 @@ class GenerationService:
             output_tokens=output_tokens,
             generated_at=datetime.now(timezone.utc).isoformat(),
             generation_config={
-                "model":           self.model,
-                "max_tokens":      self.max_tokens,
+                "model":             self.model,
+                "max_tokens":        self.max_tokens,
+                "temperature":       self.temperature,
                 "require_grounding": self.require_grounding,
-                "article_type":    article_type,
-                "generation_mode": generation_mode,
+                "article_type":      article_type,
+                "generation_mode":   generation_mode,
             },
             include_sources_used=self.include_sources_used,
             include_token_usage=self.include_token_usage,
