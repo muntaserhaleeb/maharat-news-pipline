@@ -1,0 +1,3051 @@
+{
+  "meta": {
+    "version": "1.0",
+    "generated_at": "2026-05-08",
+    "entity_count": 53,
+    "relationship_count": 65,
+    "source_entities": "data/graph/entities.yaml",
+    "source_relations": "data/graph/relationships.yaml"
+  },
+  "entities": {
+    "maharat": {
+      "id": "maharat",
+      "name": "Maharat Construction Training Center",
+      "short_name": "Maharat",
+      "aliases": [
+        "MCTC",
+        "Maharat Construction Training Center",
+        "Maharat Center"
+      ],
+      "type": "organization",
+      "subtype": "training_institution",
+      "description": "National vocational training institution dedicated to developing a skilled workforce for the construction sector in the Kingdom of Saudi Arabia. Established 2022 through merger of NCTC and JCC; founded by Saudi Aramco and TVTC. Delivers industry-driven training programs aligned with Saudi Vision 2030.\n",
+      "attributes": {
+        "founded": "2022",
+        "sector": "construction_training",
+        "country": "Saudi Arabia",
+        "vision2030_aligned": true,
+        "trainee_language": "Arabic/English"
+      }
+    },
+    "saudi-aramco": {
+      "id": "saudi-aramco",
+      "name": "Saudi Aramco",
+      "aliases": [
+        "Aramco",
+        "Saudi Aramco Company"
+      ],
+      "type": "organization",
+      "subtype": "energy_company",
+      "description": "Saudi national oil and gas company; founding partner and key institutional stakeholder of Maharat. Endorses safety and welding programs through its Loss Prevention Department.\n",
+      "attributes": {
+        "country": "Saudi Arabia",
+        "sector": "energy"
+      }
+    },
+    "tvtc": {
+      "id": "tvtc",
+      "name": "Technical and Vocational Training Corporation",
+      "short_name": "TVTC",
+      "aliases": [
+        "TVTC",
+        "Technical and Vocational Training Corporation"
+      ],
+      "type": "organization",
+      "subtype": "government_authority",
+      "description": "Saudi national authority responsible for technical and vocational training; founding partner of Maharat.\n",
+      "attributes": {
+        "country": "Saudi Arabia",
+        "sector": "government"
+      }
+    },
+    "hrdf": {
+      "id": "hrdf",
+      "name": "Human Resources Development Fund",
+      "short_name": "HRDF",
+      "aliases": [
+        "HRDF",
+        "Human Resources Development Fund"
+      ],
+      "type": "organization",
+      "subtype": "government_fund",
+      "description": "Saudi government fund supporting workforce development and Saudization; institutional supporter of Maharat.\n",
+      "attributes": {
+        "country": "Saudi Arabia",
+        "sector": "government"
+      }
+    },
+    "sca": {
+      "id": "sca",
+      "name": "Saudi Contractors Authority",
+      "short_name": "SCA",
+      "aliases": [
+        "SCA",
+        "Saudi Contractors Authority"
+      ],
+      "type": "organization",
+      "subtype": "sector_authority",
+      "description": "National sector authority for contracting industry in Saudi Arabia; Tier 1 strategic partner of Maharat with active MoU.\n",
+      "attributes": {
+        "country": "Saudi Arabia",
+        "sector": "construction"
+      }
+    },
+    "colleges-of-excellence": {
+      "id": "colleges-of-excellence",
+      "name": "Colleges of Excellence",
+      "aliases": [
+        "Colleges of Excellence"
+      ],
+      "type": "organization",
+      "subtype": "education_network",
+      "description": "Saudi network of higher education institutions; institutional supporter of Maharat.",
+      "attributes": {
+        "country": "Saudi Arabia"
+      }
+    },
+    "nctc": {
+      "id": "nctc",
+      "name": "National Construction Training Center",
+      "short_name": "NCTC",
+      "aliases": [
+        "NCTC",
+        "National Construction Training Center"
+      ],
+      "type": "organization",
+      "subtype": "predecessor",
+      "description": "Former national training center merged in 2022 to form Maharat.",
+      "attributes": {
+        "status": "merged",
+        "merged_into": "maharat",
+        "year": "2022"
+      }
+    },
+    "jcc": {
+      "id": "jcc",
+      "name": "Jazan Contractors Consortium",
+      "short_name": "JCC",
+      "aliases": [
+        "JCC",
+        "Jazan Contractors Consortium"
+      ],
+      "type": "organization",
+      "subtype": "predecessor",
+      "description": "Former Jazan-based consortium merged in 2022 to form Maharat.",
+      "attributes": {
+        "status": "merged",
+        "merged_into": "maharat",
+        "year": "2022"
+      }
+    },
+    "sinopec": {
+      "id": "sinopec",
+      "name": "Sinopec Nanjing Engineering Middle East Co., LTD.",
+      "short_name": "Sinopec",
+      "aliases": [
+        "Sinopec",
+        "Sinopec Nanjing Engineering",
+        "Sinopec Nanjing Engineering Middle East",
+        "SNE Middle East"
+      ],
+      "type": "partner",
+      "subtype": "engineering_contractor",
+      "description": "International EPC and engineering company; Tier 1 strategic partner of Maharat. Co-brands the Safety Experience Center and Advanced Welding Academy; supports the Advancing Trainee Development Initiative (ATDI).\n",
+      "attributes": {
+        "country": "China/Saudi Arabia",
+        "sector": "engineering_construction",
+        "mou_status": "active_expanding"
+      }
+    },
+    "nesma": {
+      "id": "nesma",
+      "name": "Nesma & Partners",
+      "short_name": "Nesma",
+      "aliases": [
+        "Nesma",
+        "Nesma & Partners",
+        "Nesma and Partners"
+      ],
+      "type": "partner",
+      "subtype": "contracting_company",
+      "description": "Major Saudi contracting and industrial services company; Tier 1 employer partner of Maharat. Active MoU covering workforce supply and training alignment.\n",
+      "attributes": {
+        "country": "Saudi Arabia",
+        "sector": "construction",
+        "mou_status": "active"
+      }
+    },
+    "samsung-ea": {
+      "id": "samsung-ea",
+      "name": "Samsung E&A",
+      "short_name": "Samsung E&A",
+      "aliases": [
+        "Samsung E&A",
+        "Samsung Engineering & Construction",
+        "Samsung"
+      ],
+      "type": "partner",
+      "subtype": "engineering_contractor",
+      "description": "Korean engineering and construction company; strategic partner of Maharat. Sponsors dedicated training cohorts and employer-linked workforce development programs.\n",
+      "attributes": {
+        "country": "South Korea/Saudi Arabia",
+        "sector": "engineering_construction",
+        "mou_status": "active"
+      }
+    },
+    "esab": {
+      "id": "esab",
+      "name": "ESAB",
+      "aliases": [
+        "ESAB",
+        "ESAB Welding",
+        "ESAB Corporation"
+      ],
+      "type": "partner",
+      "subtype": "technology_supplier",
+      "description": "Global welding and cutting technology leader; Tier 1 technology partner supplying advanced welding systems and technical support to Maharat.\n",
+      "attributes": {
+        "sector": "welding_technology",
+        "mou_status": "active"
+      }
+    },
+    "tuv-sud": {
+      "id": "tuv-sud",
+      "name": "TÜV SÜD",
+      "aliases": [
+        "TÜV SÜD",
+        "TUV SUD",
+        "TÜV"
+      ],
+      "type": "partner",
+      "subtype": "certification_body",
+      "description": "International technical inspection and certification organisation; Tier 1 partner providing NDT qualifications and safety engineering credentials.\n",
+      "attributes": {
+        "sector": "certification_inspection",
+        "mou_status": "active_implementation"
+      }
+    },
+    "njupt": {
+      "id": "njupt",
+      "name": "Nanjing University of Posts and Telecommunications",
+      "short_name": "NJUPT",
+      "aliases": [
+        "NJUPT",
+        "Nanjing University of Posts and Telecommunications",
+        "Nanjing University"
+      ],
+      "type": "partner",
+      "subtype": "academic_institution",
+      "description": "Chinese university; Tier 1 academic partner of Maharat. Joint programs on smart infrastructure, IoT, AI, and green energy solutions.\n",
+      "attributes": {
+        "country": "China",
+        "sector": "academia",
+        "mou_status": "active"
+      }
+    },
+    "neft-energies": {
+      "id": "neft-energies",
+      "name": "NEFT Energies",
+      "aliases": [
+        "NEFT Energies",
+        "NEFT"
+      ],
+      "type": "partner",
+      "subtype": "energy_company",
+      "description": "Industry partner for technical collaboration with Maharat.",
+      "attributes": {
+        "sector": "energy"
+      }
+    },
+    "halumm": {
+      "id": "halumm",
+      "name": "Halumm",
+      "aliases": [
+        "Halumm"
+      ],
+      "type": "partner",
+      "subtype": "technology_company",
+      "description": "Strategic technology partner of Maharat.",
+      "attributes": {}
+    },
+    "accet": {
+      "id": "accet",
+      "name": "Accrediting Council for Continuing Education and Training",
+      "short_name": "ACCET",
+      "aliases": [
+        "ACCET"
+      ],
+      "type": "accreditation",
+      "subtype": "institutional_accreditor",
+      "description": "U.S.-based international accreditor of continuing education and training institutions. Maharat holds ACCET institutional accreditation.\n",
+      "attributes": {
+        "country": "USA",
+        "scope": "institutional"
+      }
+    },
+    "masar": {
+      "id": "masar",
+      "name": "Masar National Accreditation Framework",
+      "short_name": "Masar",
+      "aliases": [
+        "Masar",
+        "Masar Accreditation"
+      ],
+      "type": "accreditation",
+      "subtype": "national_framework",
+      "description": "Saudi national accreditation framework for vocational training; Maharat is accredited.",
+      "attributes": {
+        "country": "Saudi Arabia",
+        "scope": "institutional"
+      }
+    },
+    "nocn": {
+      "id": "nocn",
+      "name": "NOCN Group",
+      "short_name": "NOCN",
+      "aliases": [
+        "NOCN",
+        "NOCN Group"
+      ],
+      "type": "accreditation",
+      "subtype": "awarding_organisation",
+      "description": "International awarding organisation providing vocational qualifications; Maharat holds centre approval and active partnership MoU.\n",
+      "attributes": {
+        "country": "UK",
+        "scope": "program_level",
+        "mou_status": "active"
+      }
+    },
+    "city-guilds": {
+      "id": "city-guilds",
+      "name": "City & Guilds",
+      "aliases": [
+        "City & Guilds",
+        "City and Guilds"
+      ],
+      "type": "accreditation",
+      "subtype": "awarding_organisation",
+      "description": "International vocational education and qualifications organisation; Maharat holds centre approval.",
+      "attributes": {
+        "country": "UK",
+        "scope": "program_level"
+      }
+    },
+    "gatehouse-awards": {
+      "id": "gatehouse-awards",
+      "name": "Gatehouse Awards",
+      "aliases": [
+        "Gatehouse Awards",
+        "Gatehouse"
+      ],
+      "type": "accreditation",
+      "subtype": "awarding_organisation",
+      "description": "UK-based awarding organisation; Maharat is an approved training centre.",
+      "attributes": {
+        "country": "UK",
+        "scope": "program_level"
+      }
+    },
+    "aws": {
+      "id": "aws",
+      "name": "American Welding Society",
+      "short_name": "AWS",
+      "aliases": [
+        "AWS",
+        "American Welding Society"
+      ],
+      "type": "accreditation",
+      "subtype": "professional_body",
+      "description": "U.S. professional society setting welding standards and education frameworks. Maharat programs are aligned with AWS SENSE and the organisation holds an active MoU.\n",
+      "attributes": {
+        "country": "USA",
+        "scope": "program_level",
+        "mou_status": "active"
+      }
+    },
+    "iosh-org": {
+      "id": "iosh-org",
+      "name": "Institution of Occupational Safety and Health",
+      "short_name": "IOSH",
+      "aliases": [
+        "IOSH",
+        "Institution of Occupational Safety and Health"
+      ],
+      "type": "accreditation",
+      "subtype": "professional_body",
+      "description": "International professional body for occupational safety and health; Maharat offers IOSH-certified training.",
+      "attributes": {
+        "country": "UK",
+        "scope": "program_level"
+      }
+    },
+    "cert-iso-9001": {
+      "id": "cert-iso-9001",
+      "name": "ISO 9001:2015",
+      "aliases": [
+        "ISO 9001",
+        "ISO 9001:2015"
+      ],
+      "type": "certification",
+      "subtype": "quality_management",
+      "description": "International standard for quality management systems; Maharat is certified.",
+      "attributes": {
+        "standard": "ISO",
+        "year_certified": "2024"
+      }
+    },
+    "cert-iso-21001": {
+      "id": "cert-iso-21001",
+      "name": "ISO 21001:2018",
+      "aliases": [
+        "ISO 21001",
+        "ISO 21001:2018"
+      ],
+      "type": "certification",
+      "subtype": "education_management",
+      "description": "International standard for educational organization management systems; Maharat is certified.",
+      "attributes": {
+        "standard": "ISO",
+        "year_certified": "2024"
+      }
+    },
+    "cert-aws-sense": {
+      "id": "cert-aws-sense",
+      "name": "AWS SENSE",
+      "aliases": [
+        "AWS SENSE",
+        "SENSE"
+      ],
+      "type": "certification",
+      "subtype": "welding_education",
+      "description": "American Welding Society's School Excelling through National Skills Education framework; Maharat is a recognised SENSE institution.",
+      "attributes": {
+        "issuer": "aws"
+      }
+    },
+    "cert-cwqap": {
+      "id": "cert-cwqap",
+      "name": "CWQAP",
+      "aliases": [
+        "CWQAP",
+        "Construction & Welding Qualifications Accreditation Programme"
+      ],
+      "type": "certification",
+      "subtype": "welding_qualification",
+      "description": "Construction and Welding Qualifications Accreditation Programme; certification pathway offered through Maharat.",
+      "attributes": {}
+    },
+    "cert-gptw": {
+      "id": "cert-gptw",
+      "name": "Great Place to Work",
+      "aliases": [
+        "Great Place to Work",
+        "GPTW"
+      ],
+      "type": "certification",
+      "subtype": "workplace_culture",
+      "description": "International workplace culture certification; Maharat certified for 2025–2026.",
+      "attributes": {
+        "period": "2025-2026"
+      }
+    },
+    "program-welding": {
+      "id": "program-welding",
+      "name": "Welding Technician Program",
+      "aliases": [
+        "Welding Program",
+        "Welding Technician"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Core one-year technical program in welding and fabrication, leading to Associate Diploma.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "welding"
+      }
+    },
+    "program-automated-welding": {
+      "id": "program-automated-welding",
+      "name": "Automated Welding Program",
+      "aliases": [
+        "Automated Welding",
+        "Advanced Welding Program"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Two-year flagship program in automated welding systems; leading to full Diploma. Uses advanced ESAB equipment.",
+      "attributes": {
+        "duration": "2 years",
+        "credential": "Diploma",
+        "discipline": "welding",
+        "flagship": true
+      }
+    },
+    "program-pipefitting": {
+      "id": "program-pipefitting",
+      "name": "Pipefitting Technician Program",
+      "aliases": [
+        "Pipefitting Program",
+        "Pipefitting Technician"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Technical program in piping systems design, installation, and maintenance.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "pipefitting"
+      }
+    },
+    "program-electrical": {
+      "id": "program-electrical",
+      "name": "Electrical Technician Program",
+      "aliases": [
+        "Electrical Program",
+        "Electrical Technician"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Technical program in electrical systems for industrial and construction environments.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "electrical"
+      }
+    },
+    "program-instrumentation": {
+      "id": "program-instrumentation",
+      "name": "Instrumentation Technician Program",
+      "aliases": [
+        "Instrumentation Program",
+        "Instrumentation Technician"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Technical program in industrial instrumentation and control systems.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "instrumentation"
+      }
+    },
+    "program-construction-safety": {
+      "id": "program-construction-safety",
+      "name": "Construction Safety Program",
+      "aliases": [
+        "Construction Safety",
+        "Safety Program"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Technical program in occupational safety, health, and construction risk management. Endorsed by Saudi Aramco Loss Prevention Department.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "safety",
+        "endorsed_by": "Saudi Aramco Loss Prevention Department"
+      }
+    },
+    "program-scaffolding": {
+      "id": "program-scaffolding",
+      "name": "Scaffolding Program",
+      "aliases": [
+        "Scaffolding",
+        "Scaffolding Technician Program"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Technical program in scaffolding systems erection, inspection, and dismantling. Endorsed by Saudi Aramco Loss Prevention Department.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "scaffolding",
+        "endorsed_by": "Saudi Aramco Loss Prevention Department"
+      }
+    },
+    "program-civil": {
+      "id": "program-civil",
+      "name": "Civil Construction Program",
+      "aliases": [
+        "Civil Construction",
+        "Civil Program"
+      ],
+      "type": "program",
+      "subtype": "diploma",
+      "description": "Technical program in construction methods, materials, and site operations.",
+      "attributes": {
+        "duration": "1 year",
+        "credential": "Associate Diploma",
+        "discipline": "civil_construction"
+      }
+    },
+    "program-atdi": {
+      "id": "program-atdi",
+      "name": "Advancing Trainee Development Initiative",
+      "short_name": "ATDI",
+      "aliases": [
+        "ATDI",
+        "Advancing Trainee Development Initiative"
+      ],
+      "type": "program",
+      "subtype": "post_graduation_pathway",
+      "description": "International graduate development program co-developed with Sinopec and NJUPT; provides advanced learning and professional exposure for Maharat graduates in China and globally.\n",
+      "attributes": {
+        "duration": "variable",
+        "partnership": "Sinopec / NJUPT"
+      }
+    },
+    "program-short-courses": {
+      "id": "program-short-courses",
+      "name": "Short Courses Portfolio",
+      "aliases": [
+        "Short Courses",
+        "Professional Development Programs"
+      ],
+      "type": "program",
+      "subtype": "short_course_cluster",
+      "description": "Portfolio of professional short courses including HSSEQ, Rigging & Lifting, Site Inspection, Environmental, and Advanced Welding clusters.\n",
+      "attributes": {
+        "format": "short_course"
+      }
+    },
+    "facility-main-campus": {
+      "id": "facility-main-campus",
+      "name": "Main Campus",
+      "aliases": [
+        "Maharat Campus",
+        "Main Campus"
+      ],
+      "type": "campus",
+      "subtype": "main_campus",
+      "description": "Primary Maharat training campus housing all technical workshops, learning resources, and support facilities.",
+      "attributes": {
+        "location": "Saudi Arabia"
+      }
+    },
+    "facility-advanced-welding": {
+      "id": "facility-advanced-welding",
+      "name": "Advanced Welding Facility",
+      "aliases": [
+        "Advanced Welding Facility",
+        "Advanced Welding Lab"
+      ],
+      "type": "facility",
+      "subtype": "training_workshop",
+      "description": "Modern welding facility equipped with ESAB automated welding systems; supports the Automated Welding Program.",
+      "attributes": {
+        "discipline": "welding"
+      }
+    },
+    "facility-safety-training": {
+      "id": "facility-safety-training",
+      "name": "Construction Safety Training Center",
+      "aliases": [
+        "Safety Training Center",
+        "Construction Safety Training Center"
+      ],
+      "type": "facility",
+      "subtype": "training_center",
+      "description": "Dedicated safety theory and practical training facility including hazard simulation and emergency response area.",
+      "attributes": {
+        "discipline": "safety"
+      }
+    },
+    "facility-learning-resource": {
+      "id": "facility-learning-resource",
+      "name": "Learning Resource Center",
+      "aliases": [
+        "Learning Resource Center",
+        "LRC"
+      ],
+      "type": "facility",
+      "subtype": "academic_support",
+      "description": "Academic support hub with digital learning resources and library services.",
+      "attributes": {}
+    },
+    "facility-short-courses-center": {
+      "id": "facility-short-courses-center",
+      "name": "Short Courses Center",
+      "aliases": [
+        "Short Courses Center"
+      ],
+      "type": "facility",
+      "subtype": "professional_development",
+      "description": "Dedicated facility for professional development and short course delivery.",
+      "attributes": {}
+    },
+    "person-mansour-al-shehri": {
+      "id": "person-mansour-al-shehri",
+      "name": "Eng. Mansour Al-Shehri",
+      "aliases": [
+        "Mansour Al-Shehri",
+        "Eng. Mansour Al Shehri",
+        "Mansour Al Shehri"
+      ],
+      "type": "person",
+      "subtype": "board_member",
+      "description": "Chairman of the Maharat Board of Trustees; Vice President, Liquids to Chemicals Project Management at Saudi Aramco.\n",
+      "attributes": {
+        "role": "Chairman, Board of Trustees",
+        "employer": "Saudi Aramco"
+      }
+    },
+    "person-mishari-al-qahtani": {
+      "id": "person-mishari-al-qahtani",
+      "name": "Eng. Mishari Bin Abdullah Al-Qahtani",
+      "aliases": [
+        "Mishari Al-Qahtani",
+        "Eng. Mishari Al-Qahtani"
+      ],
+      "type": "person",
+      "subtype": "board_member",
+      "description": "Vice Chairman of the Maharat Board of Trustees; General Manager, TVTC Eastern Province.",
+      "attributes": {
+        "role": "Vice Chairman, Board of Trustees",
+        "employer": "TVTC"
+      }
+    },
+    "person-sami-musalli": {
+      "id": "person-sami-musalli",
+      "name": "Sami Musalli",
+      "aliases": [
+        "Sami Musalli",
+        "Managing Director"
+      ],
+      "type": "person",
+      "subtype": "executive",
+      "description": "Managing Director of Maharat; institutional voice on workforce readiness, mission, safety culture, and partnership strategy.",
+      "attributes": {
+        "role": "Managing Director",
+        "employer": "Maharat"
+      }
+    },
+    "person-muntaser-ali": {
+      "id": "person-muntaser-ali",
+      "name": "Muntaser Ali",
+      "aliases": [
+        "Muntaser Ali",
+        "Muntaser Haleeb"
+      ],
+      "type": "person",
+      "subtype": "staff",
+      "description": "Business Development and Partnerships lead at Maharat.",
+      "attributes": {
+        "role": "Business Development / Partnerships",
+        "employer": "Maharat"
+      }
+    },
+    "initiative-vision-2030": {
+      "id": "initiative-vision-2030",
+      "name": "Saudi Vision 2030",
+      "short_name": "Vision 2030",
+      "aliases": [
+        "Saudi Vision 2030",
+        "Vision 2030"
+      ],
+      "type": "initiative",
+      "subtype": "national_program",
+      "description": "Saudi Arabia's national strategic transformation program; Maharat directly supports workforce development objectives under Vision 2030.",
+      "attributes": {
+        "country": "Saudi Arabia"
+      }
+    },
+    "initiative-safety-experience-center": {
+      "id": "initiative-safety-experience-center",
+      "name": "Safety Experience Center",
+      "aliases": [
+        "Safety Experience Center"
+      ],
+      "type": "initiative",
+      "subtype": "planned_facility",
+      "description": "Planned simulation-based safety training center co-branded with Sinopec; strategic expansion initiative.",
+      "attributes": {
+        "status": "planned",
+        "partner": "Sinopec"
+      }
+    },
+    "initiative-automated-welding-academy": {
+      "id": "initiative-automated-welding-academy",
+      "name": "Automated Welding Academy",
+      "aliases": [
+        "Automated Welding Academy"
+      ],
+      "type": "initiative",
+      "subtype": "planned_facility",
+      "description": "Planned advanced welding specialization academy; supported by Sinopec as part of the strategic partnership.",
+      "attributes": {
+        "status": "planned",
+        "partner": "Sinopec"
+      }
+    },
+    "initiative-saudization": {
+      "id": "initiative-saudization",
+      "name": "Saudization",
+      "aliases": [
+        "Saudization",
+        "Nitaqat",
+        "Saudi Workforce Localization"
+      ],
+      "type": "initiative",
+      "subtype": "national_policy",
+      "description": "Saudi national policy to increase participation of Saudi nationals in the workforce; key objective that Maharat supports.",
+      "attributes": {
+        "country": "Saudi Arabia"
+      }
+    },
+    "location-saudi-arabia": {
+      "id": "location-saudi-arabia",
+      "name": "Saudi Arabia",
+      "aliases": [
+        "KSA",
+        "Kingdom of Saudi Arabia",
+        "Saudi Arabia"
+      ],
+      "type": "location",
+      "subtype": "country",
+      "description": "Kingdom of Saudi Arabia; where Maharat operates.",
+      "attributes": {
+        "region": "Middle East"
+      }
+    },
+    "location-eastern-province": {
+      "id": "location-eastern-province",
+      "name": "Eastern Province",
+      "aliases": [
+        "Eastern Province",
+        "Eastern Region"
+      ],
+      "type": "location",
+      "subtype": "region",
+      "description": "Saudi Arabia's Eastern Province; primary operational region for Maharat and Saudi Aramco.",
+      "attributes": {
+        "country": "Saudi Arabia"
+      }
+    }
+  },
+  "relationships": [
+    {
+      "id": "rel-001",
+      "source": "maharat",
+      "type": "founded_by",
+      "target": "saudi-aramco",
+      "label": "Founded by Saudi Aramco (2022)",
+      "attributes": {
+        "year": "2022",
+        "context": "Strategic founding partner and institutional stakeholder"
+      }
+    },
+    {
+      "id": "rel-002",
+      "source": "maharat",
+      "type": "founded_by",
+      "target": "tvtc",
+      "label": "Founded by TVTC (2022)",
+      "attributes": {
+        "year": "2022",
+        "context": "Strategic founding partner, national vocational authority"
+      }
+    },
+    {
+      "id": "rel-003",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "hrdf",
+      "label": "Supported by HRDF",
+      "attributes": {
+        "context": "Institutional financial and workforce development support"
+      }
+    },
+    {
+      "id": "rel-004",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "colleges-of-excellence",
+      "label": "Supported by Colleges of Excellence",
+      "attributes": {
+        "context": "Institutional academic support partner"
+      }
+    },
+    {
+      "id": "rel-005",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "nctc",
+      "label": "Merged from NCTC (2022)",
+      "attributes": {
+        "year": "2022",
+        "context": "Maharat formed through 2022 consolidation of NCTC and JCC"
+      }
+    },
+    {
+      "id": "rel-006",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "jcc",
+      "label": "Merged from JCC (2022)",
+      "attributes": {
+        "year": "2022",
+        "context": "Maharat formed through 2022 consolidation of NCTC and JCC"
+      }
+    },
+    {
+      "id": "rel-010",
+      "source": "maharat",
+      "type": "governed_by",
+      "target": "person-mansour-al-shehri",
+      "label": "Board chaired by Eng. Mansour Al-Shehri",
+      "attributes": {
+        "role": "Chairman, Board of Trustees"
+      }
+    },
+    {
+      "id": "rel-011",
+      "source": "maharat",
+      "type": "governed_by",
+      "target": "person-mishari-al-qahtani",
+      "label": "Board vice-chaired by Eng. Mishari Al-Qahtani",
+      "attributes": {
+        "role": "Vice Chairman, Board of Trustees"
+      }
+    },
+    {
+      "id": "rel-012",
+      "source": "person-sami-musalli",
+      "type": "related_to",
+      "target": "maharat",
+      "label": "Sami Musalli is Managing Director of Maharat",
+      "attributes": {
+        "role": "Managing Director"
+      }
+    },
+    {
+      "id": "rel-013",
+      "source": "person-muntaser-ali",
+      "type": "related_to",
+      "target": "maharat",
+      "label": "Muntaser Ali leads Business Development at Maharat",
+      "attributes": {
+        "role": "Business Development / Partnerships"
+      }
+    },
+    {
+      "id": "rel-014",
+      "source": "person-mansour-al-shehri",
+      "type": "related_to",
+      "target": "saudi-aramco",
+      "label": "Eng. Mansour Al-Shehri is VP at Saudi Aramco",
+      "attributes": {
+        "role": "VP Liquids to Chemicals Project Management"
+      }
+    },
+    {
+      "id": "rel-015",
+      "source": "person-mishari-al-qahtani",
+      "type": "related_to",
+      "target": "tvtc",
+      "label": "Eng. Mishari Al-Qahtani is General Manager at TVTC Eastern Province",
+      "attributes": {
+        "role": "General Manager, TVTC Eastern Province"
+      }
+    },
+    {
+      "id": "rel-020",
+      "source": "maharat",
+      "type": "located_at",
+      "target": "location-saudi-arabia",
+      "label": "Maharat is located in Saudi Arabia",
+      "attributes": {}
+    },
+    {
+      "id": "rel-021",
+      "source": "maharat",
+      "type": "located_at",
+      "target": "location-eastern-province",
+      "label": "Primary campus in the Eastern Province",
+      "attributes": {}
+    },
+    {
+      "id": "rel-022",
+      "source": "facility-main-campus",
+      "type": "located_at",
+      "target": "location-eastern-province",
+      "label": "Main Campus is in the Eastern Province",
+      "attributes": {}
+    },
+    {
+      "id": "rel-025",
+      "source": "maharat",
+      "type": "supports_initiative",
+      "target": "initiative-vision-2030",
+      "label": "Maharat supports Saudi Vision 2030",
+      "attributes": {
+        "context": "Strengthens national workforce capability and Saudization in the construction sector in alignment with Vision 2030 objectives\n"
+      }
+    },
+    {
+      "id": "rel-026",
+      "source": "maharat",
+      "type": "supports_initiative",
+      "target": "initiative-saudization",
+      "label": "Maharat advances Saudization in the construction workforce",
+      "attributes": {
+        "context": "Prepares Saudi nationals for technical roles in construction"
+      }
+    },
+    {
+      "id": "rel-030",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "sinopec",
+      "label": "MoU with Sinopec Nanjing Engineering (active/expanding)",
+      "attributes": {
+        "mou_status": "active_expanding",
+        "tier": 1,
+        "scope": "Joint facility development (Safety Experience Center, Advanced Welding Academy), ATDI co-development, advanced training content\n"
+      }
+    },
+    {
+      "id": "rel-031",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "nesma",
+      "label": "MoU with Nesma & Partners (active)",
+      "attributes": {
+        "mou_status": "active",
+        "tier": 1,
+        "scope": "Workforce supply agreements, employer-linked training alignment"
+      }
+    },
+    {
+      "id": "rel-032",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "samsung-ea",
+      "label": "MoU with Samsung E&A (active)",
+      "attributes": {
+        "mou_status": "active",
+        "tier": 1,
+        "scope": "Sponsored training cohorts, employer-linked workforce development"
+      }
+    },
+    {
+      "id": "rel-033",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "aws",
+      "label": "MoU with American Welding Society (active/expanding)",
+      "attributes": {
+        "mou_status": "active_expanding",
+        "tier": 1,
+        "scope": "Welding education standards, AWS SENSE recognition, curriculum alignment"
+      }
+    },
+    {
+      "id": "rel-034",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "esab",
+      "label": "MoU with ESAB (active)",
+      "attributes": {
+        "mou_status": "active",
+        "tier": 1,
+        "scope": "Advanced welding technology supply, equipment, technical support"
+      }
+    },
+    {
+      "id": "rel-035",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "nocn",
+      "label": "MoU with NOCN Group (active)",
+      "attributes": {
+        "mou_status": "active",
+        "tier": 1,
+        "scope": "Vocational qualification accreditation and awarding"
+      }
+    },
+    {
+      "id": "rel-036",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "sca",
+      "label": "MoU with Saudi Contractors Authority (active)",
+      "attributes": {
+        "mou_status": "active",
+        "tier": 1,
+        "scope": "National sector collaboration, contractor workforce development"
+      }
+    },
+    {
+      "id": "rel-037",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "tuv-sud",
+      "label": "MoU with TÜV SÜD (active/implementation)",
+      "attributes": {
+        "mou_status": "active_implementation",
+        "tier": 1,
+        "scope": "NDT qualifications, safety engineering certifications"
+      }
+    },
+    {
+      "id": "rel-038",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "njupt",
+      "label": "MoU with Nanjing University (active)",
+      "attributes": {
+        "mou_status": "active",
+        "tier": 1,
+        "scope": "Joint academic programs, smart infrastructure, IoT, AI, green energy solutions, ATDI co-development\n"
+      }
+    },
+    {
+      "id": "rel-039",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "neft-energies",
+      "label": "Partnership with NEFT Energies",
+      "attributes": {
+        "tier": 2,
+        "scope": "Technical industry collaboration"
+      }
+    },
+    {
+      "id": "rel-040",
+      "source": "maharat",
+      "type": "partnered_with",
+      "target": "halumm",
+      "label": "Partnership with Halumm",
+      "attributes": {
+        "tier": 2,
+        "scope": "Strategic technology collaboration"
+      }
+    },
+    {
+      "id": "rel-050",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "accet",
+      "label": "Maharat is accredited by ACCET",
+      "attributes": {
+        "scope": "institutional",
+        "country": "USA"
+      }
+    },
+    {
+      "id": "rel-051",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "masar",
+      "label": "Maharat is accredited under Masar National Framework",
+      "attributes": {
+        "scope": "institutional",
+        "country": "Saudi Arabia"
+      }
+    },
+    {
+      "id": "rel-052",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "nocn",
+      "label": "Maharat holds NOCN centre approval",
+      "attributes": {
+        "scope": "program_level"
+      }
+    },
+    {
+      "id": "rel-053",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "city-guilds",
+      "label": "Maharat holds City & Guilds centre approval",
+      "attributes": {
+        "scope": "program_level"
+      }
+    },
+    {
+      "id": "rel-054",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "gatehouse-awards",
+      "label": "Maharat is a Gatehouse Awards approved centre",
+      "attributes": {
+        "scope": "program_level"
+      }
+    },
+    {
+      "id": "rel-055",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "aws",
+      "label": "Maharat is recognised under AWS SENSE framework",
+      "attributes": {
+        "scope": "program_level"
+      }
+    },
+    {
+      "id": "rel-056",
+      "source": "maharat",
+      "type": "accredited_by",
+      "target": "iosh-org",
+      "label": "Maharat delivers IOSH-certified safety training",
+      "attributes": {
+        "scope": "program_level"
+      }
+    },
+    {
+      "id": "rel-060",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "cert-iso-9001",
+      "label": "Maharat is ISO 9001:2015 certified",
+      "attributes": {
+        "context": "Quality management system certification"
+      }
+    },
+    {
+      "id": "rel-061",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "cert-iso-21001",
+      "label": "Maharat is ISO 21001:2018 certified",
+      "attributes": {
+        "context": "Educational organization management system certification"
+      }
+    },
+    {
+      "id": "rel-062",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "cert-aws-sense",
+      "label": "Maharat holds AWS SENSE recognition",
+      "attributes": {
+        "context": "American Welding Society approved institution"
+      }
+    },
+    {
+      "id": "rel-063",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "cert-cwqap",
+      "label": "Maharat offers CWQAP qualification pathways",
+      "attributes": {
+        "context": "Construction welding qualification accreditation"
+      }
+    },
+    {
+      "id": "rel-064",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "cert-gptw",
+      "label": "Maharat is a Great Place to Work certified (2025-2026)",
+      "attributes": {
+        "period": "2025-2026"
+      }
+    },
+    {
+      "id": "rel-070",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-welding",
+      "label": "Maharat offers Welding Technician Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-071",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-automated-welding",
+      "label": "Maharat offers Automated Welding Program (flagship)",
+      "attributes": {
+        "flagship": true
+      }
+    },
+    {
+      "id": "rel-072",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-pipefitting",
+      "label": "Maharat offers Pipefitting Technician Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-073",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-electrical",
+      "label": "Maharat offers Electrical Technician Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-074",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-instrumentation",
+      "label": "Maharat offers Instrumentation Technician Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-075",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-construction-safety",
+      "label": "Maharat offers Construction Safety Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-076",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-scaffolding",
+      "label": "Maharat offers Scaffolding Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-077",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-civil",
+      "label": "Maharat offers Civil Construction Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-078",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-atdi",
+      "label": "Maharat offers ATDI post-graduation pathway",
+      "attributes": {}
+    },
+    {
+      "id": "rel-079",
+      "source": "maharat",
+      "type": "offers_program",
+      "target": "program-short-courses",
+      "label": "Maharat offers Short Courses Portfolio",
+      "attributes": {}
+    },
+    {
+      "id": "rel-080",
+      "source": "program-construction-safety",
+      "type": "related_to",
+      "target": "saudi-aramco",
+      "label": "Construction Safety Program endorsed by Saudi Aramco LP Department",
+      "attributes": {
+        "endorsement": "Saudi Aramco Loss Prevention Department"
+      }
+    },
+    {
+      "id": "rel-081",
+      "source": "program-scaffolding",
+      "type": "related_to",
+      "target": "saudi-aramco",
+      "label": "Scaffolding Program endorsed by Saudi Aramco LP Department",
+      "attributes": {
+        "endorsement": "Saudi Aramco Loss Prevention Department"
+      }
+    },
+    {
+      "id": "rel-082",
+      "source": "program-automated-welding",
+      "type": "collaborates_on",
+      "target": "esab",
+      "label": "Automated Welding Program uses ESAB technology",
+      "attributes": {
+        "context": "ESAB equipment and technical support"
+      }
+    },
+    {
+      "id": "rel-083",
+      "source": "program-welding",
+      "type": "related_to",
+      "target": "cert-aws-sense",
+      "label": "Welding programs aligned with AWS SENSE framework",
+      "attributes": {}
+    },
+    {
+      "id": "rel-090",
+      "source": "sinopec",
+      "type": "supports_initiative",
+      "target": "initiative-safety-experience-center",
+      "label": "Sinopec co-brands the Safety Experience Center",
+      "attributes": {
+        "context": "Joint facility branding and support"
+      }
+    },
+    {
+      "id": "rel-091",
+      "source": "sinopec",
+      "type": "supports_initiative",
+      "target": "initiative-automated-welding-academy",
+      "label": "Sinopec supports the Automated Welding Academy",
+      "attributes": {
+        "context": "Joint facility sponsorship"
+      }
+    },
+    {
+      "id": "rel-092",
+      "source": "sinopec",
+      "type": "collaborates_on",
+      "target": "program-atdi",
+      "label": "Sinopec co-develops the ATDI program",
+      "attributes": {
+        "context": "International graduate development in China"
+      }
+    },
+    {
+      "id": "rel-093",
+      "source": "njupt",
+      "type": "collaborates_on",
+      "target": "program-atdi",
+      "label": "NJUPT co-develops the ATDI program",
+      "attributes": {
+        "context": "Academic exchange and advanced learning in China"
+      }
+    },
+    {
+      "id": "rel-100",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "facility-main-campus",
+      "label": "Maharat operates the Main Campus",
+      "attributes": {}
+    },
+    {
+      "id": "rel-101",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "facility-advanced-welding",
+      "label": "Maharat operates the Advanced Welding Facility",
+      "attributes": {}
+    },
+    {
+      "id": "rel-102",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "facility-safety-training",
+      "label": "Maharat operates the Construction Safety Training Center",
+      "attributes": {}
+    },
+    {
+      "id": "rel-103",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "facility-learning-resource",
+      "label": "Maharat operates the Learning Resource Center",
+      "attributes": {}
+    },
+    {
+      "id": "rel-104",
+      "source": "maharat",
+      "type": "related_to",
+      "target": "facility-short-courses-center",
+      "label": "Maharat operates the Short Courses Center",
+      "attributes": {}
+    },
+    {
+      "id": "rel-105",
+      "source": "facility-advanced-welding",
+      "type": "related_to",
+      "target": "program-automated-welding",
+      "label": "Advanced Welding Facility supports the Automated Welding Program",
+      "attributes": {}
+    },
+    {
+      "id": "rel-106",
+      "source": "facility-safety-training",
+      "type": "related_to",
+      "target": "program-construction-safety",
+      "label": "Safety Training Center supports the Construction Safety Program",
+      "attributes": {}
+    }
+  ],
+  "indexes": {
+    "by_name": {
+      "maharat construction training center": "maharat",
+      "maharat": "maharat",
+      "mctc": "maharat",
+      "maharat center": "maharat",
+      "saudi aramco": "saudi-aramco",
+      "aramco": "saudi-aramco",
+      "saudi aramco company": "saudi-aramco",
+      "technical and vocational training corporation": "tvtc",
+      "tvtc": "tvtc",
+      "human resources development fund": "hrdf",
+      "hrdf": "hrdf",
+      "saudi contractors authority": "sca",
+      "sca": "sca",
+      "colleges of excellence": "colleges-of-excellence",
+      "national construction training center": "nctc",
+      "nctc": "nctc",
+      "jazan contractors consortium": "jcc",
+      "jcc": "jcc",
+      "sinopec nanjing engineering middle east co., ltd.": "sinopec",
+      "sinopec": "sinopec",
+      "sinopec nanjing engineering": "sinopec",
+      "sinopec nanjing engineering middle east": "sinopec",
+      "sne middle east": "sinopec",
+      "nesma & partners": "nesma",
+      "nesma": "nesma",
+      "nesma and partners": "nesma",
+      "samsung e&a": "samsung-ea",
+      "samsung engineering & construction": "samsung-ea",
+      "samsung": "samsung-ea",
+      "esab": "esab",
+      "esab welding": "esab",
+      "esab corporation": "esab",
+      "tüv süd": "tuv-sud",
+      "tuv sud": "tuv-sud",
+      "tüv": "tuv-sud",
+      "nanjing university of posts and telecommunications": "njupt",
+      "njupt": "njupt",
+      "nanjing university": "njupt",
+      "neft energies": "neft-energies",
+      "neft": "neft-energies",
+      "halumm": "halumm",
+      "accrediting council for continuing education and training": "accet",
+      "accet": "accet",
+      "masar national accreditation framework": "masar",
+      "masar": "masar",
+      "masar accreditation": "masar",
+      "nocn group": "nocn",
+      "nocn": "nocn",
+      "city & guilds": "city-guilds",
+      "city and guilds": "city-guilds",
+      "gatehouse awards": "gatehouse-awards",
+      "gatehouse": "gatehouse-awards",
+      "american welding society": "aws",
+      "aws": "aws",
+      "institution of occupational safety and health": "iosh-org",
+      "iosh": "iosh-org",
+      "iso 9001:2015": "cert-iso-9001",
+      "iso 9001": "cert-iso-9001",
+      "iso 21001:2018": "cert-iso-21001",
+      "iso 21001": "cert-iso-21001",
+      "aws sense": "cert-aws-sense",
+      "sense": "cert-aws-sense",
+      "cwqap": "cert-cwqap",
+      "construction & welding qualifications accreditation programme": "cert-cwqap",
+      "great place to work": "cert-gptw",
+      "gptw": "cert-gptw",
+      "welding technician program": "program-welding",
+      "welding program": "program-welding",
+      "welding technician": "program-welding",
+      "automated welding program": "program-automated-welding",
+      "automated welding": "program-automated-welding",
+      "advanced welding program": "program-automated-welding",
+      "pipefitting technician program": "program-pipefitting",
+      "pipefitting program": "program-pipefitting",
+      "pipefitting technician": "program-pipefitting",
+      "electrical technician program": "program-electrical",
+      "electrical program": "program-electrical",
+      "electrical technician": "program-electrical",
+      "instrumentation technician program": "program-instrumentation",
+      "instrumentation program": "program-instrumentation",
+      "instrumentation technician": "program-instrumentation",
+      "construction safety program": "program-construction-safety",
+      "construction safety": "program-construction-safety",
+      "safety program": "program-construction-safety",
+      "scaffolding program": "program-scaffolding",
+      "scaffolding": "program-scaffolding",
+      "scaffolding technician program": "program-scaffolding",
+      "civil construction program": "program-civil",
+      "civil construction": "program-civil",
+      "civil program": "program-civil",
+      "advancing trainee development initiative": "program-atdi",
+      "atdi": "program-atdi",
+      "short courses portfolio": "program-short-courses",
+      "short courses": "program-short-courses",
+      "professional development programs": "program-short-courses",
+      "main campus": "facility-main-campus",
+      "maharat campus": "facility-main-campus",
+      "advanced welding facility": "facility-advanced-welding",
+      "advanced welding lab": "facility-advanced-welding",
+      "construction safety training center": "facility-safety-training",
+      "safety training center": "facility-safety-training",
+      "learning resource center": "facility-learning-resource",
+      "lrc": "facility-learning-resource",
+      "short courses center": "facility-short-courses-center",
+      "eng. mansour al-shehri": "person-mansour-al-shehri",
+      "mansour al-shehri": "person-mansour-al-shehri",
+      "eng. mansour al shehri": "person-mansour-al-shehri",
+      "mansour al shehri": "person-mansour-al-shehri",
+      "eng. mishari bin abdullah al-qahtani": "person-mishari-al-qahtani",
+      "mishari al-qahtani": "person-mishari-al-qahtani",
+      "eng. mishari al-qahtani": "person-mishari-al-qahtani",
+      "sami musalli": "person-sami-musalli",
+      "managing director": "person-sami-musalli",
+      "muntaser ali": "person-muntaser-ali",
+      "muntaser haleeb": "person-muntaser-ali",
+      "saudi vision 2030": "initiative-vision-2030",
+      "vision 2030": "initiative-vision-2030",
+      "safety experience center": "initiative-safety-experience-center",
+      "automated welding academy": "initiative-automated-welding-academy",
+      "saudization": "initiative-saudization",
+      "nitaqat": "initiative-saudization",
+      "saudi workforce localization": "initiative-saudization",
+      "saudi arabia": "location-saudi-arabia",
+      "ksa": "location-saudi-arabia",
+      "kingdom of saudi arabia": "location-saudi-arabia",
+      "eastern province": "location-eastern-province",
+      "eastern region": "location-eastern-province"
+    },
+    "by_type": {
+      "partner": [
+        "sinopec",
+        "nesma",
+        "samsung-ea",
+        "esab",
+        "tuv-sud",
+        "njupt",
+        "neft-energies",
+        "halumm"
+      ],
+      "organization": [
+        "maharat",
+        "saudi-aramco",
+        "tvtc",
+        "hrdf",
+        "sca",
+        "colleges-of-excellence",
+        "nctc",
+        "jcc"
+      ],
+      "program": [
+        "program-welding",
+        "program-automated-welding",
+        "program-pipefitting",
+        "program-electrical",
+        "program-instrumentation",
+        "program-construction-safety",
+        "program-scaffolding",
+        "program-civil",
+        "program-atdi",
+        "program-short-courses"
+      ],
+      "campus": [
+        "facility-main-campus"
+      ],
+      "certification": [
+        "cert-iso-9001",
+        "cert-iso-21001",
+        "cert-aws-sense",
+        "cert-cwqap",
+        "cert-gptw"
+      ],
+      "facility": [
+        "facility-advanced-welding",
+        "facility-safety-training",
+        "facility-learning-resource",
+        "facility-short-courses-center"
+      ],
+      "person": [
+        "person-mansour-al-shehri",
+        "person-mishari-al-qahtani",
+        "person-sami-musalli",
+        "person-muntaser-ali"
+      ],
+      "initiative": [
+        "initiative-vision-2030",
+        "initiative-safety-experience-center",
+        "initiative-automated-welding-academy",
+        "initiative-saudization"
+      ],
+      "location": [
+        "location-saudi-arabia",
+        "location-eastern-province"
+      ],
+      "accreditation": [
+        "accet",
+        "masar",
+        "nocn",
+        "city-guilds",
+        "gatehouse-awards",
+        "aws",
+        "iosh-org"
+      ]
+    },
+    "adjacency": {
+      "maharat": [
+        {
+          "rel_id": "rel-001",
+          "direction": "outgoing",
+          "type": "founded_by",
+          "target": "saudi-aramco",
+          "label": "Founded by Saudi Aramco (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Strategic founding partner and institutional stakeholder"
+          }
+        },
+        {
+          "rel_id": "rel-002",
+          "direction": "outgoing",
+          "type": "founded_by",
+          "target": "tvtc",
+          "label": "Founded by TVTC (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Strategic founding partner, national vocational authority"
+          }
+        },
+        {
+          "rel_id": "rel-003",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "hrdf",
+          "label": "Supported by HRDF",
+          "attributes": {
+            "context": "Institutional financial and workforce development support"
+          }
+        },
+        {
+          "rel_id": "rel-004",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "colleges-of-excellence",
+          "label": "Supported by Colleges of Excellence",
+          "attributes": {
+            "context": "Institutional academic support partner"
+          }
+        },
+        {
+          "rel_id": "rel-005",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "nctc",
+          "label": "Merged from NCTC (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Maharat formed through 2022 consolidation of NCTC and JCC"
+          }
+        },
+        {
+          "rel_id": "rel-006",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "jcc",
+          "label": "Merged from JCC (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Maharat formed through 2022 consolidation of NCTC and JCC"
+          }
+        },
+        {
+          "rel_id": "rel-010",
+          "direction": "outgoing",
+          "type": "governed_by",
+          "target": "person-mansour-al-shehri",
+          "label": "Board chaired by Eng. Mansour Al-Shehri",
+          "attributes": {
+            "role": "Chairman, Board of Trustees"
+          }
+        },
+        {
+          "rel_id": "rel-011",
+          "direction": "outgoing",
+          "type": "governed_by",
+          "target": "person-mishari-al-qahtani",
+          "label": "Board vice-chaired by Eng. Mishari Al-Qahtani",
+          "attributes": {
+            "role": "Vice Chairman, Board of Trustees"
+          }
+        },
+        {
+          "rel_id": "rel-012",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "person-sami-musalli",
+          "label": "Sami Musalli is Managing Director of Maharat",
+          "attributes": {
+            "role": "Managing Director"
+          }
+        },
+        {
+          "rel_id": "rel-013",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "person-muntaser-ali",
+          "label": "Muntaser Ali leads Business Development at Maharat",
+          "attributes": {
+            "role": "Business Development / Partnerships"
+          }
+        },
+        {
+          "rel_id": "rel-020",
+          "direction": "outgoing",
+          "type": "located_at",
+          "target": "location-saudi-arabia",
+          "label": "Maharat is located in Saudi Arabia",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-021",
+          "direction": "outgoing",
+          "type": "located_at",
+          "target": "location-eastern-province",
+          "label": "Primary campus in the Eastern Province",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-025",
+          "direction": "outgoing",
+          "type": "supports_initiative",
+          "target": "initiative-vision-2030",
+          "label": "Maharat supports Saudi Vision 2030",
+          "attributes": {
+            "context": "Strengthens national workforce capability and Saudization in the construction sector in alignment with Vision 2030 objectives\n"
+          }
+        },
+        {
+          "rel_id": "rel-026",
+          "direction": "outgoing",
+          "type": "supports_initiative",
+          "target": "initiative-saudization",
+          "label": "Maharat advances Saudization in the construction workforce",
+          "attributes": {
+            "context": "Prepares Saudi nationals for technical roles in construction"
+          }
+        },
+        {
+          "rel_id": "rel-030",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "sinopec",
+          "label": "MoU with Sinopec Nanjing Engineering (active/expanding)",
+          "attributes": {
+            "mou_status": "active_expanding",
+            "tier": 1,
+            "scope": "Joint facility development (Safety Experience Center, Advanced Welding Academy), ATDI co-development, advanced training content\n"
+          }
+        },
+        {
+          "rel_id": "rel-031",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "nesma",
+          "label": "MoU with Nesma & Partners (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Workforce supply agreements, employer-linked training alignment"
+          }
+        },
+        {
+          "rel_id": "rel-032",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "samsung-ea",
+          "label": "MoU with Samsung E&A (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Sponsored training cohorts, employer-linked workforce development"
+          }
+        },
+        {
+          "rel_id": "rel-033",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "aws",
+          "label": "MoU with American Welding Society (active/expanding)",
+          "attributes": {
+            "mou_status": "active_expanding",
+            "tier": 1,
+            "scope": "Welding education standards, AWS SENSE recognition, curriculum alignment"
+          }
+        },
+        {
+          "rel_id": "rel-034",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "esab",
+          "label": "MoU with ESAB (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Advanced welding technology supply, equipment, technical support"
+          }
+        },
+        {
+          "rel_id": "rel-035",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "nocn",
+          "label": "MoU with NOCN Group (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Vocational qualification accreditation and awarding"
+          }
+        },
+        {
+          "rel_id": "rel-036",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "sca",
+          "label": "MoU with Saudi Contractors Authority (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "National sector collaboration, contractor workforce development"
+          }
+        },
+        {
+          "rel_id": "rel-037",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "tuv-sud",
+          "label": "MoU with TÜV SÜD (active/implementation)",
+          "attributes": {
+            "mou_status": "active_implementation",
+            "tier": 1,
+            "scope": "NDT qualifications, safety engineering certifications"
+          }
+        },
+        {
+          "rel_id": "rel-038",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "njupt",
+          "label": "MoU with Nanjing University (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Joint academic programs, smart infrastructure, IoT, AI, green energy solutions, ATDI co-development\n"
+          }
+        },
+        {
+          "rel_id": "rel-039",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "neft-energies",
+          "label": "Partnership with NEFT Energies",
+          "attributes": {
+            "tier": 2,
+            "scope": "Technical industry collaboration"
+          }
+        },
+        {
+          "rel_id": "rel-040",
+          "direction": "outgoing",
+          "type": "partnered_with",
+          "target": "halumm",
+          "label": "Partnership with Halumm",
+          "attributes": {
+            "tier": 2,
+            "scope": "Strategic technology collaboration"
+          }
+        },
+        {
+          "rel_id": "rel-050",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "accet",
+          "label": "Maharat is accredited by ACCET",
+          "attributes": {
+            "scope": "institutional",
+            "country": "USA"
+          }
+        },
+        {
+          "rel_id": "rel-051",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "masar",
+          "label": "Maharat is accredited under Masar National Framework",
+          "attributes": {
+            "scope": "institutional",
+            "country": "Saudi Arabia"
+          }
+        },
+        {
+          "rel_id": "rel-052",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "nocn",
+          "label": "Maharat holds NOCN centre approval",
+          "attributes": {
+            "scope": "program_level"
+          }
+        },
+        {
+          "rel_id": "rel-053",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "city-guilds",
+          "label": "Maharat holds City & Guilds centre approval",
+          "attributes": {
+            "scope": "program_level"
+          }
+        },
+        {
+          "rel_id": "rel-054",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "gatehouse-awards",
+          "label": "Maharat is a Gatehouse Awards approved centre",
+          "attributes": {
+            "scope": "program_level"
+          }
+        },
+        {
+          "rel_id": "rel-055",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "aws",
+          "label": "Maharat is recognised under AWS SENSE framework",
+          "attributes": {
+            "scope": "program_level"
+          }
+        },
+        {
+          "rel_id": "rel-056",
+          "direction": "outgoing",
+          "type": "accredited_by",
+          "target": "iosh-org",
+          "label": "Maharat delivers IOSH-certified safety training",
+          "attributes": {
+            "scope": "program_level"
+          }
+        },
+        {
+          "rel_id": "rel-060",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "cert-iso-9001",
+          "label": "Maharat is ISO 9001:2015 certified",
+          "attributes": {
+            "context": "Quality management system certification"
+          }
+        },
+        {
+          "rel_id": "rel-061",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "cert-iso-21001",
+          "label": "Maharat is ISO 21001:2018 certified",
+          "attributes": {
+            "context": "Educational organization management system certification"
+          }
+        },
+        {
+          "rel_id": "rel-062",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "cert-aws-sense",
+          "label": "Maharat holds AWS SENSE recognition",
+          "attributes": {
+            "context": "American Welding Society approved institution"
+          }
+        },
+        {
+          "rel_id": "rel-063",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "cert-cwqap",
+          "label": "Maharat offers CWQAP qualification pathways",
+          "attributes": {
+            "context": "Construction welding qualification accreditation"
+          }
+        },
+        {
+          "rel_id": "rel-064",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "cert-gptw",
+          "label": "Maharat is a Great Place to Work certified (2025-2026)",
+          "attributes": {
+            "period": "2025-2026"
+          }
+        },
+        {
+          "rel_id": "rel-070",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-welding",
+          "label": "Maharat offers Welding Technician Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-071",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-automated-welding",
+          "label": "Maharat offers Automated Welding Program (flagship)",
+          "attributes": {
+            "flagship": true
+          }
+        },
+        {
+          "rel_id": "rel-072",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-pipefitting",
+          "label": "Maharat offers Pipefitting Technician Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-073",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-electrical",
+          "label": "Maharat offers Electrical Technician Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-074",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-instrumentation",
+          "label": "Maharat offers Instrumentation Technician Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-075",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-construction-safety",
+          "label": "Maharat offers Construction Safety Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-076",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-scaffolding",
+          "label": "Maharat offers Scaffolding Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-077",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-civil",
+          "label": "Maharat offers Civil Construction Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-078",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-atdi",
+          "label": "Maharat offers ATDI post-graduation pathway",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-079",
+          "direction": "outgoing",
+          "type": "offers_program",
+          "target": "program-short-courses",
+          "label": "Maharat offers Short Courses Portfolio",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-100",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "facility-main-campus",
+          "label": "Maharat operates the Main Campus",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-101",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "facility-advanced-welding",
+          "label": "Maharat operates the Advanced Welding Facility",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-102",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "facility-safety-training",
+          "label": "Maharat operates the Construction Safety Training Center",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-103",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "facility-learning-resource",
+          "label": "Maharat operates the Learning Resource Center",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-104",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "facility-short-courses-center",
+          "label": "Maharat operates the Short Courses Center",
+          "attributes": {}
+        }
+      ],
+      "saudi-aramco": [
+        {
+          "rel_id": "rel-001",
+          "direction": "incoming",
+          "type": "founded_by",
+          "source": "maharat",
+          "label": "Founded by Saudi Aramco (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Strategic founding partner and institutional stakeholder"
+          }
+        },
+        {
+          "rel_id": "rel-014",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "person-mansour-al-shehri",
+          "label": "Eng. Mansour Al-Shehri is VP at Saudi Aramco",
+          "attributes": {
+            "role": "VP Liquids to Chemicals Project Management"
+          }
+        },
+        {
+          "rel_id": "rel-080",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "program-construction-safety",
+          "label": "Construction Safety Program endorsed by Saudi Aramco LP Department",
+          "attributes": {
+            "endorsement": "Saudi Aramco Loss Prevention Department"
+          }
+        },
+        {
+          "rel_id": "rel-081",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "program-scaffolding",
+          "label": "Scaffolding Program endorsed by Saudi Aramco LP Department",
+          "attributes": {
+            "endorsement": "Saudi Aramco Loss Prevention Department"
+          }
+        }
+      ],
+      "tvtc": [
+        {
+          "rel_id": "rel-002",
+          "direction": "incoming",
+          "type": "founded_by",
+          "source": "maharat",
+          "label": "Founded by TVTC (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Strategic founding partner, national vocational authority"
+          }
+        },
+        {
+          "rel_id": "rel-015",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "person-mishari-al-qahtani",
+          "label": "Eng. Mishari Al-Qahtani is General Manager at TVTC Eastern Province",
+          "attributes": {
+            "role": "General Manager, TVTC Eastern Province"
+          }
+        }
+      ],
+      "hrdf": [
+        {
+          "rel_id": "rel-003",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Supported by HRDF",
+          "attributes": {
+            "context": "Institutional financial and workforce development support"
+          }
+        }
+      ],
+      "sca": [
+        {
+          "rel_id": "rel-036",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with Saudi Contractors Authority (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "National sector collaboration, contractor workforce development"
+          }
+        }
+      ],
+      "colleges-of-excellence": [
+        {
+          "rel_id": "rel-004",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Supported by Colleges of Excellence",
+          "attributes": {
+            "context": "Institutional academic support partner"
+          }
+        }
+      ],
+      "nctc": [
+        {
+          "rel_id": "rel-005",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Merged from NCTC (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Maharat formed through 2022 consolidation of NCTC and JCC"
+          }
+        }
+      ],
+      "jcc": [
+        {
+          "rel_id": "rel-006",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Merged from JCC (2022)",
+          "attributes": {
+            "year": "2022",
+            "context": "Maharat formed through 2022 consolidation of NCTC and JCC"
+          }
+        }
+      ],
+      "sinopec": [
+        {
+          "rel_id": "rel-030",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with Sinopec Nanjing Engineering (active/expanding)",
+          "attributes": {
+            "mou_status": "active_expanding",
+            "tier": 1,
+            "scope": "Joint facility development (Safety Experience Center, Advanced Welding Academy), ATDI co-development, advanced training content\n"
+          }
+        },
+        {
+          "rel_id": "rel-090",
+          "direction": "outgoing",
+          "type": "supports_initiative",
+          "target": "initiative-safety-experience-center",
+          "label": "Sinopec co-brands the Safety Experience Center",
+          "attributes": {
+            "context": "Joint facility branding and support"
+          }
+        },
+        {
+          "rel_id": "rel-091",
+          "direction": "outgoing",
+          "type": "supports_initiative",
+          "target": "initiative-automated-welding-academy",
+          "label": "Sinopec supports the Automated Welding Academy",
+          "attributes": {
+            "context": "Joint facility sponsorship"
+          }
+        },
+        {
+          "rel_id": "rel-092",
+          "direction": "outgoing",
+          "type": "collaborates_on",
+          "target": "program-atdi",
+          "label": "Sinopec co-develops the ATDI program",
+          "attributes": {
+            "context": "International graduate development in China"
+          }
+        }
+      ],
+      "nesma": [
+        {
+          "rel_id": "rel-031",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with Nesma & Partners (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Workforce supply agreements, employer-linked training alignment"
+          }
+        }
+      ],
+      "samsung-ea": [
+        {
+          "rel_id": "rel-032",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with Samsung E&A (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Sponsored training cohorts, employer-linked workforce development"
+          }
+        }
+      ],
+      "esab": [
+        {
+          "rel_id": "rel-034",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with ESAB (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Advanced welding technology supply, equipment, technical support"
+          }
+        },
+        {
+          "rel_id": "rel-082",
+          "direction": "incoming",
+          "type": "collaborates_on",
+          "source": "program-automated-welding",
+          "label": "Automated Welding Program uses ESAB technology",
+          "attributes": {
+            "context": "ESAB equipment and technical support"
+          }
+        }
+      ],
+      "tuv-sud": [
+        {
+          "rel_id": "rel-037",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with TÜV SÜD (active/implementation)",
+          "attributes": {
+            "mou_status": "active_implementation",
+            "tier": 1,
+            "scope": "NDT qualifications, safety engineering certifications"
+          }
+        }
+      ],
+      "njupt": [
+        {
+          "rel_id": "rel-038",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with Nanjing University (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Joint academic programs, smart infrastructure, IoT, AI, green energy solutions, ATDI co-development\n"
+          }
+        },
+        {
+          "rel_id": "rel-093",
+          "direction": "outgoing",
+          "type": "collaborates_on",
+          "target": "program-atdi",
+          "label": "NJUPT co-develops the ATDI program",
+          "attributes": {
+            "context": "Academic exchange and advanced learning in China"
+          }
+        }
+      ],
+      "neft-energies": [
+        {
+          "rel_id": "rel-039",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "Partnership with NEFT Energies",
+          "attributes": {
+            "tier": 2,
+            "scope": "Technical industry collaboration"
+          }
+        }
+      ],
+      "halumm": [
+        {
+          "rel_id": "rel-040",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "Partnership with Halumm",
+          "attributes": {
+            "tier": 2,
+            "scope": "Strategic technology collaboration"
+          }
+        }
+      ],
+      "accet": [
+        {
+          "rel_id": "rel-050",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat is accredited by ACCET",
+          "attributes": {
+            "scope": "institutional",
+            "country": "USA"
+          }
+        }
+      ],
+      "masar": [
+        {
+          "rel_id": "rel-051",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat is accredited under Masar National Framework",
+          "attributes": {
+            "scope": "institutional",
+            "country": "Saudi Arabia"
+          }
+        }
+      ],
+      "nocn": [
+        {
+          "rel_id": "rel-035",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with NOCN Group (active)",
+          "attributes": {
+            "mou_status": "active",
+            "tier": 1,
+            "scope": "Vocational qualification accreditation and awarding"
+          }
+        },
+        {
+          "rel_id": "rel-052",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat holds NOCN centre approval",
+          "attributes": {
+            "scope": "program_level"
+          }
+        }
+      ],
+      "city-guilds": [
+        {
+          "rel_id": "rel-053",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat holds City & Guilds centre approval",
+          "attributes": {
+            "scope": "program_level"
+          }
+        }
+      ],
+      "gatehouse-awards": [
+        {
+          "rel_id": "rel-054",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat is a Gatehouse Awards approved centre",
+          "attributes": {
+            "scope": "program_level"
+          }
+        }
+      ],
+      "aws": [
+        {
+          "rel_id": "rel-033",
+          "direction": "incoming",
+          "type": "partnered_with",
+          "source": "maharat",
+          "label": "MoU with American Welding Society (active/expanding)",
+          "attributes": {
+            "mou_status": "active_expanding",
+            "tier": 1,
+            "scope": "Welding education standards, AWS SENSE recognition, curriculum alignment"
+          }
+        },
+        {
+          "rel_id": "rel-055",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat is recognised under AWS SENSE framework",
+          "attributes": {
+            "scope": "program_level"
+          }
+        }
+      ],
+      "iosh-org": [
+        {
+          "rel_id": "rel-056",
+          "direction": "incoming",
+          "type": "accredited_by",
+          "source": "maharat",
+          "label": "Maharat delivers IOSH-certified safety training",
+          "attributes": {
+            "scope": "program_level"
+          }
+        }
+      ],
+      "cert-iso-9001": [
+        {
+          "rel_id": "rel-060",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat is ISO 9001:2015 certified",
+          "attributes": {
+            "context": "Quality management system certification"
+          }
+        }
+      ],
+      "cert-iso-21001": [
+        {
+          "rel_id": "rel-061",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat is ISO 21001:2018 certified",
+          "attributes": {
+            "context": "Educational organization management system certification"
+          }
+        }
+      ],
+      "cert-aws-sense": [
+        {
+          "rel_id": "rel-062",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat holds AWS SENSE recognition",
+          "attributes": {
+            "context": "American Welding Society approved institution"
+          }
+        },
+        {
+          "rel_id": "rel-083",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "program-welding",
+          "label": "Welding programs aligned with AWS SENSE framework",
+          "attributes": {}
+        }
+      ],
+      "cert-cwqap": [
+        {
+          "rel_id": "rel-063",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat offers CWQAP qualification pathways",
+          "attributes": {
+            "context": "Construction welding qualification accreditation"
+          }
+        }
+      ],
+      "cert-gptw": [
+        {
+          "rel_id": "rel-064",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat is a Great Place to Work certified (2025-2026)",
+          "attributes": {
+            "period": "2025-2026"
+          }
+        }
+      ],
+      "program-welding": [
+        {
+          "rel_id": "rel-070",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Welding Technician Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-083",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "cert-aws-sense",
+          "label": "Welding programs aligned with AWS SENSE framework",
+          "attributes": {}
+        }
+      ],
+      "program-automated-welding": [
+        {
+          "rel_id": "rel-071",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Automated Welding Program (flagship)",
+          "attributes": {
+            "flagship": true
+          }
+        },
+        {
+          "rel_id": "rel-082",
+          "direction": "outgoing",
+          "type": "collaborates_on",
+          "target": "esab",
+          "label": "Automated Welding Program uses ESAB technology",
+          "attributes": {
+            "context": "ESAB equipment and technical support"
+          }
+        },
+        {
+          "rel_id": "rel-105",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "facility-advanced-welding",
+          "label": "Advanced Welding Facility supports the Automated Welding Program",
+          "attributes": {}
+        }
+      ],
+      "program-pipefitting": [
+        {
+          "rel_id": "rel-072",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Pipefitting Technician Program",
+          "attributes": {}
+        }
+      ],
+      "program-electrical": [
+        {
+          "rel_id": "rel-073",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Electrical Technician Program",
+          "attributes": {}
+        }
+      ],
+      "program-instrumentation": [
+        {
+          "rel_id": "rel-074",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Instrumentation Technician Program",
+          "attributes": {}
+        }
+      ],
+      "program-construction-safety": [
+        {
+          "rel_id": "rel-075",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Construction Safety Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-080",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "saudi-aramco",
+          "label": "Construction Safety Program endorsed by Saudi Aramco LP Department",
+          "attributes": {
+            "endorsement": "Saudi Aramco Loss Prevention Department"
+          }
+        },
+        {
+          "rel_id": "rel-106",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "facility-safety-training",
+          "label": "Safety Training Center supports the Construction Safety Program",
+          "attributes": {}
+        }
+      ],
+      "program-scaffolding": [
+        {
+          "rel_id": "rel-076",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Scaffolding Program",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-081",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "saudi-aramco",
+          "label": "Scaffolding Program endorsed by Saudi Aramco LP Department",
+          "attributes": {
+            "endorsement": "Saudi Aramco Loss Prevention Department"
+          }
+        }
+      ],
+      "program-civil": [
+        {
+          "rel_id": "rel-077",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Civil Construction Program",
+          "attributes": {}
+        }
+      ],
+      "program-atdi": [
+        {
+          "rel_id": "rel-078",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers ATDI post-graduation pathway",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-092",
+          "direction": "incoming",
+          "type": "collaborates_on",
+          "source": "sinopec",
+          "label": "Sinopec co-develops the ATDI program",
+          "attributes": {
+            "context": "International graduate development in China"
+          }
+        },
+        {
+          "rel_id": "rel-093",
+          "direction": "incoming",
+          "type": "collaborates_on",
+          "source": "njupt",
+          "label": "NJUPT co-develops the ATDI program",
+          "attributes": {
+            "context": "Academic exchange and advanced learning in China"
+          }
+        }
+      ],
+      "program-short-courses": [
+        {
+          "rel_id": "rel-079",
+          "direction": "incoming",
+          "type": "offers_program",
+          "source": "maharat",
+          "label": "Maharat offers Short Courses Portfolio",
+          "attributes": {}
+        }
+      ],
+      "facility-main-campus": [
+        {
+          "rel_id": "rel-022",
+          "direction": "outgoing",
+          "type": "located_at",
+          "target": "location-eastern-province",
+          "label": "Main Campus is in the Eastern Province",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-100",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat operates the Main Campus",
+          "attributes": {}
+        }
+      ],
+      "facility-advanced-welding": [
+        {
+          "rel_id": "rel-101",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat operates the Advanced Welding Facility",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-105",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "program-automated-welding",
+          "label": "Advanced Welding Facility supports the Automated Welding Program",
+          "attributes": {}
+        }
+      ],
+      "facility-safety-training": [
+        {
+          "rel_id": "rel-102",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat operates the Construction Safety Training Center",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-106",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "program-construction-safety",
+          "label": "Safety Training Center supports the Construction Safety Program",
+          "attributes": {}
+        }
+      ],
+      "facility-learning-resource": [
+        {
+          "rel_id": "rel-103",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat operates the Learning Resource Center",
+          "attributes": {}
+        }
+      ],
+      "facility-short-courses-center": [
+        {
+          "rel_id": "rel-104",
+          "direction": "incoming",
+          "type": "related_to",
+          "source": "maharat",
+          "label": "Maharat operates the Short Courses Center",
+          "attributes": {}
+        }
+      ],
+      "person-mansour-al-shehri": [
+        {
+          "rel_id": "rel-010",
+          "direction": "incoming",
+          "type": "governed_by",
+          "source": "maharat",
+          "label": "Board chaired by Eng. Mansour Al-Shehri",
+          "attributes": {
+            "role": "Chairman, Board of Trustees"
+          }
+        },
+        {
+          "rel_id": "rel-014",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "saudi-aramco",
+          "label": "Eng. Mansour Al-Shehri is VP at Saudi Aramco",
+          "attributes": {
+            "role": "VP Liquids to Chemicals Project Management"
+          }
+        }
+      ],
+      "person-mishari-al-qahtani": [
+        {
+          "rel_id": "rel-011",
+          "direction": "incoming",
+          "type": "governed_by",
+          "source": "maharat",
+          "label": "Board vice-chaired by Eng. Mishari Al-Qahtani",
+          "attributes": {
+            "role": "Vice Chairman, Board of Trustees"
+          }
+        },
+        {
+          "rel_id": "rel-015",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "tvtc",
+          "label": "Eng. Mishari Al-Qahtani is General Manager at TVTC Eastern Province",
+          "attributes": {
+            "role": "General Manager, TVTC Eastern Province"
+          }
+        }
+      ],
+      "person-sami-musalli": [
+        {
+          "rel_id": "rel-012",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "maharat",
+          "label": "Sami Musalli is Managing Director of Maharat",
+          "attributes": {
+            "role": "Managing Director"
+          }
+        }
+      ],
+      "person-muntaser-ali": [
+        {
+          "rel_id": "rel-013",
+          "direction": "outgoing",
+          "type": "related_to",
+          "target": "maharat",
+          "label": "Muntaser Ali leads Business Development at Maharat",
+          "attributes": {
+            "role": "Business Development / Partnerships"
+          }
+        }
+      ],
+      "initiative-vision-2030": [
+        {
+          "rel_id": "rel-025",
+          "direction": "incoming",
+          "type": "supports_initiative",
+          "source": "maharat",
+          "label": "Maharat supports Saudi Vision 2030",
+          "attributes": {
+            "context": "Strengthens national workforce capability and Saudization in the construction sector in alignment with Vision 2030 objectives\n"
+          }
+        }
+      ],
+      "initiative-safety-experience-center": [
+        {
+          "rel_id": "rel-090",
+          "direction": "incoming",
+          "type": "supports_initiative",
+          "source": "sinopec",
+          "label": "Sinopec co-brands the Safety Experience Center",
+          "attributes": {
+            "context": "Joint facility branding and support"
+          }
+        }
+      ],
+      "initiative-automated-welding-academy": [
+        {
+          "rel_id": "rel-091",
+          "direction": "incoming",
+          "type": "supports_initiative",
+          "source": "sinopec",
+          "label": "Sinopec supports the Automated Welding Academy",
+          "attributes": {
+            "context": "Joint facility sponsorship"
+          }
+        }
+      ],
+      "initiative-saudization": [
+        {
+          "rel_id": "rel-026",
+          "direction": "incoming",
+          "type": "supports_initiative",
+          "source": "maharat",
+          "label": "Maharat advances Saudization in the construction workforce",
+          "attributes": {
+            "context": "Prepares Saudi nationals for technical roles in construction"
+          }
+        }
+      ],
+      "location-saudi-arabia": [
+        {
+          "rel_id": "rel-020",
+          "direction": "incoming",
+          "type": "located_at",
+          "source": "maharat",
+          "label": "Maharat is located in Saudi Arabia",
+          "attributes": {}
+        }
+      ],
+      "location-eastern-province": [
+        {
+          "rel_id": "rel-021",
+          "direction": "incoming",
+          "type": "located_at",
+          "source": "maharat",
+          "label": "Primary campus in the Eastern Province",
+          "attributes": {}
+        },
+        {
+          "rel_id": "rel-022",
+          "direction": "incoming",
+          "type": "located_at",
+          "source": "facility-main-campus",
+          "label": "Main Campus is in the Eastern Province",
+          "attributes": {}
+        }
+      ]
+    }
+  }
+}

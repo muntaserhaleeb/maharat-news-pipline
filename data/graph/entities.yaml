@@ -1,0 +1,633 @@
+# Maharat Knowledge Graph — Entities
+# Source of truth for the lightweight graph layer.
+# Generated from data/knowledge/**/*.md — update here first, then rebuild.
+# Version: 1.0  |  Last updated: 2026-05-08
+
+entities:
+
+  # ── CORE ORGANIZATION ──────────────────────────────────────────────────────
+
+  - id: maharat
+    name: Maharat Construction Training Center
+    short_name: Maharat
+    aliases: [MCTC, "Maharat Construction Training Center", "Maharat Center"]
+    type: organization
+    subtype: training_institution
+    description: >
+      National vocational training institution dedicated to developing a skilled
+      workforce for the construction sector in the Kingdom of Saudi Arabia.
+      Established 2022 through merger of NCTC and JCC; founded by Saudi Aramco
+      and TVTC. Delivers industry-driven training programs aligned with
+      Saudi Vision 2030.
+    attributes:
+      founded: "2022"
+      sector: construction_training
+      country: Saudi Arabia
+      vision2030_aligned: true
+      trainee_language: Arabic/English
+
+  # ── FOUNDING & GOVERNANCE PARTNERS ───────────────────────────────────────
+
+  - id: saudi-aramco
+    name: Saudi Aramco
+    aliases: ["Aramco", "Saudi Aramco Company"]
+    type: organization
+    subtype: energy_company
+    description: >
+      Saudi national oil and gas company; founding partner and key
+      institutional stakeholder of Maharat. Endorses safety and welding
+      programs through its Loss Prevention Department.
+    attributes:
+      country: Saudi Arabia
+      sector: energy
+
+  - id: tvtc
+    name: Technical and Vocational Training Corporation
+    short_name: TVTC
+    aliases: ["TVTC", "Technical and Vocational Training Corporation"]
+    type: organization
+    subtype: government_authority
+    description: >
+      Saudi national authority responsible for technical and vocational training;
+      founding partner of Maharat.
+    attributes:
+      country: Saudi Arabia
+      sector: government
+
+  - id: hrdf
+    name: Human Resources Development Fund
+    short_name: HRDF
+    aliases: ["HRDF", "Human Resources Development Fund"]
+    type: organization
+    subtype: government_fund
+    description: >
+      Saudi government fund supporting workforce development and Saudization;
+      institutional supporter of Maharat.
+    attributes:
+      country: Saudi Arabia
+      sector: government
+
+  - id: sca
+    name: Saudi Contractors Authority
+    short_name: SCA
+    aliases: ["SCA", "Saudi Contractors Authority"]
+    type: organization
+    subtype: sector_authority
+    description: >
+      National sector authority for contracting industry in Saudi Arabia;
+      Tier 1 strategic partner of Maharat with active MoU.
+    attributes:
+      country: Saudi Arabia
+      sector: construction
+
+  - id: colleges-of-excellence
+    name: Colleges of Excellence
+    aliases: ["Colleges of Excellence"]
+    type: organization
+    subtype: education_network
+    description: Saudi network of higher education institutions; institutional supporter of Maharat.
+    attributes:
+      country: Saudi Arabia
+
+  # ── PREDECESSOR INSTITUTIONS ──────────────────────────────────────────────
+
+  - id: nctc
+    name: National Construction Training Center
+    short_name: NCTC
+    aliases: ["NCTC", "National Construction Training Center"]
+    type: organization
+    subtype: predecessor
+    description: Former national training center merged in 2022 to form Maharat.
+    attributes:
+      status: merged
+      merged_into: maharat
+      year: "2022"
+
+  - id: jcc
+    name: Jazan Contractors Consortium
+    short_name: JCC
+    aliases: ["JCC", "Jazan Contractors Consortium"]
+    type: organization
+    subtype: predecessor
+    description: Former Jazan-based consortium merged in 2022 to form Maharat.
+    attributes:
+      status: merged
+      merged_into: maharat
+      year: "2022"
+
+  # ── STRATEGIC INDUSTRY PARTNERS ──────────────────────────────────────────
+
+  - id: sinopec
+    name: Sinopec Nanjing Engineering Middle East Co., LTD.
+    short_name: Sinopec
+    aliases:
+      - "Sinopec"
+      - "Sinopec Nanjing Engineering"
+      - "Sinopec Nanjing Engineering Middle East"
+      - "SNE Middle East"
+    type: partner
+    subtype: engineering_contractor
+    description: >
+      International EPC and engineering company; Tier 1 strategic partner of
+      Maharat. Co-brands the Safety Experience Center and Advanced Welding
+      Academy; supports the Advancing Trainee Development Initiative (ATDI).
+    attributes:
+      country: China/Saudi Arabia
+      sector: engineering_construction
+      mou_status: active_expanding
+
+  - id: nesma
+    name: Nesma & Partners
+    short_name: Nesma
+    aliases: ["Nesma", "Nesma & Partners", "Nesma and Partners"]
+    type: partner
+    subtype: contracting_company
+    description: >
+      Major Saudi contracting and industrial services company; Tier 1 employer
+      partner of Maharat. Active MoU covering workforce supply and training
+      alignment.
+    attributes:
+      country: Saudi Arabia
+      sector: construction
+      mou_status: active
+
+  - id: samsung-ea
+    name: Samsung E&A
+    short_name: "Samsung E&A"
+    aliases: ["Samsung E&A", "Samsung Engineering & Construction", "Samsung"]
+    type: partner
+    subtype: engineering_contractor
+    description: >
+      Korean engineering and construction company; strategic partner of Maharat.
+      Sponsors dedicated training cohorts and employer-linked workforce
+      development programs.
+    attributes:
+      country: South Korea/Saudi Arabia
+      sector: engineering_construction
+      mou_status: active
+
+  - id: esab
+    name: ESAB
+    aliases: ["ESAB", "ESAB Welding", "ESAB Corporation"]
+    type: partner
+    subtype: technology_supplier
+    description: >
+      Global welding and cutting technology leader; Tier 1 technology partner
+      supplying advanced welding systems and technical support to Maharat.
+    attributes:
+      sector: welding_technology
+      mou_status: active
+
+  - id: tuv-sud
+    name: TÜV SÜD
+    aliases: ["TÜV SÜD", "TUV SUD", "TÜV"]
+    type: partner
+    subtype: certification_body
+    description: >
+      International technical inspection and certification organisation;
+      Tier 1 partner providing NDT qualifications and safety engineering
+      credentials.
+    attributes:
+      sector: certification_inspection
+      mou_status: active_implementation
+
+  - id: njupt
+    name: Nanjing University of Posts and Telecommunications
+    short_name: NJUPT
+    aliases:
+      - "NJUPT"
+      - "Nanjing University of Posts and Telecommunications"
+      - "Nanjing University"
+    type: partner
+    subtype: academic_institution
+    description: >
+      Chinese university; Tier 1 academic partner of Maharat. Joint programs
+      on smart infrastructure, IoT, AI, and green energy solutions.
+    attributes:
+      country: China
+      sector: academia
+      mou_status: active
+
+  - id: neft-energies
+    name: NEFT Energies
+    aliases: ["NEFT Energies", "NEFT"]
+    type: partner
+    subtype: energy_company
+    description: Industry partner for technical collaboration with Maharat.
+    attributes:
+      sector: energy
+
+  - id: halumm
+    name: Halumm
+    aliases: ["Halumm"]
+    type: partner
+    subtype: technology_company
+    description: Strategic technology partner of Maharat.
+    attributes: {}
+
+  # ── ACCREDITATION BODIES ─────────────────────────────────────────────────
+
+  - id: accet
+    name: Accrediting Council for Continuing Education and Training
+    short_name: ACCET
+    aliases: ["ACCET"]
+    type: accreditation
+    subtype: institutional_accreditor
+    description: >
+      U.S.-based international accreditor of continuing education and training
+      institutions. Maharat holds ACCET institutional accreditation.
+    attributes:
+      country: USA
+      scope: institutional
+
+  - id: masar
+    name: Masar National Accreditation Framework
+    short_name: Masar
+    aliases: ["Masar", "Masar Accreditation"]
+    type: accreditation
+    subtype: national_framework
+    description: Saudi national accreditation framework for vocational training; Maharat is accredited.
+    attributes:
+      country: Saudi Arabia
+      scope: institutional
+
+  - id: nocn
+    name: NOCN Group
+    short_name: NOCN
+    aliases: ["NOCN", "NOCN Group"]
+    type: accreditation
+    subtype: awarding_organisation
+    description: >
+      International awarding organisation providing vocational qualifications;
+      Maharat holds centre approval and active partnership MoU.
+    attributes:
+      country: UK
+      scope: program_level
+      mou_status: active
+
+  - id: city-guilds
+    name: City & Guilds
+    aliases: ["City & Guilds", "City and Guilds"]
+    type: accreditation
+    subtype: awarding_organisation
+    description: International vocational education and qualifications organisation; Maharat holds centre approval.
+    attributes:
+      country: UK
+      scope: program_level
+
+  - id: gatehouse-awards
+    name: Gatehouse Awards
+    aliases: ["Gatehouse Awards", "Gatehouse"]
+    type: accreditation
+    subtype: awarding_organisation
+    description: UK-based awarding organisation; Maharat is an approved training centre.
+    attributes:
+      country: UK
+      scope: program_level
+
+  - id: aws
+    name: American Welding Society
+    short_name: AWS
+    aliases: ["AWS", "American Welding Society"]
+    type: accreditation
+    subtype: professional_body
+    description: >
+      U.S. professional society setting welding standards and education
+      frameworks. Maharat programs are aligned with AWS SENSE and the
+      organisation holds an active MoU.
+    attributes:
+      country: USA
+      scope: program_level
+      mou_status: active
+
+  - id: iosh-org
+    name: Institution of Occupational Safety and Health
+    short_name: IOSH
+    aliases: ["IOSH", "Institution of Occupational Safety and Health"]
+    type: accreditation
+    subtype: professional_body
+    description: International professional body for occupational safety and health; Maharat offers IOSH-certified training.
+    attributes:
+      country: UK
+      scope: program_level
+
+  # ── CERTIFICATIONS ────────────────────────────────────────────────────────
+
+  - id: cert-iso-9001
+    name: ISO 9001:2015
+    aliases: ["ISO 9001", "ISO 9001:2015"]
+    type: certification
+    subtype: quality_management
+    description: International standard for quality management systems; Maharat is certified.
+    attributes:
+      standard: ISO
+      year_certified: "2024"
+
+  - id: cert-iso-21001
+    name: ISO 21001:2018
+    aliases: ["ISO 21001", "ISO 21001:2018"]
+    type: certification
+    subtype: education_management
+    description: International standard for educational organization management systems; Maharat is certified.
+    attributes:
+      standard: ISO
+      year_certified: "2024"
+
+  - id: cert-aws-sense
+    name: AWS SENSE
+    aliases: ["AWS SENSE", "SENSE"]
+    type: certification
+    subtype: welding_education
+    description: American Welding Society's School Excelling through National Skills Education framework; Maharat is a recognised SENSE institution.
+    attributes:
+      issuer: aws
+
+  - id: cert-cwqap
+    name: CWQAP
+    aliases: ["CWQAP", "Construction & Welding Qualifications Accreditation Programme"]
+    type: certification
+    subtype: welding_qualification
+    description: Construction and Welding Qualifications Accreditation Programme; certification pathway offered through Maharat.
+    attributes: {}
+
+  - id: cert-gptw
+    name: Great Place to Work
+    aliases: ["Great Place to Work", "GPTW"]
+    type: certification
+    subtype: workplace_culture
+    description: International workplace culture certification; Maharat certified for 2025–2026.
+    attributes:
+      period: "2025-2026"
+
+  # ── TRAINING PROGRAMS ─────────────────────────────────────────────────────
+
+  - id: program-welding
+    name: Welding Technician Program
+    aliases: ["Welding Program", "Welding Technician"]
+    type: program
+    subtype: diploma
+    description: Core one-year technical program in welding and fabrication, leading to Associate Diploma.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: welding
+
+  - id: program-automated-welding
+    name: Automated Welding Program
+    aliases: ["Automated Welding", "Advanced Welding Program"]
+    type: program
+    subtype: diploma
+    description: Two-year flagship program in automated welding systems; leading to full Diploma. Uses advanced ESAB equipment.
+    attributes:
+      duration: 2 years
+      credential: Diploma
+      discipline: welding
+      flagship: true
+
+  - id: program-pipefitting
+    name: Pipefitting Technician Program
+    aliases: ["Pipefitting Program", "Pipefitting Technician"]
+    type: program
+    subtype: diploma
+    description: Technical program in piping systems design, installation, and maintenance.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: pipefitting
+
+  - id: program-electrical
+    name: Electrical Technician Program
+    aliases: ["Electrical Program", "Electrical Technician"]
+    type: program
+    subtype: diploma
+    description: Technical program in electrical systems for industrial and construction environments.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: electrical
+
+  - id: program-instrumentation
+    name: Instrumentation Technician Program
+    aliases: ["Instrumentation Program", "Instrumentation Technician"]
+    type: program
+    subtype: diploma
+    description: Technical program in industrial instrumentation and control systems.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: instrumentation
+
+  - id: program-construction-safety
+    name: Construction Safety Program
+    aliases: ["Construction Safety", "Safety Program"]
+    type: program
+    subtype: diploma
+    description: Technical program in occupational safety, health, and construction risk management. Endorsed by Saudi Aramco Loss Prevention Department.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: safety
+      endorsed_by: Saudi Aramco Loss Prevention Department
+
+  - id: program-scaffolding
+    name: Scaffolding Program
+    aliases: ["Scaffolding", "Scaffolding Technician Program"]
+    type: program
+    subtype: diploma
+    description: Technical program in scaffolding systems erection, inspection, and dismantling. Endorsed by Saudi Aramco Loss Prevention Department.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: scaffolding
+      endorsed_by: Saudi Aramco Loss Prevention Department
+
+  - id: program-civil
+    name: Civil Construction Program
+    aliases: ["Civil Construction", "Civil Program"]
+    type: program
+    subtype: diploma
+    description: Technical program in construction methods, materials, and site operations.
+    attributes:
+      duration: 1 year
+      credential: Associate Diploma
+      discipline: civil_construction
+
+  - id: program-atdi
+    name: Advancing Trainee Development Initiative
+    short_name: ATDI
+    aliases: ["ATDI", "Advancing Trainee Development Initiative"]
+    type: program
+    subtype: post_graduation_pathway
+    description: >
+      International graduate development program co-developed with Sinopec and
+      NJUPT; provides advanced learning and professional exposure for Maharat
+      graduates in China and globally.
+    attributes:
+      duration: variable
+      partnership: Sinopec / NJUPT
+
+  - id: program-short-courses
+    name: Short Courses Portfolio
+    aliases: ["Short Courses", "Professional Development Programs"]
+    type: program
+    subtype: short_course_cluster
+    description: >
+      Portfolio of professional short courses including HSSEQ, Rigging &
+      Lifting, Site Inspection, Environmental, and Advanced Welding clusters.
+    attributes:
+      format: short_course
+
+  # ── FACILITIES ────────────────────────────────────────────────────────────
+
+  - id: facility-main-campus
+    name: Main Campus
+    aliases: ["Maharat Campus", "Main Campus"]
+    type: campus
+    subtype: main_campus
+    description: Primary Maharat training campus housing all technical workshops, learning resources, and support facilities.
+    attributes:
+      location: Saudi Arabia
+
+  - id: facility-advanced-welding
+    name: Advanced Welding Facility
+    aliases: ["Advanced Welding Facility", "Advanced Welding Lab"]
+    type: facility
+    subtype: training_workshop
+    description: Modern welding facility equipped with ESAB automated welding systems; supports the Automated Welding Program.
+    attributes:
+      discipline: welding
+
+  - id: facility-safety-training
+    name: Construction Safety Training Center
+    aliases: ["Safety Training Center", "Construction Safety Training Center"]
+    type: facility
+    subtype: training_center
+    description: Dedicated safety theory and practical training facility including hazard simulation and emergency response area.
+    attributes:
+      discipline: safety
+
+  - id: facility-learning-resource
+    name: Learning Resource Center
+    aliases: ["Learning Resource Center", "LRC"]
+    type: facility
+    subtype: academic_support
+    description: Academic support hub with digital learning resources and library services.
+    attributes: {}
+
+  - id: facility-short-courses-center
+    name: Short Courses Center
+    aliases: ["Short Courses Center"]
+    type: facility
+    subtype: professional_development
+    description: Dedicated facility for professional development and short course delivery.
+    attributes: {}
+
+  # ── PEOPLE ────────────────────────────────────────────────────────────────
+
+  - id: person-mansour-al-shehri
+    name: Eng. Mansour Al-Shehri
+    aliases:
+      - "Mansour Al-Shehri"
+      - "Eng. Mansour Al Shehri"
+      - "Mansour Al Shehri"
+    type: person
+    subtype: board_member
+    description: >
+      Chairman of the Maharat Board of Trustees; Vice President, Liquids to
+      Chemicals Project Management at Saudi Aramco.
+    attributes:
+      role: Chairman, Board of Trustees
+      employer: Saudi Aramco
+
+  - id: person-mishari-al-qahtani
+    name: Eng. Mishari Bin Abdullah Al-Qahtani
+    aliases:
+      - "Mishari Al-Qahtani"
+      - "Eng. Mishari Al-Qahtani"
+    type: person
+    subtype: board_member
+    description: Vice Chairman of the Maharat Board of Trustees; General Manager, TVTC Eastern Province.
+    attributes:
+      role: Vice Chairman, Board of Trustees
+      employer: TVTC
+
+  - id: person-sami-musalli
+    name: Sami Musalli
+    aliases: ["Sami Musalli", "Managing Director"]
+    type: person
+    subtype: executive
+    description: Managing Director of Maharat; institutional voice on workforce readiness, mission, safety culture, and partnership strategy.
+    attributes:
+      role: Managing Director
+      employer: Maharat
+
+  - id: person-muntaser-ali
+    name: Muntaser Ali
+    aliases: ["Muntaser Ali", "Muntaser Haleeb"]
+    type: person
+    subtype: staff
+    description: Business Development and Partnerships lead at Maharat.
+    attributes:
+      role: Business Development / Partnerships
+      employer: Maharat
+
+  # ── INITIATIVES ───────────────────────────────────────────────────────────
+
+  - id: initiative-vision-2030
+    name: Saudi Vision 2030
+    short_name: Vision 2030
+    aliases: ["Saudi Vision 2030", "Vision 2030"]
+    type: initiative
+    subtype: national_program
+    description: Saudi Arabia's national strategic transformation program; Maharat directly supports workforce development objectives under Vision 2030.
+    attributes:
+      country: Saudi Arabia
+
+  - id: initiative-safety-experience-center
+    name: Safety Experience Center
+    aliases: ["Safety Experience Center"]
+    type: initiative
+    subtype: planned_facility
+    description: Planned simulation-based safety training center co-branded with Sinopec; strategic expansion initiative.
+    attributes:
+      status: planned
+      partner: Sinopec
+
+  - id: initiative-automated-welding-academy
+    name: Automated Welding Academy
+    aliases: ["Automated Welding Academy"]
+    type: initiative
+    subtype: planned_facility
+    description: Planned advanced welding specialization academy; supported by Sinopec as part of the strategic partnership.
+    attributes:
+      status: planned
+      partner: Sinopec
+
+  - id: initiative-saudization
+    name: Saudization
+    aliases: ["Saudization", "Nitaqat", "Saudi Workforce Localization"]
+    type: initiative
+    subtype: national_policy
+    description: Saudi national policy to increase participation of Saudi nationals in the workforce; key objective that Maharat supports.
+    attributes:
+      country: Saudi Arabia
+
+  # ── LOCATIONS ─────────────────────────────────────────────────────────────
+
+  - id: location-saudi-arabia
+    name: Saudi Arabia
+    aliases: ["KSA", "Kingdom of Saudi Arabia", "Saudi Arabia"]
+    type: location
+    subtype: country
+    description: Kingdom of Saudi Arabia; where Maharat operates.
+    attributes:
+      region: Middle East
+
+  - id: location-eastern-province
+    name: Eastern Province
+    aliases: ["Eastern Province", "Eastern Region"]
+    type: location
+    subtype: region
+    description: Saudi Arabia's Eastern Province; primary operational region for Maharat and Saudi Aramco.
+    attributes:
+      country: Saudi Arabia

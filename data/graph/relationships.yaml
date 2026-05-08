@@ -1,0 +1,560 @@
+# Maharat Knowledge Graph — Relationships
+# Source of truth for the lightweight graph layer.
+# Each entry: source → type → target (directed edge).
+# Version: 1.0  |  Last updated: 2026-05-08
+
+relationships:
+
+  # ── FOUNDING & ORIGIN ─────────────────────────────────────────────────────
+
+  - id: rel-001
+    source: maharat
+    type: founded_by
+    target: saudi-aramco
+    label: Founded by Saudi Aramco (2022)
+    attributes:
+      year: "2022"
+      context: Strategic founding partner and institutional stakeholder
+
+  - id: rel-002
+    source: maharat
+    type: founded_by
+    target: tvtc
+    label: Founded by TVTC (2022)
+    attributes:
+      year: "2022"
+      context: Strategic founding partner, national vocational authority
+
+  - id: rel-003
+    source: maharat
+    type: related_to
+    target: hrdf
+    label: Supported by HRDF
+    attributes:
+      context: Institutional financial and workforce development support
+
+  - id: rel-004
+    source: maharat
+    type: related_to
+    target: colleges-of-excellence
+    label: Supported by Colleges of Excellence
+    attributes:
+      context: Institutional academic support partner
+
+  - id: rel-005
+    source: maharat
+    type: related_to
+    target: nctc
+    label: Merged from NCTC (2022)
+    attributes:
+      year: "2022"
+      context: Maharat formed through 2022 consolidation of NCTC and JCC
+
+  - id: rel-006
+    source: maharat
+    type: related_to
+    target: jcc
+    label: Merged from JCC (2022)
+    attributes:
+      year: "2022"
+      context: Maharat formed through 2022 consolidation of NCTC and JCC
+
+  # ── GOVERNANCE ────────────────────────────────────────────────────────────
+
+  - id: rel-010
+    source: maharat
+    type: governed_by
+    target: person-mansour-al-shehri
+    label: Board chaired by Eng. Mansour Al-Shehri
+    attributes:
+      role: Chairman, Board of Trustees
+
+  - id: rel-011
+    source: maharat
+    type: governed_by
+    target: person-mishari-al-qahtani
+    label: Board vice-chaired by Eng. Mishari Al-Qahtani
+    attributes:
+      role: Vice Chairman, Board of Trustees
+
+  - id: rel-012
+    source: person-sami-musalli
+    type: related_to
+    target: maharat
+    label: Sami Musalli is Managing Director of Maharat
+    attributes:
+      role: Managing Director
+
+  - id: rel-013
+    source: person-muntaser-ali
+    type: related_to
+    target: maharat
+    label: Muntaser Ali leads Business Development at Maharat
+    attributes:
+      role: Business Development / Partnerships
+
+  - id: rel-014
+    source: person-mansour-al-shehri
+    type: related_to
+    target: saudi-aramco
+    label: Eng. Mansour Al-Shehri is VP at Saudi Aramco
+    attributes:
+      role: VP Liquids to Chemicals Project Management
+
+  - id: rel-015
+    source: person-mishari-al-qahtani
+    type: related_to
+    target: tvtc
+    label: Eng. Mishari Al-Qahtani is General Manager at TVTC Eastern Province
+    attributes:
+      role: General Manager, TVTC Eastern Province
+
+  # ── LOCATION ─────────────────────────────────────────────────────────────
+
+  - id: rel-020
+    source: maharat
+    type: located_at
+    target: location-saudi-arabia
+    label: Maharat is located in Saudi Arabia
+    attributes: {}
+
+  - id: rel-021
+    source: maharat
+    type: located_at
+    target: location-eastern-province
+    label: Primary campus in the Eastern Province
+    attributes: {}
+
+  - id: rel-022
+    source: facility-main-campus
+    type: located_at
+    target: location-eastern-province
+    label: Main Campus is in the Eastern Province
+    attributes: {}
+
+  # ── VISION 2030 ALIGNMENT ─────────────────────────────────────────────────
+
+  - id: rel-025
+    source: maharat
+    type: supports_initiative
+    target: initiative-vision-2030
+    label: Maharat supports Saudi Vision 2030
+    attributes:
+      context: >
+        Strengthens national workforce capability and Saudization in the
+        construction sector in alignment with Vision 2030 objectives
+
+  - id: rel-026
+    source: maharat
+    type: supports_initiative
+    target: initiative-saudization
+    label: Maharat advances Saudization in the construction workforce
+    attributes:
+      context: Prepares Saudi nationals for technical roles in construction
+
+  # ── STRATEGIC PARTNER MOUS ────────────────────────────────────────────────
+
+  - id: rel-030
+    source: maharat
+    type: partnered_with
+    target: sinopec
+    label: MoU with Sinopec Nanjing Engineering (active/expanding)
+    attributes:
+      mou_status: active_expanding
+      tier: 1
+      scope: >
+        Joint facility development (Safety Experience Center, Advanced Welding
+        Academy), ATDI co-development, advanced training content
+
+  - id: rel-031
+    source: maharat
+    type: partnered_with
+    target: nesma
+    label: MoU with Nesma & Partners (active)
+    attributes:
+      mou_status: active
+      tier: 1
+      scope: Workforce supply agreements, employer-linked training alignment
+
+  - id: rel-032
+    source: maharat
+    type: partnered_with
+    target: samsung-ea
+    label: MoU with Samsung E&A (active)
+    attributes:
+      mou_status: active
+      tier: 1
+      scope: Sponsored training cohorts, employer-linked workforce development
+
+  - id: rel-033
+    source: maharat
+    type: partnered_with
+    target: aws
+    label: MoU with American Welding Society (active/expanding)
+    attributes:
+      mou_status: active_expanding
+      tier: 1
+      scope: Welding education standards, AWS SENSE recognition, curriculum alignment
+
+  - id: rel-034
+    source: maharat
+    type: partnered_with
+    target: esab
+    label: MoU with ESAB (active)
+    attributes:
+      mou_status: active
+      tier: 1
+      scope: Advanced welding technology supply, equipment, technical support
+
+  - id: rel-035
+    source: maharat
+    type: partnered_with
+    target: nocn
+    label: MoU with NOCN Group (active)
+    attributes:
+      mou_status: active
+      tier: 1
+      scope: Vocational qualification accreditation and awarding
+
+  - id: rel-036
+    source: maharat
+    type: partnered_with
+    target: sca
+    label: MoU with Saudi Contractors Authority (active)
+    attributes:
+      mou_status: active
+      tier: 1
+      scope: National sector collaboration, contractor workforce development
+
+  - id: rel-037
+    source: maharat
+    type: partnered_with
+    target: tuv-sud
+    label: MoU with TÜV SÜD (active/implementation)
+    attributes:
+      mou_status: active_implementation
+      tier: 1
+      scope: NDT qualifications, safety engineering certifications
+
+  - id: rel-038
+    source: maharat
+    type: partnered_with
+    target: njupt
+    label: MoU with Nanjing University (active)
+    attributes:
+      mou_status: active
+      tier: 1
+      scope: >
+        Joint academic programs, smart infrastructure, IoT, AI, green energy
+        solutions, ATDI co-development
+
+  - id: rel-039
+    source: maharat
+    type: partnered_with
+    target: neft-energies
+    label: Partnership with NEFT Energies
+    attributes:
+      tier: 2
+      scope: Technical industry collaboration
+
+  - id: rel-040
+    source: maharat
+    type: partnered_with
+    target: halumm
+    label: Partnership with Halumm
+    attributes:
+      tier: 2
+      scope: Strategic technology collaboration
+
+  # ── ACCREDITATIONS ────────────────────────────────────────────────────────
+
+  - id: rel-050
+    source: maharat
+    type: accredited_by
+    target: accet
+    label: Maharat is accredited by ACCET
+    attributes:
+      scope: institutional
+      country: USA
+
+  - id: rel-051
+    source: maharat
+    type: accredited_by
+    target: masar
+    label: Maharat is accredited under Masar National Framework
+    attributes:
+      scope: institutional
+      country: Saudi Arabia
+
+  - id: rel-052
+    source: maharat
+    type: accredited_by
+    target: nocn
+    label: Maharat holds NOCN centre approval
+    attributes:
+      scope: program_level
+
+  - id: rel-053
+    source: maharat
+    type: accredited_by
+    target: city-guilds
+    label: Maharat holds City & Guilds centre approval
+    attributes:
+      scope: program_level
+
+  - id: rel-054
+    source: maharat
+    type: accredited_by
+    target: gatehouse-awards
+    label: Maharat is a Gatehouse Awards approved centre
+    attributes:
+      scope: program_level
+
+  - id: rel-055
+    source: maharat
+    type: accredited_by
+    target: aws
+    label: Maharat is recognised under AWS SENSE framework
+    attributes:
+      scope: program_level
+
+  - id: rel-056
+    source: maharat
+    type: accredited_by
+    target: iosh-org
+    label: Maharat delivers IOSH-certified safety training
+    attributes:
+      scope: program_level
+
+  # ── CERTIFICATIONS ────────────────────────────────────────────────────────
+
+  - id: rel-060
+    source: maharat
+    type: related_to
+    target: cert-iso-9001
+    label: Maharat is ISO 9001:2015 certified
+    attributes:
+      context: Quality management system certification
+
+  - id: rel-061
+    source: maharat
+    type: related_to
+    target: cert-iso-21001
+    label: Maharat is ISO 21001:2018 certified
+    attributes:
+      context: Educational organization management system certification
+
+  - id: rel-062
+    source: maharat
+    type: related_to
+    target: cert-aws-sense
+    label: Maharat holds AWS SENSE recognition
+    attributes:
+      context: American Welding Society approved institution
+
+  - id: rel-063
+    source: maharat
+    type: related_to
+    target: cert-cwqap
+    label: Maharat offers CWQAP qualification pathways
+    attributes:
+      context: Construction welding qualification accreditation
+
+  - id: rel-064
+    source: maharat
+    type: related_to
+    target: cert-gptw
+    label: Maharat is a Great Place to Work certified (2025-2026)
+    attributes:
+      period: 2025-2026
+
+  # ── PROGRAMS ─────────────────────────────────────────────────────────────
+
+  - id: rel-070
+    source: maharat
+    type: offers_program
+    target: program-welding
+    label: Maharat offers Welding Technician Program
+    attributes: {}
+
+  - id: rel-071
+    source: maharat
+    type: offers_program
+    target: program-automated-welding
+    label: Maharat offers Automated Welding Program (flagship)
+    attributes:
+      flagship: true
+
+  - id: rel-072
+    source: maharat
+    type: offers_program
+    target: program-pipefitting
+    label: Maharat offers Pipefitting Technician Program
+    attributes: {}
+
+  - id: rel-073
+    source: maharat
+    type: offers_program
+    target: program-electrical
+    label: Maharat offers Electrical Technician Program
+    attributes: {}
+
+  - id: rel-074
+    source: maharat
+    type: offers_program
+    target: program-instrumentation
+    label: Maharat offers Instrumentation Technician Program
+    attributes: {}
+
+  - id: rel-075
+    source: maharat
+    type: offers_program
+    target: program-construction-safety
+    label: Maharat offers Construction Safety Program
+    attributes: {}
+
+  - id: rel-076
+    source: maharat
+    type: offers_program
+    target: program-scaffolding
+    label: Maharat offers Scaffolding Program
+    attributes: {}
+
+  - id: rel-077
+    source: maharat
+    type: offers_program
+    target: program-civil
+    label: Maharat offers Civil Construction Program
+    attributes: {}
+
+  - id: rel-078
+    source: maharat
+    type: offers_program
+    target: program-atdi
+    label: Maharat offers ATDI post-graduation pathway
+    attributes: {}
+
+  - id: rel-079
+    source: maharat
+    type: offers_program
+    target: program-short-courses
+    label: Maharat offers Short Courses Portfolio
+    attributes: {}
+
+  # ── PROGRAM ENDORSEMENTS ─────────────────────────────────────────────────
+
+  - id: rel-080
+    source: program-construction-safety
+    type: related_to
+    target: saudi-aramco
+    label: Construction Safety Program endorsed by Saudi Aramco LP Department
+    attributes:
+      endorsement: Saudi Aramco Loss Prevention Department
+
+  - id: rel-081
+    source: program-scaffolding
+    type: related_to
+    target: saudi-aramco
+    label: Scaffolding Program endorsed by Saudi Aramco LP Department
+    attributes:
+      endorsement: Saudi Aramco Loss Prevention Department
+
+  - id: rel-082
+    source: program-automated-welding
+    type: collaborates_on
+    target: esab
+    label: Automated Welding Program uses ESAB technology
+    attributes:
+      context: ESAB equipment and technical support
+
+  - id: rel-083
+    source: program-welding
+    type: related_to
+    target: cert-aws-sense
+    label: Welding programs aligned with AWS SENSE framework
+    attributes: {}
+
+  # ── SINOPEC COLLABORATIONS ───────────────────────────────────────────────
+
+  - id: rel-090
+    source: sinopec
+    type: supports_initiative
+    target: initiative-safety-experience-center
+    label: Sinopec co-brands the Safety Experience Center
+    attributes:
+      context: Joint facility branding and support
+
+  - id: rel-091
+    source: sinopec
+    type: supports_initiative
+    target: initiative-automated-welding-academy
+    label: Sinopec supports the Automated Welding Academy
+    attributes:
+      context: Joint facility sponsorship
+
+  - id: rel-092
+    source: sinopec
+    type: collaborates_on
+    target: program-atdi
+    label: Sinopec co-develops the ATDI program
+    attributes:
+      context: International graduate development in China
+
+  - id: rel-093
+    source: njupt
+    type: collaborates_on
+    target: program-atdi
+    label: NJUPT co-develops the ATDI program
+    attributes:
+      context: Academic exchange and advanced learning in China
+
+  # ── FACILITIES ────────────────────────────────────────────────────────────
+
+  - id: rel-100
+    source: maharat
+    type: related_to
+    target: facility-main-campus
+    label: Maharat operates the Main Campus
+    attributes: {}
+
+  - id: rel-101
+    source: maharat
+    type: related_to
+    target: facility-advanced-welding
+    label: Maharat operates the Advanced Welding Facility
+    attributes: {}
+
+  - id: rel-102
+    source: maharat
+    type: related_to
+    target: facility-safety-training
+    label: Maharat operates the Construction Safety Training Center
+    attributes: {}
+
+  - id: rel-103
+    source: maharat
+    type: related_to
+    target: facility-learning-resource
+    label: Maharat operates the Learning Resource Center
+    attributes: {}
+
+  - id: rel-104
+    source: maharat
+    type: related_to
+    target: facility-short-courses-center
+    label: Maharat operates the Short Courses Center
+    attributes: {}
+
+  - id: rel-105
+    source: facility-advanced-welding
+    type: related_to
+    target: program-automated-welding
+    label: Advanced Welding Facility supports the Automated Welding Program
+    attributes: {}
+
+  - id: rel-106
+    source: facility-safety-training
+    type: related_to
+    target: program-construction-safety
+    label: Safety Training Center supports the Construction Safety Program
+    attributes: {}

@@ -1,0 +1,11 @@
+query,expected_text_contains,knowledge_type,min_results
+"What is Maharat?",maharat,,1
+"What are Maharat strategic partnerships?",partner,,1
+"How does Maharat describe its training methodology?",training,,1
+"What short courses does Maharat offer?",course,,1
+"Maharat accreditation and certifications",accreditation,,1
+"Maharat campus and facilities",campus,,1
+"Maharat mission and vision",mission,,1
+"Maharat governance and leadership",maharat,,1
+"Who are Maharat industry partners?",partner,,1
+"Maharat editorial style and brand language",maharat,,1

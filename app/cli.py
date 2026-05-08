@@ -12,6 +12,9 @@ Commands:
     evaluate               Run retrieval eval cases from tests/retrieval_eval.csv
     ingest-knowledge       Ingest data/knowledge/**/*.md into the knowledge collection
     search-knowledge       Hybrid search over the knowledge collection
+    route-query            Show which memory layer(s) a query routes to
+    evaluate-knowledge     Run knowledge retrieval eval cases
+    evaluate-dual          Run routing + dual-retrieval eval cases
     refresh-weekly-highlights  Safe refresh of Weekly Highlights DOCX content
 
 Examples:
@@ -29,6 +32,16 @@ Examples:
     python app/cli.py draft --topic "MCTC workforce development" --mode magazine_article
     python app/cli.py draft --topic "safety drill" --dry-run
     python app/cli.py draft --topic "OJT monitoring" --year 2026 --no-stream --mode event_announcement
+    python app/cli.py draft --topic "Maharat collaboration with Sinopec" --mode website_news --use-knowledge
+
+    python app/cli.py route-query "Write an article about Maharat and Sinopec"
+    python app/cli.py route-query "What is Maharat?" --intent knowledge
+
+    python app/cli.py evaluate-knowledge
+    python app/cli.py evaluate-knowledge --verbose
+
+    python app/cli.py evaluate-dual
+    python app/cli.py evaluate-dual --verbose
 
     python app/cli.py evaluate
     python app/cli.py evaluate --verbose
@@ -125,6 +138,7 @@ def cmd_draft(args):
         score_threshold=args.score_threshold or None,
         dry_run=args.dry_run,
         stream=not args.no_stream,
+        use_knowledge=args.use_knowledge,
     )
 
     if result and args.output:
@@ -136,6 +150,28 @@ def cmd_draft(args):
 def cmd_evaluate(args):
     from tests.test_retrieval import run_evaluation
     ok = run_evaluation(verbose=args.verbose)
+    sys.exit(0 if ok else 1)
+
+
+def cmd_route_query(args):
+    from services.memory_router import MemoryRouter
+    router = MemoryRouter()
+    result = router.route_query(args.query, intent=args.intent or None)
+    print(f"\nQuery  : {args.query}")
+    print(f"Route  : {result.route}")
+    print(f"Intent : {result.intent}")
+    print(f"Reason : {result.reasoning}")
+
+
+def cmd_evaluate_knowledge(args):
+    from tests.test_knowledge_retrieval import run_knowledge_evaluation
+    ok = run_knowledge_evaluation(verbose=args.verbose)
+    sys.exit(0 if ok else 1)
+
+
+def cmd_evaluate_dual(args):
+    from tests.test_dual_retrieval import run_dual_evaluation
+    ok = run_dual_evaluation(verbose=args.verbose)
     sys.exit(0 if ok else 1)
 
 
@@ -293,11 +329,32 @@ def build_parser():
         help="Show retrieved chunks without calling Claude")
     p_draft.add_argument("--no-stream", action="store_true", dest="no_stream",
         help="Collect full response before printing")
+    p_draft.add_argument("--use-knowledge", action="store_true", dest="use_knowledge",
+        help="Also retrieve from the knowledge collection (dual retrieval)")
 
     # ── evaluate ─────────────────────────────────────────────────────────────
     p_eval = sub.add_parser("evaluate",
         help="Run retrieval eval cases from tests/retrieval_eval.csv")
     p_eval.add_argument("--verbose", action="store_true",
+        help="Print result for every case, not just failures")
+
+    # ── route-query ───────────────────────────────────────────────────────────
+    p_rq = sub.add_parser("route-query",
+        help="Show which memory layer(s) a query would route to")
+    p_rq.add_argument("query", help="Query text to classify")
+    p_rq.add_argument("--intent", default="",
+        help="Explicit intent override: news | knowledge | both")
+
+    # ── evaluate-knowledge ────────────────────────────────────────────────────
+    p_ek = sub.add_parser("evaluate-knowledge",
+        help="Run retrieval eval cases against the knowledge collection")
+    p_ek.add_argument("--verbose", action="store_true",
+        help="Print result for every case, not just failures")
+
+    # ── evaluate-dual ─────────────────────────────────────────────────────────
+    p_ed = sub.add_parser("evaluate-dual",
+        help="Run routing and dual-retrieval eval cases")
+    p_ed.add_argument("--verbose", action="store_true",
         help="Print result for every case, not just failures")
 
     # ── ingest-knowledge ─────────────────────────────────────────────────────
@@ -368,6 +425,9 @@ def main():
         "evaluate":                    cmd_evaluate,
         "ingest-knowledge":            cmd_ingest_knowledge,
         "search-knowledge":            cmd_search_knowledge,
+        "route-query":                 cmd_route_query,
+        "evaluate-knowledge":          cmd_evaluate_knowledge,
+        "evaluate-dual":               cmd_evaluate_dual,
         "refresh-weekly-highlights":   cmd_refresh_weekly_highlights,
     }[args.command](args)
 

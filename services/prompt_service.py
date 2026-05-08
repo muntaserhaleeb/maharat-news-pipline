@@ -342,6 +342,137 @@ def build_prompt_package(
     return {"system": system, "user": user}
 
 
+# ── knowledge chunk formatting ────────────────────────────────────────────
+
+def format_knowledge_chunks_as_context(chunks: list) -> str:
+    """Format knowledge ScoredPoint objects into an INSTITUTIONAL KNOWLEDGE block."""
+    lines = []
+    for i, point in enumerate(chunks, 1):
+        p = point.payload or {}
+        lines.append(f"--- Knowledge {i} (score={point.score:.4f}) ---")
+        if p.get("title"):
+            lines.append(f"Title         : {p['title']}")
+        if p.get("knowledge_type"):
+            lines.append(f"Knowledge type: {p['knowledge_type']}")
+        if p.get("section"):
+            lines.append(f"Section       : {p['section']}")
+        lines.append(f"Text          :\n{p.get('chunk_text', '').strip()}")
+        lines.append("")
+    return "\n".join(lines)
+
+
+# ── dual-retrieval user message ───────────────────────────────────────────
+
+def build_user_message_dual(
+    topic: str,
+    news_context: str,
+    knowledge_context: str,
+    article_type: Optional[str] = None,
+    mode_spec: Optional[dict] = None,
+    mode_name: Optional[str] = None,
+    entities_detected: Optional[dict] = None,
+    include_entity_context: bool = False,
+) -> str:
+    """
+    Build a user message with clearly separated news evidence and
+    institutional knowledge sections.  Used when use_knowledge=True.
+    """
+    type_hint = (
+        f" (article type: {article_type.replace('_', ' ')})"
+        if article_type else ""
+    )
+    mode_hint = (
+        f" (mode: {mode_name.replace('_', ' ')})"
+        if mode_name else ""
+    )
+
+    parts = [
+        f"Draft a professional Maharat news article about: "
+        f"{topic}{type_hint}{mode_hint}",
+        "",
+    ]
+
+    if include_entity_context and entities_detected:
+        entity_block = build_entity_context(entities_detected)
+        if entity_block:
+            parts += [entity_block, ""]
+
+    if mode_spec and mode_name:
+        parts += [build_mode_instructions(mode_name, mode_spec), ""]
+    else:
+        parts += [
+            "Respond with a JSON object containing: "
+            "headline, summary, body, suggested_slug, seo_summary.",
+            "",
+        ]
+
+    if news_context.strip():
+        parts += [
+            "═══ NEWS / EVENT EVIDENCE ════════════════════════════════════════",
+            "Use the chunks below as the primary factual basis for the article.",
+            "",
+            news_context,
+        ]
+
+    if knowledge_context.strip():
+        parts += [
+            "═══ INSTITUTIONAL KNOWLEDGE ══════════════════════════════════════",
+            "Use the chunks below to accurately describe Maharat — its programs,",
+            "accreditations, mission, and partnerships.  Do not invent any details",
+            "not present in these chunks.",
+            "",
+            knowledge_context,
+        ]
+
+    return "\n".join(parts)
+
+
+def build_prompt_package_dual(
+    topic: str,
+    news_chunks: list,
+    knowledge_chunks: list,
+    gen_cfg: dict,
+    style_service=None,
+    article_type: Optional[str] = None,
+    mode_name: Optional[str] = None,
+    mode_spec: Optional[dict] = None,
+    entities_detected: Optional[dict] = None,
+) -> Dict[str, str]:
+    """
+    Return {"system": str, "user": str} for dual-retrieval (news + knowledge) drafting.
+    """
+    grounding_rules = gen_cfg.get("grounding_rules")
+    entity_usage    = gen_cfg.get("entity_usage", {})
+    include_entity  = (
+        entity_usage.get("include_entity_context_in_prompt", False)
+        and bool(entities_detected)
+    )
+
+    if style_service is not None:
+        system = build_system_prompt(
+            style_service,
+            article_type=article_type,
+            grounding_rules=grounding_rules,
+        )
+    else:
+        system = _DEFAULT_SYSTEM_PROMPT
+
+    news_ctx  = format_chunks_as_context(news_chunks)         if news_chunks      else ""
+    know_ctx  = format_knowledge_chunks_as_context(knowledge_chunks) if knowledge_chunks else ""
+
+    user = build_user_message_dual(
+        topic=topic,
+        news_context=news_ctx,
+        knowledge_context=know_ctx,
+        article_type=article_type,
+        mode_spec=mode_spec,
+        mode_name=mode_name,
+        entities_detected=entities_detected,
+        include_entity_context=include_entity,
+    )
+    return {"system": system, "user": user}
+
+
 # ── legacy accessor ───────────────────────────────────────────────────────
 
 def get_system_prompt(template_name: str = "maharat_news_v1") -> str:
