@@ -280,6 +280,99 @@ tags:
     - "Recognition Ceremony"
     - "Launch Event"
 
+# Topic/thematic tags only. Entity tags (organizations, locations, credentials)
+# are auto-generated at runtime from config/entities.yaml.
+tag_rules:
+  min_tags: 3
+  max_tags: 7
+  tags:
+    # Intakes
+    - tag: "intake-11"
+      keywords: ["intake 11"]
+    - tag: "intake-12"
+      keywords: ["intake 12"]
+    - tag: "intake-13"
+      keywords: ["intake 13"]
+    - tag: "intake-14"
+      keywords: ["intake 14"]
+    - tag: "intake-15"
+      keywords: ["intake 15"]
+    # Trades / programs
+    - tag: "welding"
+      keywords: ["welding", "welder", "5g welding", "steelfab"]
+    - tag: "scaffolding"
+      keywords: ["scaffolding", "scaffold"]
+    - tag: "pipefitting"
+      keywords: ["pipefitting", "pipefitter"]
+    - tag: "instrumentation"
+      keywords: ["instrumentation"]
+    - tag: "construction-safety-program"
+      keywords: ["construction safety", "csm course", "construction safety manual"]
+    - tag: "osh"
+      keywords: ["osh training", "oil and gas safety", "oil & gas safety"]
+    - tag: "wpr"
+      keywords: ["work permit receiver", "wpr pre-requisite", "wpr training"]
+    # Academic / learning
+    - tag: "english-language"
+      keywords: ["english conversation", "evp", "hvp", "headway program"]
+    - tag: "examinations"
+      keywords: ["midterm exam", "end-of-semester exam", "final speaking test", "final examination"]
+    - tag: "graduation"
+      keywords: ["graduation ceremony", "graduation project", "pre-graduation", "celebrates graduation"]
+    - tag: "ojt"
+      keywords: ["ojt", "on-the-job training", "pre-ojt"]
+    - tag: "cpd"
+      keywords: ["cpd", "continuing professional development"]
+    - tag: "counseling"
+      keywords: ["counseling session", "counseling sessions", "counselor"]
+    # Safety topics
+    - tag: "fire-safety"
+      keywords: ["fire drill", "fire safety"]
+    - tag: "drug-awareness"
+      keywords: ["drug awareness", "drug & alcohol", "alcohol-free", "substance"]
+    - tag: "road-safety"
+      keywords: ["pedestrian safety", "wrong-way driving", "drive safety", "driving session"]
+    - tag: "working-at-height"
+      keywords: ["working at height", "working-at-height", "height training"]
+    - tag: "safety-campaign"
+      keywords: ["safety campaign", "safety awareness campaign", "safety contest", "safety slogan"]
+    - tag: "camping-safety"
+      keywords: ["camping safety"]
+    # Events & community
+    - tag: "nariyah-spring-festival"
+      keywords: ["nariyah spring festival"]
+    - tag: "ramadan"
+      keywords: ["ramadan", "iftar"]
+    - tag: "umrah"
+      keywords: ["umrah"]
+    - tag: "sports"
+      keywords: ["football tournament", "fun day"]
+    - tag: "volunteer"
+      keywords: ["volunteer", "road repair initiative"]
+    - tag: "female-trainees"
+      keywords: ["female trainee", "female cohort", "first cohort of female"]
+    - tag: "religious-activities"
+      keywords: ["istisqa", "prayer for rain"]
+    - tag: "career-guidance"
+      keywords: ["career guidance forum"]
+    - tag: "speak-up-club"
+      keywords: ["speak up club"]
+    # Concepts & admin
+    - tag: "digital-transformation"
+      keywords: ["digital transformation"]
+    - tag: "accreditation"
+      keywords: ["accreditation", "accredited by"]
+    - tag: "mou"
+      keywords: [" mou", "memorandum of understanding"]
+    - tag: "staff-well-being"
+      keywords: ["employee well-being", "staff well-being", "wellbeing initiative", "sponsored umrah"]
+    - tag: "media-coverage"
+      keywords: ["published in construction week", "construction week"]
+    - tag: "benchmarking"
+      keywords: ["benchmarking visit"]
+    - tag: "leadership"
+      keywords: ["leadership workshop", "leadership for empowering"]
+
 rules:
   single_primary_category: true
   min_tags_per_article: 3

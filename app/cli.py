@@ -5,11 +5,14 @@ Maharat News Pipeline CLI
 Single entry point — calls pipelines only.
 
 Commands:
-    ingest          Validate, chunk, embed and upsert data/posts/ into Qdrant
-    rebuild-index   Drop collection, recreate schema, re-ingest everything
-    search          Hybrid search over indexed content
-    draft           Generate a grounded article draft via RAG
-    evaluate        Run retrieval eval cases from tests/retrieval_eval.csv
+    ingest                 Validate, chunk, embed and upsert data/posts/ into Qdrant
+    rebuild-index          Drop collection, recreate schema, re-ingest everything
+    search                 Hybrid search over indexed content
+    draft                  Generate a grounded article draft via RAG
+    evaluate               Run retrieval eval cases from tests/retrieval_eval.csv
+    ingest-knowledge       Ingest data/knowledge/**/*.md into the knowledge collection
+    search-knowledge       Hybrid search over the knowledge collection
+    refresh-weekly-highlights  Safe refresh of Weekly Highlights DOCX content
 
 Examples:
     python app/cli.py ingest
@@ -29,6 +32,20 @@ Examples:
 
     python app/cli.py evaluate
     python app/cli.py evaluate --verbose
+
+    python app/cli.py ingest-knowledge
+    python app/cli.py ingest-knowledge --dry-run
+    python app/cli.py ingest-knowledge --recreate
+
+    python app/cli.py search-knowledge "What is Maharat?"
+    python app/cli.py search-knowledge "training methodology" --knowledge-type training_methodology
+    python app/cli.py search-knowledge "strategic partnerships" --limit 5
+
+    python app/cli.py refresh-weekly-highlights --source input/weekly-highlights
+    python app/cli.py refresh-weekly-highlights --source input/weekly-highlights --dry-run
+    python app/cli.py refresh-weekly-highlights --source input/weekly-highlights \\
+        --backup true --delete-existing true --reinsert true \\
+        --regenerate-image-metadata true --create-liferay-manifest true
 """
 
 import argparse
@@ -122,6 +139,89 @@ def cmd_evaluate(args):
     sys.exit(0 if ok else 1)
 
 
+def cmd_ingest_knowledge(args):
+    from pipelines.knowledge_ingest_pipeline import KnowledgeIngestPipeline
+    summary = KnowledgeIngestPipeline.from_config().run(
+        dry_run=args.dry_run,
+        recreate=args.recreate,
+    )
+    print(f"\nSummary: {summary}")
+
+
+def cmd_search_knowledge(args):
+    from services.retrieval_service import RetrievalService
+    from services.config_service import load_qdrant_config
+
+    qdrant_cfg = load_qdrant_config()
+    service    = RetrievalService.from_config(qdrant_cfg, collection_key="knowledge")
+
+    query_filter = service.build_filter(
+        knowledge_type=args.knowledge_type or None,
+        language=args.language or None,
+        priority=args.priority or None,
+        published=True,
+        status="approved",
+    )
+    results = service.search(
+        query_text=args.query,
+        limit=args.limit or 8,
+        query_filter=query_filter,
+    )
+
+    if args.json:
+        print(json.dumps(
+            [{"id": r.id, "score": r.score, "payload": r.payload} for r in results],
+            indent=2, ensure_ascii=False,
+        ))
+        return
+
+    print(f"\nQuery: \"{args.query}\"  Results: {len(results)}\n" + "─" * 72)
+    for i, r in enumerate(results, 1):
+        p    = r.payload or {}
+        print(f"{i:2d}. {p.get('title', '—')}")
+        print(f"     Score        : {r.score:.4f}")
+        print(f"     slug         : {p.get('slug', '')}")
+        print(f"     knowledge_type: {p.get('knowledge_type', '')}")
+        print(f"     section      : {p.get('section', '')}")
+        excerpt = (p.get("chunk_text") or "")[:220]
+        if excerpt:
+            print(f"     Chunk: {excerpt}…")
+        print()
+
+
+def _str_to_bool(v: str) -> bool:
+    """Accept 'true'/'false' strings as boolean values."""
+    return str(v).strip().lower() in ("true", "yes", "1")
+
+
+def cmd_refresh_weekly_highlights(args):
+    from pathlib import Path
+    from pipelines.refresh_pipeline import RefreshPipeline
+
+    source_dir = Path(args.source)
+    if not source_dir.is_absolute():
+        source_dir = ROOT / source_dir
+
+    pipeline = RefreshPipeline.from_config(source_dir=source_dir)
+    report = pipeline.run(
+        dry_run=args.dry_run,
+        backup=args.backup,
+        delete_existing=args.delete_existing,
+        reinsert=args.reinsert,
+        regenerate_image_metadata=args.regenerate_image_metadata,
+        create_liferay_manifest=args.create_liferay_manifest,
+        base_url=args.base_url or "",
+    )
+
+    failed = report.get("issues", {}).get("failed_files", [])
+    if failed:
+        print(f"\nFailed files ({len(failed)}):")
+        for f in failed:
+            print(f"  {f['file']}: {f['error']}")
+
+    sys.exit(1 if failed else 0)
+
+
 # ── argument parser ────────────────────────────────────────────────────────
 
 def build_parser():
@@ -200,6 +300,60 @@ def build_parser():
     p_eval.add_argument("--verbose", action="store_true",
         help="Print result for every case, not just failures")
 
+    # ── ingest-knowledge ─────────────────────────────────────────────────────
+    p_ik = sub.add_parser("ingest-knowledge",
+        help="Ingest data/knowledge/**/*.md into the knowledge Qdrant collection")
+    p_ik.add_argument("--dry-run", action="store_true",
+        help="Parse and chunk without writing to Qdrant")
+    p_ik.add_argument("--recreate", action="store_true",
+        help="Drop and recreate the knowledge collection before ingesting")
+
+    # ── search-knowledge ─────────────────────────────────────────────────────
+    p_sk = sub.add_parser("search-knowledge",
+        help="Hybrid search over the knowledge collection")
+    p_sk.add_argument("query",              help="Search query text")
+    p_sk.add_argument("--limit",            type=int, default=0,
+        help="Max results (default: 8)")
+    p_sk.add_argument("--knowledge-type",   default="", dest="knowledge_type",
+        help="Filter by knowledge_type (e.g. institutional_profile)")
+    p_sk.add_argument("--language",         default="",
+        help="Filter by language code (default: no filter)")
+    p_sk.add_argument("--priority",         default="",
+        help="Filter by priority (high / medium / low)")
+    p_sk.add_argument("--json",             action="store_true",
+        help="Output raw JSON")
+
+    # ── refresh-weekly-highlights ─────────────────────────────────────────
+    p_rwh = sub.add_parser(
+        "refresh-weekly-highlights",
+        help="Safe, idempotent refresh of Weekly Highlights DOCX content",
+    )
+    p_rwh.add_argument(
+        "--source", required=True,
+        metavar="DIR",
+        help="Directory containing the revised Weekly Highlights .docx files "
+             "(e.g. input/weekly-highlights)",
+    )
+    p_rwh.add_argument("--dry-run", action="store_true",
+        help="Show what would change without writing any files")
+    p_rwh.add_argument("--backup", type=_str_to_bool, default=True,
+        metavar="BOOL",
+        help="Backup existing posts and images before deletion (default: true)")
+    p_rwh.add_argument("--delete-existing", type=_str_to_bool, default=True,
+        dest="delete_existing", metavar="BOOL",
+        help="Delete existing matching posts before reinserting (default: true)")
+    p_rwh.add_argument("--reinsert", type=_str_to_bool, default=True,
+        metavar="BOOL",
+        help="Upsert newly extracted posts to Qdrant (default: true)")
+    p_rwh.add_argument("--regenerate-image-metadata", type=_str_to_bool, default=True,
+        dest="regenerate_image_metadata", metavar="BOOL",
+        help="Run category/tags/summary assignment and image renaming (default: true)")
+    p_rwh.add_argument("--create-liferay-manifest", type=_str_to_bool, default=True,
+        dest="create_liferay_manifest", metavar="BOOL",
+        help="Generate Liferay-ready JSON + CSV manifest (default: true)")
+    p_rwh.add_argument("--base-url", default="", dest="base_url",
+        help="Base URL for absolute image/post URLs in feeds")
+
     return parser
 
 
@@ -207,11 +361,14 @@ def main():
     parser = build_parser()
     args   = parser.parse_args()
     {
-        "ingest":         cmd_ingest,
-        "rebuild-index":  cmd_rebuild_index,
-        "search":         cmd_search,
-        "draft":          cmd_draft,
-        "evaluate":       cmd_evaluate,
+        "ingest":                      cmd_ingest,
+        "rebuild-index":               cmd_rebuild_index,
+        "search":                      cmd_search,
+        "draft":                       cmd_draft,
+        "evaluate":                    cmd_evaluate,
+        "ingest-knowledge":            cmd_ingest_knowledge,
+        "search-knowledge":            cmd_search_knowledge,
+        "refresh-weekly-highlights":   cmd_refresh_weekly_highlights,
     }[args.command](args)
 
 

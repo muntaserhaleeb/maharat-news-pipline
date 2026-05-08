@@ -41,6 +41,10 @@ def load_editorial_style_config() -> dict:
     return _load("editorial_style.yaml")
 
 
+def load_knowledge_chunking_config() -> dict:
+    return _load("knowledge_chunking.yaml")
+
+
 def get_collection_cfg(qdrant_cfg: dict = None) -> dict:
     if qdrant_cfg is None:
         qdrant_cfg = load_qdrant_config()

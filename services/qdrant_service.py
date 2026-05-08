@@ -126,11 +126,15 @@ class QdrantService:
         self.alias_name      = col_cfg["live_alias"]
 
     @classmethod
-    def from_config(cls, qdrant_cfg: Optional[dict] = None) -> "QdrantService":
+    def from_config(
+        cls,
+        qdrant_cfg: Optional[dict] = None,
+        collection_key: str = "primary",
+    ) -> "QdrantService":
         if qdrant_cfg is None:
             qdrant_cfg = load_qdrant_config()
         client  = make_client(qdrant_cfg)
-        col_cfg = qdrant_cfg["collections"]["primary"]
+        col_cfg = qdrant_cfg["collections"][collection_key]
         return cls(client=client, col_cfg=col_cfg, qdrant_cfg=qdrant_cfg)
 
     def collection_exists(self) -> bool:
@@ -192,7 +196,11 @@ class QdrantService:
             "geo":      PayloadSchemaType.GEO,
             "text":     PayloadSchemaType.TEXT,
         }
-        indexes = self.qdrant_cfg.get("payload_indexes", [])
+        # Collection-level indexes take precedence over the global list
+        indexes = (
+            self.col_cfg.get("payload_indexes")
+            or self.qdrant_cfg.get("payload_indexes", [])
+        )
         print(f"  Creating {len(indexes)} payload indexes…")
         for idx_def in indexes:
             field  = idx_def["field_name"]
@@ -233,3 +241,41 @@ class QdrantService:
             total += len(batch)
             print(f"  Upserted {min(start + batch_size, len(points))}/{len(points)}")
         return total
+
+    def count_for_slugs(self, slugs: List[str]) -> int:
+        """Count Qdrant points whose article_id is in slugs."""
+        from qdrant_client.models import FieldCondition, Filter, MatchAny
+        if not slugs or not self.collection_exists():
+            return 0
+        try:
+            result = self.client.count(
+                collection_name=self.collection_name,
+                count_filter=Filter(must=[
+                    FieldCondition(key="article_id", match=MatchAny(any=slugs))
+                ]),
+                exact=True,
+            )
+            return result.count
+        except Exception:
+            return 0
+
+    def delete_by_slugs(self, slugs: List[str]) -> int:
+        """Delete all points whose article_id is in slugs. Returns number of slugs processed."""
+        from qdrant_client.models import FieldCondition, Filter, FilterSelector, MatchValue
+        if not slugs or not self.collection_exists():
+            return 0
+        deleted = 0
+        for slug in slugs:
+            try:
+                self.client.delete(
+                    collection_name=self.collection_name,
+                    points_selector=FilterSelector(
+                        filter=Filter(must=[
+                            FieldCondition(key="article_id", match=MatchValue(value=slug))
+                        ])
+                    ),
+                )
+                deleted += 1
+            except Exception as e:
+                print(f"    Warning: could not delete points for '{slug}': {e}")
+        return deleted

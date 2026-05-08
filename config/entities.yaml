@@ -62,6 +62,22 @@ entities:
     - canonical: "National Development Association"
       aliases: []
 
+    # Accreditation & evaluation bodies
+    - canonical: "Education and Training Evaluation Commission"
+      aliases: ["ETEC"]
+    - canonical: "TÜV SÜD"
+      aliases: ["TUV SUD", "Tuv Sud"]
+
+    # Contractors & service companies
+    - canonical: "SICIM"
+      aliases: []
+
+    # Digital platforms
+    - canonical: "Classera"
+      aliases: []
+    - canonical: "Leadxera"
+      aliases: []
+
     # Community & social organizations
     - canonical: "Nairiyah Local Council"
       aliases: []
@@ -137,6 +153,12 @@ entities:
       aliases: ["RTC", "Rahima"]
     - canonical: "North Housing Training Institute"
       aliases: ["NHTI Training Center"]
+    - canonical: "Jubail"
+      aliases: []
+    - canonical: "Abqaiq"
+      aliases: []
+    - canonical: "Sharjah"
+      aliases: []
 
   # ── credentials ───────────────────────────────────────────────────────────
   credentials:

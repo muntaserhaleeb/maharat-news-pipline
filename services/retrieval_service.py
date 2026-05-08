@@ -29,10 +29,14 @@ class RetrievalService:
         self.embedding_service = embedding_service
 
     @classmethod
-    def from_config(cls, qdrant_cfg: Optional[dict] = None) -> "RetrievalService":
+    def from_config(
+        cls,
+        qdrant_cfg: Optional[dict] = None,
+        collection_key: str = "primary",
+    ) -> "RetrievalService":
         if qdrant_cfg is None:
             qdrant_cfg = load_qdrant_config()
-        col_cfg     = qdrant_cfg["collections"]["primary"]
+        col_cfg     = qdrant_cfg["collections"][collection_key]
         client      = make_client(qdrant_cfg)
         emb_service = EmbeddingService.from_config(col_cfg)
         coll_name   = col_cfg.get("live_alias") or col_cfg["name"]
@@ -48,24 +52,33 @@ class RetrievalService:
         status: Optional[str] = None,
         published: Optional[bool] = None,
         visibility: Optional[str] = None,
+        knowledge_type: Optional[str] = None,
+        memory_layer: Optional[str] = None,
+        priority: Optional[str] = None,
     ) -> Optional[Filter]:
         must = []
         if category:
-            must.append(FieldCondition(key="category",   match=MatchValue(value=category)))
+            must.append(FieldCondition(key="category",      match=MatchValue(value=category)))
         if year:
-            must.append(FieldCondition(key="year",       match=MatchValue(value=int(year))))
+            must.append(FieldCondition(key="year",          match=MatchValue(value=int(year))))
         if quarter:
-            must.append(FieldCondition(key="quarter",    match=MatchValue(value=quarter)))
+            must.append(FieldCondition(key="quarter",       match=MatchValue(value=quarter)))
         if chunk_type:
-            must.append(FieldCondition(key="chunk_type", match=MatchValue(value=chunk_type)))
+            must.append(FieldCondition(key="chunk_type",    match=MatchValue(value=chunk_type)))
         if language:
-            must.append(FieldCondition(key="language",   match=MatchValue(value=language)))
+            must.append(FieldCondition(key="language",      match=MatchValue(value=language)))
         if status:
-            must.append(FieldCondition(key="status",     match=MatchValue(value=status)))
+            must.append(FieldCondition(key="status",        match=MatchValue(value=status)))
         if published is not None:
-            must.append(FieldCondition(key="published",  match=MatchValue(value=published)))
+            must.append(FieldCondition(key="published",     match=MatchValue(value=published)))
         if visibility:
-            must.append(FieldCondition(key="visibility", match=MatchValue(value=visibility)))
+            must.append(FieldCondition(key="visibility",    match=MatchValue(value=visibility)))
+        if knowledge_type:
+            must.append(FieldCondition(key="knowledge_type", match=MatchValue(value=knowledge_type)))
+        if memory_layer:
+            must.append(FieldCondition(key="memory_layer",  match=MatchValue(value=memory_layer)))
+        if priority:
+            must.append(FieldCondition(key="priority",      match=MatchValue(value=priority)))
         return Filter(must=must) if must else None
 
     def search(

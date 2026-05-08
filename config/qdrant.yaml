@@ -44,6 +44,52 @@ collections:
       quantile: 0.99
       always_ram: false
 
+  knowledge:
+    name: "maharat_knowledge_memory_v1"
+    live_alias: "maharat_knowledge_live"
+
+    vectors:
+      dense:
+        model: "BAAI/bge-small-en-v1.5"
+        size: 384
+        distance: "Cosine"
+        on_disk: false
+
+    sparse_vectors:
+      sparse:
+        modifier: null
+
+    storage:
+      on_disk_payload: true
+
+    optimization:
+      indexing_threshold: 20000
+
+    hnsw:
+      m: 16
+      ef_construct: 100
+      full_scan_threshold: 10000
+
+    payload_indexes:
+      - {field_name: "knowledge_type",         field_schema: "keyword"}
+      - {field_name: "priority",               field_schema: "keyword"}
+      - {field_name: "language",               field_schema: "keyword"}
+      - {field_name: "status",                 field_schema: "keyword"}
+      - {field_name: "published",              field_schema: "bool"}
+      - {field_name: "memory_layer",           field_schema: "keyword"}
+      - {field_name: "slug",                   field_schema: "keyword"}
+      - {field_name: "doc_id",                 field_schema: "keyword"}
+      - {field_name: "chunk_id",               field_schema: "keyword"}
+      - {field_name: "chunk_type",             field_schema: "keyword"}
+      - {field_name: "chunk_index",            field_schema: "integer"}
+      - {field_name: "word_count",             field_schema: "integer"}
+      - {field_name: "ingested_at",            field_schema: "datetime"}
+      - {field_name: "entities_organizations", field_schema: "keyword"}
+      - {field_name: "entities_programs",      field_schema: "keyword"}
+      - {field_name: "entities_locations",     field_schema: "keyword"}
+      - {field_name: "entities_credentials",   field_schema: "keyword"}
+      - {field_name: "entities_people",        field_schema: "keyword"}
+
 payload_schema:
   article_id:
     type: "keyword"

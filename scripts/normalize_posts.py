@@ -47,81 +47,39 @@ CATEGORY_RULES: list[tuple[str, list[str]]] = [
     for rule in _cat_cfg["ordered_rules"]
 ]
 
-# ── Controlled tag vocabulary ──────────────────────────────────────────────
-# Each tag maps to keywords that trigger it.
-TAG_RULES: list[tuple[str, list[str]]] = [
-    # ── Intakes
-    ("intake-11",  ["intake 11"]),
-    ("intake-12",  ["intake 12"]),
-    ("intake-13",  ["intake 13"]),
-    ("intake-14",  ["intake 14"]),
-    ("intake-15",  ["intake 15"]),
-    # ── Trades / programs
-    ("welding",        ["welding", "welder", "5g welding", "steelfab"]),
-    ("scaffolding",    ["scaffolding", "scaffold"]),
-    ("pipefitting",    ["pipefitting", "pipefitter"]),
-    ("instrumentation",["instrumentation"]),
-    ("construction-safety-program", ["construction safety", "csm course", "construction safety manual"]),
-    ("osh",            ["osh training", "oil and gas safety", "oil & gas safety"]),
-    ("wpr",            ["work permit receiver", "wpr pre-requisite", "wpr training"]),
-    # ── Academic / learning
-    ("english-language",  ["english conversation", "evp", "hvp", "headway program"]),
-    ("examinations",      ["midterm exam", "end-of-semester exam", "final speaking test", "final examination"]),
-    ("graduation",        ["graduation ceremony", "graduation project", "pre-graduation", "celebrates graduation"]),
-    ("ojt",               ["ojt", "on-the-job training", "pre-ojt"]),
-    ("cpd",               ["cpd", "continuing professional development"]),
-    ("counseling",        ["counseling session", "counseling sessions", "counselor"]),
-    # ── Safety topics
-    ("fire-safety",         ["fire drill", "fire safety"]),
-    ("drug-awareness",      ["drug awareness", "drug & alcohol", "alcohol-free", "substance"]),
-    ("road-safety",         ["pedestrian safety", "wrong-way driving", "drive safety", "driving session"]),
-    ("working-at-height",   ["working at height", "working-at-height", "height training"]),
-    ("safety-campaign",     ["safety campaign", "safety awareness campaign", "safety contest", "safety slogan"]),
-    ("camping-safety",      ["camping safety"]),
-    # ── Events & community
-    ("nariyah-spring-festival", ["nariyah spring festival"]),
-    ("ramadan",               ["ramadan", "iftar"]),
-    ("umrah",                 ["umrah"]),
-    ("sports",                ["football tournament", "fun day"]),
-    ("volunteer",             ["volunteer", "road repair initiative"]),
-    ("female-trainees",       ["female trainee", "female cohort", "first cohort of female"]),
-    ("religious-activities",  ["istisqa", "prayer for rain"]),
-    ("career-guidance",       ["career guidance forum"]),
-    ("speak-up-club",         ["speak up club"]),
-    # ── Partners & bodies
-    ("nesma",            ["nesma"]),
-    ("saudi-aramco",     ["saudi aramco", "aramco"]),
-    ("etec",             ["etec", "education and training evaluation"]),
-    ("tvtc",             ["tvtc", "technical and vocational"]),
-    ("hrdf",             ["hrdf", "human resources development fund"]),
-    ("city-guilds",      ["city & guilds", "city guilds"]),
-    ("gatehouse",        ["gatehouse awards", "gatehouse accreditation"]),
-    ("samsung",          ["samsung e&a", "samsung ea"]),
-    ("sicim",            ["sicim"]),
-    ("nhti",             ["nesma high training", "nhti"]),
-    ("jtc",              ["juaimah training center", "ju'aymah training center", "jtc"]),
-    ("halumm",           ["halumm"]),
-    ("tuv-sud",          ["tüv süd", "tuv sud"]),
-    # ── Locations
-    ("jubail",   ["jubail"]),
-    ("riyadh",   ["riyadh"]),
-    ("dammam",   ["dammam"]),
-    ("abqaiq",   ["abqaiq"]),
-    ("sharjah",  ["sharjah"]),
-    # ── Digital & admin
-    ("digital-transformation", ["digital transformation"]),
-    ("classera",               ["classera"]),
-    ("leadxera",               ["leadxera"]),
-    ("accreditation",          ["accreditation", "accredited by"]),
-    ("mou",                    [" mou", "memorandum of understanding"]),
-    ("staff-well-being",       ["employee well-being", "staff well-being", "wellbeing initiative", "sponsored umrah"]),
-    ("media-coverage",         ["published in construction week", "construction week"]),
-    ("benchmarking",           ["benchmarking visit"]),
-    ("leadership",             ["leadership workshop", "leadership for empowering"]),
-]
+# ── Load tag rules from taxonomy.yaml + entities.yaml ─────────────────────
+def _slugify(text: str) -> str:
+    t = text.lower().replace("&", " and ")
+    t = re.sub(r"[^a-z0-9]+", "-", t)
+    return t.strip("-")
 
-TAG_MIN = 3
-TAG_MAX = 7
+
+def _entity_tags(section: list) -> list:
+    result = []
+    for entry in section:
+        canonical = entry["canonical"]
+        aliases = [a for a in (entry.get("aliases") or []) if a]
+        slug = _slugify(canonical)
+        keywords = [canonical.lower()] + [a.lower() for a in aliases]
+        result.append((slug, keywords))
+    return result
+
+
+_tag_cfg = _taxonomy["tag_rules"]
+TAG_MIN: int = _tag_cfg["min_tags"]
+TAG_MAX: int = _tag_cfg["max_tags"]
+
+_topic_tags: list = [(e["tag"], e["keywords"]) for e in _tag_cfg["tags"]]
+
+_entities = yaml.safe_load((ROOT / "config" / "entities.yaml").read_text(encoding="utf-8"))
+_ent = _entities["entities"]
+_entity_tag_rules: list = (
+    _entity_tags(_ent.get("organizations", []))
+    + _entity_tags(_ent.get("locations", []))
+    + _entity_tags(_ent.get("credentials", []))
+)
+
+TAG_RULES: list = _topic_tags + _entity_tag_rules
 
 # ── Markdown helpers ───────────────────────────────────────────────────────
 _FM_RE = re.compile(r"^---\n(.*?)\n---\n(.*)", re.DOTALL)

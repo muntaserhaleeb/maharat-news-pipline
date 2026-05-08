@@ -2,6 +2,7 @@ data/
 output/
 review/
 input/
+logs/
 __pycache__/
 *.pyc
 .DS_Store
