@@ -81,6 +81,87 @@ _entity_tag_rules: list = (
 
 TAG_RULES: list = _topic_tags + _entity_tag_rules
 
+# ── Date backfill helpers ──────────────────────────────────────────────────
+_MONTHS_PAT = (
+    r"(?:January|February|March|April|May|June|July|August|"
+    r"September|October|November|December|"
+    r"Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+)
+_PAT_ISO_BF  = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
+_PAT_MDY_BF  = re.compile(
+    rf"({_MONTHS_PAT})\.?\s+(\d{{1,2}})(?:\s*[-–—]\s*\d{{1,2}})?,\s*(\d{{4}})",
+    re.IGNORECASE,
+)
+_PAT_MY_BF   = re.compile(rf"\b({_MONTHS_PAT})\.?\s+(\d{{4}})\b", re.IGNORECASE)
+_PAT_MD_BF   = re.compile(rf"\b({_MONTHS_PAT})\s+(\d{{1,2}})\b", re.IGNORECASE)
+
+
+def _quarter(month: int) -> str:
+    return ["Q1","Q1","Q1","Q2","Q2","Q2","Q3","Q3","Q3","Q4","Q4","Q4"][month - 1]
+
+
+def _apply_date(front: dict, dt: datetime) -> None:
+    front["date"]    = dt.strftime("%Y-%m-%d")
+    front["year"]    = dt.year
+    front["quarter"] = _quarter(dt.month)
+
+
+def backfill_date(front: dict, body: str) -> bool:
+    """Try to set date/year/quarter if currently empty. Returns True if filled."""
+    if front.get("date"):
+        return False
+
+    title = front.get("title", "") or ""
+    summary = front.get("summary", "") or ""
+    source  = front.get("source_document", "") or ""
+
+    for text in (title, summary, body):
+        m = _PAT_ISO_BF.search(text)
+        if m:
+            try:
+                _apply_date(front, datetime.strptime(m.group(1), "%Y-%m-%d"))
+                return True
+            except ValueError:
+                pass
+
+        m = _PAT_MDY_BF.search(text)
+        if m:
+            month_s, day_s, year_s = m.group(1), m.group(2), m.group(3)
+            for fmt in ("%B %d %Y", "%b %d %Y"):
+                try:
+                    _apply_date(front, datetime.strptime(f"{month_s} {day_s} {year_s}", fmt))
+                    return True
+                except ValueError:
+                    pass
+
+        m = _PAT_MY_BF.search(text)
+        if m:
+            month_s, year_s = m.group(1), m.group(2)
+            for fmt in ("%B %Y", "%b %Y"):
+                try:
+                    _apply_date(front, datetime.strptime(f"{month_s} {year_s}", fmt))
+                    return True
+                except ValueError:
+                    pass
+
+    # Partial date (Month Day) in body/summary + year from source_document
+    yr_m = re.search(r"(\d{4})", source)
+    if yr_m:
+        year_s = yr_m.group(1)
+        for text in (summary, body):
+            m = _PAT_MD_BF.search(text)
+            if m:
+                month_s, day_s = m.group(1), m.group(2)
+                for fmt in ("%B %d %Y", "%b %d %Y"):
+                    try:
+                        _apply_date(front, datetime.strptime(f"{month_s} {day_s} {year_s}", fmt))
+                        return True
+                    except ValueError:
+                        pass
+
+    return False
+
+
 # ── Markdown helpers ───────────────────────────────────────────────────────
 _FM_RE = re.compile(r"^---\n(.*?)\n---\n(.*)", re.DOTALL)
 
@@ -343,6 +424,9 @@ def main():
 
         slug = front.get("slug") or md_path.stem
         all_slugs.append(slug)
+
+        # 0. Backfill missing date from title / body / source_document year
+        backfill_date(front, body)
 
         # 1. Category — always recalculate (idempotent; human edits belong in review CSV)
         front["category"] = assign_category(front, body)

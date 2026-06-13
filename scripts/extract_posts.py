@@ -168,9 +168,16 @@ _PAT_MDY = re.compile(
 _PAT_MY = re.compile(rf"\b({_MONTHS})\.?\s+(\d{{4}})\b", re.IGNORECASE)
 
 
-def detect_date(paragraphs) -> tuple:
-    """Return (date_str, year, quarter) from the first date-like string found."""
-    for para in paragraphs:
+def detect_date(paragraphs, title: str = "") -> tuple:
+    """Return (date_str, year, quarter) from the first date-like string found.
+
+    Checks title first (the section heading is not in paragraphs), then body.
+    """
+    class _FakePara:
+        def __init__(self, t): self.text = t
+
+    all_items = ([_FakePara(title)] if title else []) + list(paragraphs)
+    for para in all_items:
         text = para.text
 
         m = _PAT_ISO.search(text)
@@ -259,7 +266,7 @@ def build_post(section: dict, index: int, source_doc: str, rid_to_path: dict) ->
     featured_image = image_rel_paths[0] if image_rel_paths else ""
     gallery_images = image_rel_paths[1:] if len(image_rel_paths) > 1 else []
 
-    date_str, year, quarter = detect_date(section["paragraphs"])
+    date_str, year, quarter = detect_date(section["paragraphs"], title=section["title"])
 
     # Summary: first paragraph with real text, truncated
     summary = ""
