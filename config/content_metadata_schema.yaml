@@ -1,0 +1,91 @@
+content_metadata_schema:
+  version: '1.0'
+  target_systems:
+  - Payload CMS
+  - Qdrant
+  - RAG pipeline
+  required_fields:
+    title: string
+    slug: string
+    language:
+      type: enum
+      allowed:
+      - en
+      - ar
+      default: en
+    status:
+      type: enum
+      allowed:
+      - draft
+      - approved
+      - archived
+      default: approved
+    visibility:
+      type: enum
+      allowed:
+      - public
+      - internal
+      - restricted
+      default: public
+    summary: string
+    body: richtext_or_markdown
+    primary_category: controlled_vocabulary
+    subcategory: controlled_vocabulary
+    tags: array[string]
+    entities:
+      organizations: array[string]
+      programs: array[string]
+      credentials: array[string]
+      locations: array[string]
+      people: array[string]
+      activities: array[string]
+  recommended_fields:
+    featured_image: media_reference
+    image_candidates: array[media_reference]
+    event_date: date
+    publish_date: date
+    source_file: string
+    source_collection: string
+    confidence:
+      category_score: number
+      subcategory_score: number
+      entity_extraction_score: number
+    related_content_keys: array[string]
+    qdrant_payload:
+      content_type: string
+      primary_category: string
+      subcategory: string
+      tags: array[string]
+      entities_flat: array[string]
+      language: string
+      date: date
+  example:
+    title: Maharat signs training agreement with Samsung E&A
+    slug: maharat-samsung-training-agreement
+    language: en
+    status: approved
+    visibility: public
+    summary: Maharat signed a strategic training agreement with Samsung E&A to sponsor trainees in key construction disciplines.
+    primary_category: Partnerships & Agreements
+    subcategory: Industry Sponsorships
+    entities:
+      organizations:
+      - Maharat Construction Training Center
+      - Samsung E&A
+      programs:
+      - Welding Associate Diploma
+      - Electrical Diploma
+      credentials: []
+      locations:
+      - Saudi Arabia
+      people: []
+      activities:
+      - Agreement
+      - Training Delivery
+    tags:
+    - Samsung E&A
+    - Welding Associate Diploma
+    - Electrical Diploma
+    - Agreement
+    - Workforce Development
+    - Employer Engagement

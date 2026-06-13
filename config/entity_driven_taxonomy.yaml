@@ -1,0 +1,261 @@
+taxonomy:
+  version: '2.0'
+  locale: en
+  source: Maharat entity-driven taxonomy
+  classification_strategy: Extract entities first, then derive category, subcategory, audience, and tags from entity relationships.
+primary_categories:
+- id: partnerships_agreements
+  label: Partnerships & Agreements
+  description: Formal partnerships, MoUs, agreements, sponsorships, and industry collaboration updates.
+  subcategories:
+  - Strategic Partnerships
+  - Government & Sector Partnerships
+  - Industry Sponsorships
+  - International Partnerships
+  - Commercial Agreements
+  signals:
+    activities:
+    - Agreement
+    - Memorandum of Understanding
+    entity_patterns:
+    - - Maharat Construction Training Center
+      - organization
+      - Agreement
+    - - organization
+      - organization
+      - Memorandum of Understanding
+    - - organization
+      - program
+      - Training Delivery
+- id: training_programs
+  label: Training Programs
+  description: Diplomas, short courses, technical programs, curricula, intakes, training delivery, and trainee development.
+  subcategories:
+  - Diploma Programs
+  - Short Courses
+  - Professional Certifications
+  - Trainee Development
+  - Intakes & Enrollment
+  signals:
+    entity_types:
+    - programs
+    activities:
+    - Training Delivery
+- id: accreditation_compliance
+  label: Accreditation & Compliance
+  description: Institutional accreditation, certification bodies, standards, audits, approvals, and compliance visits.
+  subcategories:
+  - Institutional Accreditation
+  - International Certifications
+  - Industry Endorsements
+  - Quality & Compliance Visits
+  signals:
+    entity_types:
+    - credentials
+    activities:
+    - Accreditation
+    - Certification
+    - Endorsement
+- id: events_ceremonies
+  label: Events & Ceremonies
+  description: Graduations, ceremonies, forums, workshops, exhibitions, conferences, and official gatherings.
+  subcategories:
+  - Graduation Ceremonies
+  - Official Events
+  - Forums & Conferences
+  - Workshops
+  - Exhibitions
+  signals:
+    activities:
+    - Graduation
+    - Workshop
+    - Conference
+- id: industry_engagement
+  label: Industry Engagement
+  description: Site visits, employer engagement, OJT, workforce development initiatives, and sector collaboration.
+  subcategories:
+  - Site Visits
+  - OJT & Employer Engagement
+  - Workforce Development
+  - Sector Collaboration
+  signals:
+    activities:
+    - Site Visit
+    - On-the-Job Training
+- id: safety_hse
+  label: Safety & HSE
+  description: Safety campaigns, HSE training, fire drills, site safety, and occupational safety initiatives.
+  subcategories:
+  - Safety Campaigns
+  - HSE Training
+  - Site Safety
+  - Awareness Campaigns
+  signals:
+    activities:
+    - Safety Campaign
+    programs:
+    - Construction Safety Diploma
+    - HSE Training & Certifications
+    - Construction Safety Manual
+- id: awards_recognition
+  label: Awards & Recognition
+  description: Awards, competitions, recognitions, trainee achievements, and institutional milestones.
+  subcategories:
+  - Institutional Recognition
+  - Trainee Awards
+  - Competitions
+  - Partner Recognition
+  signals:
+    activities:
+    - Award
+    - Competition
+- id: media_publications
+  label: Media & Publications
+  description: External media coverage, press mentions, published articles, and editorial features.
+  subcategories:
+  - Media Coverage
+  - Press Releases
+  - Published Features
+  signals:
+    activities:
+    - Media Coverage
+- id: campus_facilities
+  label: Campus & Facilities
+  description: Campus updates, facilities, training zones, labs, practical areas, classrooms, and infrastructure.
+  subcategories:
+  - Campus Updates
+  - Training Facilities
+  - Practical Training Zones
+  - Digital Infrastructure
+  signals:
+    entity_types:
+    - locations
+    keywords_fallback:
+    - facility
+    - campus
+    - classroom
+    - training zone
+    - workshop
+- id: community_outreach
+  label: Community Outreach
+  description: Community initiatives, social responsibility, local engagement, charity, and awareness programs.
+  subcategories:
+  - Community Initiatives
+  - CSR
+  - Local Engagement
+  - Awareness Programs
+  signals:
+    activities:
+    - Community Outreach
+- id: leadership_governance
+  label: Leadership & Governance
+  description: Board, leadership, governance, executive announcements, and institutional direction.
+  subcategories:
+  - Board Updates
+  - Leadership News
+  - Governance
+  - Strategic Direction
+  signals:
+    entity_types:
+    - people
+    keywords_fallback:
+    - board
+    - chairman
+    - managing director
+    - governance
+- id: digital_transformation
+  label: Digital Transformation
+  description: DXP, LMS, RAG, AI search, platform modernization, and digital learning systems.
+  subcategories:
+  - DXP
+  - AI & RAG
+  - Learning Systems
+  - Data & Analytics
+  signals:
+    activities:
+    - Digital Transformation
+    organizations:
+    - Classera
+    - Leadxera
+entity_type_to_tag_behavior:
+  organizations:
+    tag_group: organizations
+    max_per_article: 5
+    use_canonical_name: true
+  programs:
+    tag_group: programs
+    max_per_article: 4
+    use_canonical_name: true
+  credentials:
+    tag_group: credentials
+    max_per_article: 4
+    use_canonical_name: true
+  locations:
+    tag_group: locations
+    max_per_article: 3
+    use_canonical_name: true
+  people:
+    tag_group: people
+    max_per_article: 3
+    use_canonical_name: true
+  activities:
+    tag_group: activities
+    max_per_article: 3
+    use_canonical_name: true
+subcategory_resolution:
+  rules:
+  - when:
+      category: Partnerships & Agreements
+      has_any_organization:
+      - Saudi Aramco
+      - Technical and Vocational Training Corporation
+      - Human Resources Development Fund
+      - Saudi Contractors Authority
+    subcategory: Government & Sector Partnerships
+  - when:
+      category: Partnerships & Agreements
+      has_any_location:
+      - China
+      - Nanjing
+      has_any_organization:
+      - Sinopec Nanjing Engineering Middle East Co., LTD.
+      - Nanjing University of Posts and Telecommunications
+    subcategory: International Partnerships
+  - when:
+      category: Training Programs
+      has_any_program:
+      - Welding Associate Diploma
+      - Pipefitting Diploma
+      - Electrical Diploma
+      - Instrumentation Diploma
+      - Construction Safety Diploma
+      - Scaffolding Diploma
+    subcategory: Diploma Programs
+  - when:
+      category: Accreditation & Compliance
+      has_any_credential:
+      - ACCET
+      - NOCN
+      - Gatehouse Awards
+      - City & Guilds
+      - American Welding Society
+      - NEBOSH
+      - IOSH
+    subcategory: International Certifications
+  - when:
+      category: Events & Ceremonies
+      has_activity: Graduation
+    subcategory: Graduation Ceremonies
+  - when:
+      category: Industry Engagement
+      has_activity: On-the-Job Training
+    subcategory: OJT & Employer Engagement
+  - when:
+      category: Safety & HSE
+      has_activity: Safety Campaign
+    subcategory: Safety Campaigns
+  - when:
+      category: Media & Publications
+      has_activity: Media Coverage
+    subcategory: Media Coverage
+  fallback_subcategory: General

@@ -1,0 +1,21 @@
+{
+  "name": "maharat-classifier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Entity-driven content classification for Maharat news pipeline",
+  "scripts": {
+    "classify": "tsx scripts/test-classification.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.14.0",
+    "tsx": "^4.15.0",
+    "typescript": "^5.5.0"
+  }
+}

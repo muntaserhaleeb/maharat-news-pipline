@@ -1,137 +1,225 @@
 # Maharat News Pipeline
 
-A three-stage Python pipeline that turns a Word document of MCTC news highlights into structured Markdown posts, normalised metadata, and a publishable JSON feed.
+A Python system for managing Maharat/MCTC news content and knowledge:
+
+1. **DOCX Pipeline** — Extract Word documents → Markdown posts → JSON feed
+2. **RAG Ingestion** — Load posts and knowledge docs into Qdrant for hybrid search (dense + sparse)
+3. **Article Drafting** — Claude-powered generation with dual-collection retrieval and knowledge graph context
+
+All RAG commands route through the canonical entry point:
+
+```bash
+python3 app/cli.py <command>
+```
+
+For detailed architecture, config reference, and debugging notes, see [CLAUDE.md](CLAUDE.md).
+
+---
+
+## Quick Start
+
+### Setup
+
+```bash
+pip3 install -r requirements.txt
+```
+
+Set your Anthropic API key before running draft commands:
+
+```bash
+export ANTHROPIC_API_KEY=your-key-here
+```
+
+**Dependencies:** `python-docx`, `PyYAML`, `qdrant-client`, `fastembed`, `anthropic`
+
+Embedding models (`BAAI/bge-small-en-v1.5`, BM25) are downloaded automatically on first use.
+
+### Ingest & Search
+
+```bash
+# Index news posts from data/posts/
+python3 app/cli.py rebuild-index
+
+# Index knowledge base from data/knowledge/
+python3 app/cli.py ingest-knowledge --recreate
+
+# Hybrid search
+python3 app/cli.py search "graduation ceremony" --year 2026
+python3 app/cli.py search-knowledge "strategic partnerships" --limit 5
+```
+
+### Draft an Article
+
+```bash
+# News retrieval only
+python3 app/cli.py draft --topic "Maharat training programs" --mode website_news
+
+# Dual retrieval (news + knowledge + graph context)
+python3 app/cli.py draft \
+  --topic "Maharat strategy and partnerships" \
+  --mode website_news \
+  --use-knowledge
+
+# Preview retrieved chunks without calling Claude
+python3 app/cli.py draft --topic "safety drill" --dry-run --use-knowledge
+```
+
+### Evaluate Retrieval Quality
+
+```bash
+python3 app/cli.py evaluate              # news retrieval (10 cases)
+python3 app/cli.py evaluate-knowledge      # knowledge retrieval (10 cases)
+python3 app/cli.py evaluate-dual           # routing + dual retrieval (17 cases)
+```
+
+---
+
+## RAG System
+
+### Architecture
+
+```
+data/posts/*.md          ──► IngestPipeline      ──► maharat_content_live
+data/knowledge/**/*.md   ──► KnowledgeIngest     ──► maharat_knowledge_live
+                                                          │
+User query ──► MemoryRouter ──► Hybrid search (dense + BM25, RRF fusion)
+                    │                    │
+                    └── Knowledge graph ─┘
+                              │
+                              ▼
+                    DraftingPipeline ──► Claude API ──► outputs/drafts/
+```
+
+### Storage
+
+Qdrant runs in **embedded local mode** at `./qdrant_storage` (configured in `config/qdrant.yaml`). Only one process can access the store at a time.
+
+| Collection | Alias | Source |
+|------------|-------|--------|
+| `maharat_content_chunks_v1` | `maharat_content_live` | News posts (`data/posts/`) |
+| `maharat_knowledge_memory_v1` | `maharat_knowledge_live` | Knowledge docs (`data/knowledge/`) |
+
+**Vectors:** BAAI/bge-small-en-v1.5 (384-dim, cosine) + Qdrant BM25 (sparse), fused with Reciprocal Rank Fusion.
+
+### CLI Commands
+
+| Command | Description |
+|---------|-------------|
+| `ingest` | Validate, chunk, embed, and upsert `data/posts/` into Qdrant |
+| `rebuild-index` | Drop collection, recreate schema, re-ingest all posts |
+| `ingest-knowledge` | Ingest `data/knowledge/**/*.md` into the knowledge collection |
+| `search` | Hybrid search over news content |
+| `search-knowledge` | Hybrid search over knowledge docs |
+| `draft` | Generate a grounded article via RAG |
+| `route-query` | Show which memory layer(s) a query routes to |
+| `evaluate` | Run news retrieval eval cases |
+| `evaluate-knowledge` | Run knowledge retrieval eval cases |
+| `evaluate-dual` | Run routing + dual-retrieval eval cases |
+| `refresh-weekly-highlights` | Safe refresh of Weekly Highlights DOCX content |
+
+### Draft Options
+
+```bash
+python3 app/cli.py draft --topic "..." \
+  --mode website_news \           # website_news | linkedin_post | magazine_article |
+                                  # event_announcement | partner_highlight
+  --article-type graduation_story \  # partnership_announcement | graduation_story |
+                                     # training_program_update | event_story |
+                                     # recognition_story | leadership_news
+  --year 2026 \
+  --use-knowledge \
+  --dry-run \
+  --no-stream
+```
+
+Draft output is saved to `outputs/drafts/<topic-slug>/` as `draft.md`, `sources.json`, and `retrieval_debug.json`.
+
+### Knowledge Base
+
+25 Markdown files across 8 categories in `data/knowledge/`:
+
+| Category | Examples |
+|----------|----------|
+| institutional | Corporate profile, strategy, governance |
+| programs | Training overview, methodology, progression |
+| partnerships | Strategic partners, MOUs |
+| accreditation | Certifications, quality framework |
+| editorial | Style rules, brand language |
+| media | Quotes, story frameworks |
+| faq | FAQ (skipped on ingest — no front matter) |
+| Facility | Campus and facilities |
+
+---
+
+## DOCX Pipeline
+
+Extracts news highlights from Word documents into structured Markdown and a publishable JSON feed.
 
 ```
 input/*.docx  →  extract  →  normalize  →  export  →  output/feed.json
 ```
 
-### Results on MCTC Highlights 2026
+Run all three stages:
 
-| Metric | Count |
-|--------|------:|
-| Posts extracted | 76 |
-| Posts with date | 75 / 76 |
-| Posts with featured image | 44 / 76 |
-| Posts with tags | 75 / 76 |
-| Images extracted & renamed | 94 |
-| Feed size (feed.json) | 146 KB |
-| Feed size (posts.json) | 225 KB |
+```bash
+./run_pipeline.sh
+./run_pipeline.sh --base-url https://maharat.com
+./run_pipeline.sh --clean   # wipe output before running
+```
 
-**By category**
+The **Weekly Highlights refresh** command wraps extraction, normalization, feed export, and Qdrant re-ingestion in one idempotent flow:
 
-| Category | Posts |
-|----------|------:|
-| Trainee Programs | 12 |
-| Safety Campaigns & Drills | 10 |
-| Competitions & Awards | 9 |
-| Events & Ceremonies | 8 |
-| Staff Development | 8 |
-| Partnerships & Agreements | 7 |
-| Media & Publications | 5 |
-| Accreditation & Compliance | 5 |
-| Industry Visits & Site Tours | 3 |
-| On-the-Job Training | 3 |
-| Campus & Facilities | 2 |
-| Academic & Examinations | 1 |
-| General | 3 |
+```bash
+python3 app/cli.py refresh-weekly-highlights --source input/weekly-highlights
+python3 app/cli.py refresh-weekly-highlights --source input/weekly-highlights --dry-run
+```
 
----
+### Stage 1 — `extract_posts.py`
 
-## Pipeline stages
-
-### 1. `extract_posts.py` — DOCX → Markdown
-
-Reads every `.docx` in `input/`, splits the document into sections at heading boundaries, extracts embedded images, and writes:
+Reads every `.docx` in `input/`, splits at heading boundaries, extracts images, and writes:
 
 | Output | Description |
 |--------|-------------|
 | `output/posts/<slug>.md` | One Markdown file per highlight with YAML front matter |
-| `output/images/<hash>.<ext>` | All embedded images, named by content hash |
+| `output/images/<hash>.<ext>` | Embedded images, named by content hash |
 | `output/manifests/<doc>_manifest.json` | Per-document summary |
 | `review/<doc>_review.csv` | Flat sheet for manual enrichment |
 
 ```bash
-python scripts/extract_posts.py
-python scripts/extract_posts.py --input "input/MyFile.docx"
-python scripts/extract_posts.py --split-level 2   # if stories start at Heading 2
+python3 scripts/extract_posts.py
+python3 scripts/extract_posts.py --input "input/MyFile.docx"
+python3 scripts/extract_posts.py --split-level 2
 ```
 
----
+### Stage 2 — `normalize_posts.py`
 
-### 2. `normalize_posts.py` — Metadata normalisation
-
-Reads all posts from `output/posts/`, then:
-
-- Assigns one **category** from a controlled list
-- Generates **3–7 tags** from a controlled vocabulary
-- Cleans **summaries** to a sentence boundary (≤ 200 chars)
-- Renames images to `{slug}-01.jpg`, `{slug}-02.jpg`, … and updates references
-- Validates missing dates, missing images, low tag counts, and duplicate slugs
-- Writes `output/manifests/publishing_manifest.json` and `review/normalize_review.csv`
+Assigns category and tags from controlled vocabularies, cleans summaries, renames images, and validates metadata.
 
 ```bash
-python scripts/normalize_posts.py
-python scripts/normalize_posts.py --dry-run   # preview without writing
+python3 scripts/normalize_posts.py
+python3 scripts/normalize_posts.py --dry-run
 ```
 
-**Categories**
+**Categories:** Partnerships & Agreements, Accreditation & Compliance, Safety Campaigns & Drills, Competitions & Awards, Events & Ceremonies, Industry Visits & Site Tours, Staff Development, Academic & Examinations, On-the-Job Training, Trainee Programs, Campus & Facilities, Media & Publications.
 
-| Category | Examples |
-|----------|---------|
-| Partnerships & Agreements | MoUs, training agreements, accreditations |
-| Accreditation & Compliance | ETEC, TVTC, HRDF, Saudi Aramco surveys |
-| Safety Campaigns & Drills | Fire drills, safety awareness campaigns |
-| Competitions & Awards | Welding competitions, football tournaments |
-| Events & Ceremonies | Graduations, Iftar gatherings, festivals |
-| Industry Visits & Site Tours | Site visits, benchmarking trips |
-| Staff Development | CPD sessions, Classera training, LeadXera |
-| Academic & Examinations | Midterms, end-of-semester exams |
-| On-the-Job Training | OJT deployment, pre-OJT visits |
-| Trainee Programs | WPR training, CSM course, 5G welding |
-| Campus & Facilities | Renovations, digital transformation |
-| Media & Publications | Press coverage |
+### Stage 3 — `export_feed.py`
 
----
-
-### 3. `export_feed.py` — JSON feed export
-
-Reads all normalised posts and writes two feed files:
+Writes JSON Feed 1.1 and a flat posts array:
 
 | File | Format | Use |
 |------|--------|-----|
-| `output/feed.json` | [JSON Feed 1.1](https://jsonfeed.org/version/1.1/) | RSS readers, news aggregators, headless CMS |
-| `output/posts.json` | Flat posts array | REST API, static site generators, search index |
+| `output/feed.json` | [JSON Feed 1.1](https://jsonfeed.org/version/1.1/) | RSS readers, aggregators, headless CMS |
+| `output/posts.json` | Flat posts array | REST API, static site generators |
 
 ```bash
-python scripts/export_feed.py
-python scripts/export_feed.py --base-url https://maharat.com   # absolute image/post URLs
-python scripts/export_feed.py --base-url https://maharat.com --no-body  # omit HTML body
+python3 scripts/export_feed.py
+python3 scripts/export_feed.py --base-url https://maharat.com
+python3 scripts/export_feed.py --base-url https://maharat.com --no-body
 ```
 
-Each post in `posts.json` includes:
+### Post Schema
 
-```json
-{
-  "slug": "mctc-hosts-fire-drill",
-  "title": "MCTC Hosts Fire Drill Conducted by its Training Provider",
-  "date": "2026-01-06",
-  "date_published": "2026-01-06T00:00:00+00:00",
-  "category": "Safety Campaigns & Drills",
-  "tags": ["fire-safety", "nesma", "nhti"],
-  "summary": "On January 6, 2026, Nesma High Training Institute conducted a fire drill…",
-  "featured_image": "https://maharat.com/images/mctc-hosts-fire-drill-01.jpg",
-  "gallery_images": ["…-02.jpg", "…-03.jpg"],
-  "body_markdown": "…",
-  "body_html": "…"
-}
-```
-
----
-
-## Schema
-
-Post fields are defined in `schema/news_schema.yaml`:
+Fields are defined in `schema/news_schema.yaml`:
 
 ```
 title, internal, slug, date, year, quarter
@@ -143,33 +231,60 @@ source_document, source_section, source_page
 
 ---
 
-## Setup
-
-```bash
-pip install -r requirements.txt
-```
-
-**Dependencies:** `python-docx`, `PyYAML` — no other packages required.
-
----
-
-## Directory layout
+## Directory Layout
 
 ```
 maharat-news-pipline/
-├── input/                  # Source .docx files (gitignored)
-├── output/
-│   ├── posts/              # Extracted Markdown posts (gitignored)
-│   ├── images/             # Extracted images (gitignored)
-│   ├── manifests/          # JSON manifests (gitignored)
-│   ├── feed.json           # JSON Feed 1.1 (gitignored)
-│   └── posts.json          # Flat posts array (gitignored)
-├── review/                 # CSV review sheets (gitignored)
+├── app/
+│   └── cli.py                  # Canonical entry point (all RAG commands)
+├── pipelines/                  # Orchestration: ingest, retrieval, drafting, refresh
+├── services/                   # Business logic: chunking, embedding, search, generation
+├── config/                     # YAML configs (qdrant, chunking, taxonomy, generation, …)
+├── data/
+│   ├── posts/                  # News markdown posts (gitignored)
+│   ├── images/                 # Post images (gitignored)
+│   ├── knowledge/              # Institutional knowledge docs (25 files)
+│   ├── graph/                  # Entity graph (entities.yaml, relationships.yaml)
+│   ├── feed.json               # JSON feed (gitignored)
+│   └── posts.json              # Flat post array (gitignored)
+├── input/                      # Source .docx files (gitignored)
+├── output/                     # Legacy DOCX pipeline output (gitignored)
+├── outputs/                    # RAG draft output (draft.md, sources.json, debug)
+├── qdrant_storage/             # Embedded Qdrant store (gitignored)
+├── scripts/                    # Legacy DOCX + early RAG scripts
+├── tests/                      # Retrieval eval runners + CSV fixtures
 ├── schema/
 │   └── news_schema.yaml
-├── scripts/
-│   ├── extract_posts.py
-│   ├── normalize_posts.py
-│   └── export_feed.py
+├── run_pipeline.sh             # DOCX pipeline wrapper
+├── CLAUDE.md                   # Full RAG system documentation
 └── requirements.txt
 ```
+
+---
+
+## Configuration
+
+All behavior is driven by YAML files in `config/`:
+
+| File | Purpose |
+|------|---------|
+| `qdrant.yaml` | Qdrant client, collections, aliases, payload indexes |
+| `chunking.yaml` | News chunking (max_tokens=700, overlap=100) |
+| `knowledge_chunking.yaml` | Knowledge chunking (max_words=450, overlap=50) |
+| `taxonomy.yaml` | 12 categories, 60-tag vocabulary |
+| `generation.yaml` | Claude model, generation modes, article types |
+| `editorial_style.yaml` | Headline patterns, article templates |
+| `entities.yaml` | Entity regex patterns for extraction |
+
+---
+
+## Legacy Scripts
+
+One-off scripts in `scripts/` exist for backwards compatibility. Prefer `app/cli.py` for all new workflows:
+
+| Legacy script | Modern equivalent |
+|---------------|-------------------|
+| `ingest_markdown.py`, `embed_chunks.py`, `upsert_qdrant.py` | `app/cli.py ingest` |
+| `search_qdrant.py` | `app/cli.py search` |
+| `draft_article.py` | `app/cli.py draft` |
+| `extract_posts.py`, `normalize_posts.py`, `export_feed.py` | `run_pipeline.sh` or `refresh-weekly-highlights` |

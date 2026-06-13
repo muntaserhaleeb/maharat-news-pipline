@@ -1,0 +1,147 @@
+classification_rules:
+  version: '2.0'
+  default_category: General
+  single_primary_category: true
+  priority_order:
+  - Media & Publications
+  - Partnerships & Agreements
+  - Accreditation & Compliance
+  - Events & Ceremonies
+  - Industry Engagement
+  - Safety & HSE
+  - Training Programs
+  - Awards & Recognition
+  - Leadership & Governance
+  - Campus & Facilities
+  - Community Outreach
+  - Digital Transformation
+  scoring:
+    activity_match: 40
+    entity_pattern_match: 35
+    credential_match: 30
+    program_match: 25
+    organization_match: 15
+    location_match: 8
+    keyword_fallback_match: 5
+    minimum_confidence_for_auto_category: 45
+    minimum_confidence_for_auto_subcategory: 35
+  tie_breakers:
+  - Prefer the category with the highest-scoring activity signal.
+  - Prefer accreditation/compliance when a credential and accreditation activity co-occur.
+  - Prefer partnerships/agreements when two or more organizations co-occur with Agreement or MoU.
+  - Prefer events/ceremonies when Graduation is present, unless Media Coverage is also present and the article is clearly
+    external coverage.
+  - Use Training Programs when program entities are dominant and no stronger activity exists.
+  keyword_fallback_rules:
+  - category: Media & Publications
+    keywords:
+    - published in construction week
+    - media coverage
+    - press
+    - featured in
+  - category: Partnerships & Agreements
+    keywords:
+    - mou
+    - agreement
+    - partnership
+    - signed
+    - collaboration
+    - sponsorship
+    - contract
+  - category: Accreditation & Compliance
+    keywords:
+    - accreditation
+    - certification
+    - audit
+    - quality visit
+    - approval
+    - endorsement
+  - category: Events & Ceremonies
+    keywords:
+    - graduation
+    - ceremony
+    - forum
+    - conference
+    - workshop
+    - exhibition
+    - iftar
+  - category: Industry Engagement
+    keywords:
+    - site visit
+    - employer
+    - ojt
+    - workforce development
+    - industry engagement
+  - category: Safety & HSE
+    keywords:
+    - safety campaign
+    - fire drill
+    - hse
+    - osh
+    - work permit receiver
+    - csm
+  - category: Awards & Recognition
+    keywords:
+    - award
+    - recognition
+    - competition
+    - contest
+    - winner
+    - tournament
+  - category: Campus & Facilities
+    keywords:
+    - facility
+    - campus
+    - classroom
+    - training zone
+    - workshop renovation
+  - category: Community Outreach
+    keywords:
+    - community
+    - volunteer
+    - charity
+    - awareness
+    - local council
+  - category: Leadership & Governance
+    keywords:
+    - board
+    - chairman
+    - trustees
+    - managing director
+    - governance
+  - category: Digital Transformation
+    keywords:
+    - digital transformation
+    - dxp
+    - rag
+    - ai search
+    - lms
+    - classera
+    - leadxera
+  tag_rules:
+    min_tags: 3
+    max_tags: 9
+    deduplicate: true
+    normalize_to_canonical_entities: true
+    disallowed_free_tags:
+    - news
+    - update
+    - maharat
+    - article
+    - website
+    - post
+    thematic_tags:
+    - Workforce Development
+    - Employer Engagement
+    - Skills Development
+    - Practical Training
+    - Career Readiness
+    - Women in Construction
+    - Construction Technology
+    - Digital Transformation
+    - Saudi Vision 2030
+    - Innovation
+    - Site Safety
+    - Quality Assurance
+    - International Collaboration
+    - Community Impact
