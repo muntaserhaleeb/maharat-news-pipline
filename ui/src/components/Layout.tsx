@@ -9,6 +9,7 @@ import {
   Tags,
   Terminal,
   Inbox,
+  Images,
 } from 'lucide-react'
 
 interface Props { children: ReactNode }
@@ -22,6 +23,7 @@ const ACTIVE_NAV = [
   { to: '/taxonomy',  label: 'Taxonomy',        Icon: Tags },
   { to: '/pipeline',  label: 'Pipeline',        Icon: Terminal },
   { to: '/review',    label: 'Review Queue',    Icon: Inbox },
+  { to: '/media',     label: 'Media Library',   Icon: Images },
 ]
 
 export default function Layout({ children }: Props) {

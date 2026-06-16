@@ -8,6 +8,7 @@ import EntityManager from './pages/EntityManager'
 import TaxonomyManager from './pages/TaxonomyManager'
 import PipelineRunner from './pages/PipelineRunner'
 import ReviewQueue from './pages/ReviewQueue'
+import MediaLibrary from './pages/MediaLibrary'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/taxonomy"  element={<TaxonomyManager />} />
           <Route path="/pipeline"  element={<PipelineRunner />} />
           <Route path="/review"    element={<ReviewQueue />} />
+          <Route path="/media"     element={<MediaLibrary />} />
         </Routes>
       </Layout>
     </BrowserRouter>

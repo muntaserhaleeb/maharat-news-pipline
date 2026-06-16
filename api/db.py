@@ -48,6 +48,33 @@ def init_db() -> None:
                 error        TEXT
             )
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS app_settings (
+                key   TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            )
+        """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS media_events (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_id        TEXT    NOT NULL UNIQUE,
+                folder_name     TEXT    NOT NULL,
+                event_name      TEXT    NOT NULL,
+                event_date      TEXT,
+                base_dir        TEXT    NOT NULL,
+                status          TEXT    NOT NULL DEFAULT 'pending',
+                image_count     INTEGER DEFAULT 0,
+                scores_json     TEXT,
+                duplicates_json TEXT,
+                hero_filename   TEXT,
+                gallery_json    TEXT,
+                rejected_json   TEXT,
+                metadata_json   TEXT,
+                ai_json         TEXT,
+                created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
+                updated_at      TEXT    NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
         # Migrations: add review columns if they don't exist yet
         for ddl in [
             "ALTER TABLE generation_jobs ADD COLUMN review_status TEXT NOT NULL DEFAULT 'pending_review'",

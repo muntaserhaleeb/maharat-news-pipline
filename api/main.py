@@ -10,7 +10,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.db import init_db
-from api.routers import config, dashboard, entities, generator, pipeline, retrieval, review, taxonomy
+from api.routers import config, dashboard, entities, generator, media, pipeline, retrieval, review, taxonomy
 
 
 @asynccontextmanager
@@ -41,6 +41,7 @@ app.include_router(entities.router,    prefix="/api/entities",   tags=["entities
 app.include_router(taxonomy.router,    prefix="/api/taxonomy",   tags=["taxonomy"])
 app.include_router(pipeline.router,    prefix="/api/pipeline",   tags=["pipeline"])
 app.include_router(review.router,      prefix="/api/review",     tags=["review"])
+app.include_router(media.router,       prefix="/api/media",      tags=["media"])
 
 
 @app.get("/api/health")
