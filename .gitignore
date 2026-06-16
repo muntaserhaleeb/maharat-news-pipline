@@ -10,3 +10,5 @@ __pycache__/
 .DS_Store
 .venv/
 qdrant_storage/
+storage/*.db
+ui/dist/
